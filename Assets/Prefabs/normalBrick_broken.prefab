@@ -214,6 +214,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   part_type: 1
+  liveTime: 0.75
 --- !u!114 &114597537658569874
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -239,6 +240,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   part_type: 2
+  liveTime: 0.75
 --- !u!212 &212302894762944984
 SpriteRenderer:
   m_ObjectHideFlags: 1

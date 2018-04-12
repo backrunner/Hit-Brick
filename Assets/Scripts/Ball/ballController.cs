@@ -9,6 +9,9 @@ public class ballController : MonoBehaviour {
     //GameObjects
     public GameObject pad;
 
+    //初始球速
+    public float initMoveSpeed;
+
     //位置卡死检测的时间线
     //卡住判定时间
     public float time_check_deadline;
@@ -16,12 +19,12 @@ public class ballController : MonoBehaviour {
     public float check_limit;
 
     //位置记录和持续时间
-    public Vector3 recordedPosition;
-    public float position_deltaTime;
+    private Vector3 recordedPosition;
+    private float position_deltaTime;
 
     //记录位置是否卡住
-    public bool isStack_x;
-    public bool isStack_y;
+    private bool isStack_x;
+    private bool isStack_y;
 
 	// Use this for initialization
 	void Start () {
@@ -72,7 +75,7 @@ public class ballController : MonoBehaviour {
             {
                 this.isAttracted = false;
                 //向ball施加自定义力
-                Vector2 force = new Vector2(0f,200f);
+                Vector2 force = new Vector2(0f,initMoveSpeed);
                 this.gameObject.GetComponent<Rigidbody2D>().AddForce(force);
                 //开启ball的trail render
                 this.gameObject.GetComponent<TrailRenderer>().enabled = true;
@@ -97,13 +100,13 @@ public class ballController : MonoBehaviour {
                     //分左右两侧给球施加一个反向外力解决卡位
                     if (transform.position.x <= 0)
                     {
-                        Vector2 force = new Vector2(5f, 0f);
+                        Vector2 force = new Vector2(10f, 0f);
                         this.gameObject.GetComponent<Rigidbody2D>().AddForce(force);
                         updateRecordPosition();
                     }
                     else
                     {
-                        Vector2 force = new Vector2(-5f, 0);
+                        Vector2 force = new Vector2(-10f, 0);
                         this.gameObject.GetComponent<Rigidbody2D>().AddForce(force);
                         updateRecordPosition();
                     }
@@ -133,12 +136,12 @@ public class ballController : MonoBehaviour {
                     //分上下两侧给球施加一个反向外力解决卡位
                     if (transform.position.y <= 0)
                     {
-                        Vector2 force = new Vector2(0, 5f);
+                        Vector2 force = new Vector2(0, 10f);
                         this.gameObject.GetComponent<Rigidbody2D>().AddForce(force);
                         updateRecordPosition();
                     } else
                     {
-                        Vector2 force = new Vector2(0, -5f);
+                        Vector2 force = new Vector2(0, -10f);
                         this.gameObject.GetComponent<Rigidbody2D>().AddForce(force);
                         updateRecordPosition();
                     }
