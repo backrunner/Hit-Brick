@@ -9,6 +9,7 @@ public class brickController : MonoBehaviour {
     public GameObject ball;
 
     //砖块的碰撞类型
+    //default - none
     //1 - collision
     //2 - trigger
     public short collision_type;      
@@ -21,6 +22,8 @@ public class brickController : MonoBehaviour {
         if (ball_ctrl != null && collision_type == 1)
         {
             ball = collision.gameObject;
+            //如果球打到了砖块则不认为球卡住
+            ball_ctrl.updateRecordPosition();
             ballHit_collision();
         }
     }
@@ -33,17 +36,28 @@ public class brickController : MonoBehaviour {
         if (ball_ctrl != null && collision_type == 2)
         {
             ball = collision.gameObject;
+            //如果球打到了砖块则不认为球卡住
+            ball_ctrl.updateRecordPosition();
             ballHit_trigger();
         }
     }
 
     public virtual void ballHit_trigger()
     {
-
+        throwOutBrokenParts();
     }
 
     public virtual void ballHit_collision()
     {
+        throwOutBrokenParts();
+    }
 
+    public virtual void throwOutBrokenParts()
+    {
+        GameObject broken = Instantiate(brokenBrick, gameObject.transform.position, gameObject.transform.rotation);
+        broken.transform.localScale = transform.localScale;
+        brickBrokenController ctrl = broken.GetComponent<brickBrokenController>();
+        ctrl.throwout(ball.transform.position);
+        Destroy(gameObject);
     }
 }

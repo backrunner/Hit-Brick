@@ -13,9 +13,4 @@ public class normalBrickController : brickController {
 	void Update () {
 		
 	}
-
-    public override void ballHit_collision()
-    {
-        Destroy(gameObject);
-    }
 }

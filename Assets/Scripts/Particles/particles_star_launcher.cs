@@ -6,7 +6,7 @@ public class particles_star_launcher : MonoBehaviour
 {
 
     //粒子
-    public GameObject particle_triangle;
+    public GameObject particle_star;
     //散射的粒子数量 >= 12
     public int particle_count;
     //散射角度
@@ -32,7 +32,7 @@ public class particles_star_launcher : MonoBehaviour
         for (int i = 0; i < t; i++)
         {
             //生成particle
-            Instantiate(particle_triangle, gameObject.transform.position, Quaternion.Euler(0, 0, targetAngle));
+            Instantiate(particle_star, gameObject.transform.position, Quaternion.Euler(0, 0, targetAngle));
             targetAngle += 65f + Random.Range(-20f, 20f);
         }
         //发射完指定数目的粒子，销毁

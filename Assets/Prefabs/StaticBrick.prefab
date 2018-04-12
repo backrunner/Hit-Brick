@@ -21,6 +21,7 @@ GameObject:
   - component: {fileID: 4119415859778298}
   - component: {fileID: 212628641671025356}
   - component: {fileID: 60527029507579714}
+  - component: {fileID: 114484387994717606}
   m_Layer: 0
   m_Name: StaticBrick
   m_TagString: Untagged
@@ -83,6 +84,20 @@ PolygonCollider2D:
       - {x: 0.50241494, y: 0.14236522}
       - {x: 0.485734, y: 0.18970156}
       - {x: 0.43865085, y: 0.23696494}
+--- !u!114 &114484387994717606
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1195992322986498}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c5dafc9fa6b3a704da1875eaf31072b9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  brokenBrick: {fileID: 0}
+  ball: {fileID: 0}
+  collision_type: 1
 --- !u!212 &212628641671025356
 SpriteRenderer:
   m_ObjectHideFlags: 1

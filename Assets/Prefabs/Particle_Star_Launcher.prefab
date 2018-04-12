@@ -51,7 +51,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7bb7f999bd86097429123ac0a1126ff6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  particle_triangle: {fileID: 1989282630488468, guid: 7d7a238991ea0944594f56841141e93c,
+  particle_star: {fileID: 1989282630488468, guid: 7d7a238991ea0944594f56841141e93c,
     type: 2}
   particle_count: 12
   targetAngle: 0

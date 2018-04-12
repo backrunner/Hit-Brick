@@ -17,8 +17,11 @@ public class PadController : MonoBehaviour {
     void moveWithMouse()
     {
         Vector3 padPos = new Vector3(0f, this.transform.position.y, 0);
+        //获取鼠标坐标映射到游戏场景
         float mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition).x;
-        padPos.x = Mathf.Clamp(mousePos, -8f, 8f);
+        //计算pad坐标，保证pad不出屏幕
+        //pad长度为1.2u
+        padPos.x = Mathf.Clamp(mousePos, (-7.62f-(1f-transform.localScale.x)*0.6f),(7.62f+(1f-transform.localScale.x)*0.6f));
         this.transform.position = padPos;
     }
 }
