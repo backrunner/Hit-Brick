@@ -38,11 +38,11 @@ public class brickBrokenPartController : MonoBehaviour {
             switch (part_type)
             {
                 case 1:
-                    force = new Vector2(Random.Range(-125f,-75f),Random.Range(35f, 65f));
+                    force = new Vector2(Random.Range(-135f,-65f),Random.Range(35f, 65f));
                     rigidbody.AddForceAtPosition(force, ballPosition);
                     break;
                 case 2:
-                    force = new Vector2(Random.Range(75f, 125f), Random.Range(35f, 65f));
+                    force = new Vector2(Random.Range(65f, 165f), Random.Range(35f, 65f));
                     rigidbody.AddForceAtPosition(force, ballPosition);
                     break;
             }
@@ -52,11 +52,11 @@ public class brickBrokenPartController : MonoBehaviour {
             switch (part_type)
             {
                 case 1:
-                    force = new Vector2(Random.Range(-95f, -65f), Random.Range(-65f, -35f));
+                    force = new Vector2(Random.Range(-95f, -55f), Random.Range(-65f, -35f));
                     rigidbody.AddForceAtPosition(force, ballPosition);
                     break;
                 case 2:
-                    force = new Vector2(Random.Range(65f, 95f), Random.Range(-65f, -35f));
+                    force = new Vector2(Random.Range(55f, 95f), Random.Range(-65f, -35f));
                     rigidbody.AddForceAtPosition(force, ballPosition);
                     break;
             }

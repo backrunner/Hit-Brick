@@ -32,7 +32,7 @@ public class particles_star_launcher : MonoBehaviour
         for (int i = 0; i < t; i++)
         {
             //生成particle
-            GameObject particle = Instantiate(particle_triangle, gameObject.transform.position, Quaternion.Euler(0, 0, targetAngle));
+            Instantiate(particle_triangle, gameObject.transform.position, Quaternion.Euler(0, 0, targetAngle));
             targetAngle += 65f + Random.Range(-20f, 20f);
         }
         //发射完指定数目的粒子，销毁

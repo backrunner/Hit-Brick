@@ -14,8 +14,12 @@ public class particles_collision : MonoBehaviour {
         //检测碰撞的物体是否为ball
         if (ball != null)
         {
-            GameObject particle = Instantiate(particle_launcher, collision.gameObject.transform.position, new Quaternion(0,0,0,0));
+            ballHit(collision.gameObject.transform.position);
         }
     }
 
+    public virtual void ballHit(Vector2 ballPosition)
+    {
+        Instantiate(particle_launcher, ballPosition, new Quaternion(0, 0, 0, 0));
+    }
 }

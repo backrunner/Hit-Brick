@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Particle_Collision_Trigger : MonoBehaviour {
+public class particle_collision_trigger : MonoBehaviour {
 
     //用于散射的GameObject
     public GameObject particle_launcher;
@@ -14,7 +14,7 @@ public class Particle_Collision_Trigger : MonoBehaviour {
         //检测碰撞的物体是否为ball
         if (ball != null)
         {
-            GameObject particle = Instantiate(particle_launcher, collision.gameObject.transform.position, new Quaternion(0, 0, 0, 0));
+            Instantiate(particle_launcher, collision.gameObject.transform.position, new Quaternion(0, 0, 0, 0));
         }
     }
 }
