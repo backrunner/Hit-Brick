@@ -2,7 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class particles_triangle : MonoBehaviour {
+public class particles_star : MonoBehaviour
+{
 
     //移动速度
     public float moveSpeed;
@@ -10,23 +11,25 @@ public class particles_triangle : MonoBehaviour {
     public float liveTime;
     private float deltaScale;
 
-	// Use this for initialization
-	void Start () {
+    // Use this for initialization
+    void Start()
+    {
         //随机粒子的大小
-        float randomScale = Random.Range(0.25f, 0.55f);
+        float randomScale = Random.Range(0.35f, 0.62f);
         transform.localScale = new Vector3(randomScale, randomScale, 1);
         //计算每次缩放的差值
-        deltaScale = transform.localScale.x / (liveTime * Random.Range(0.7f,1.5f));
-	}
-	
-	// Update is called once per frame
-	void Update () {
+        deltaScale = transform.localScale.x / (liveTime * Random.Range(0.6f, 1.3f));
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
         move();
-	}
+    }
 
     void move()
     {
-        this.transform.transform.Translate(new Vector3(0,1,0) * moveSpeed * Time.deltaTime);
+        this.transform.transform.Translate(new Vector3(0, 1, 0) * moveSpeed * Time.deltaTime);
         //缩放
         Vector3 scale = transform.localScale;
         scale.x -= Time.deltaTime * deltaScale;
