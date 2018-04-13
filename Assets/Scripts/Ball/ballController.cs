@@ -80,6 +80,9 @@ public class ballController : MonoBehaviour {
             //判断自定义按键launchBall
             if (Input.GetButton("launchBall"))
             {
+                //关卡开始
+                levelController.isLevelStarted = true;
+                //取消附着状态
                 this.isAttracted = false;
                 //向ball施加自定义力
                 Vector2 force = new Vector2(0f,initMoveSpeed);

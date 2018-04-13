@@ -9,7 +9,7 @@ public class particles_triangle_launcher : MonoBehaviour {
     //散射的粒子数量 >= 12
     public int particle_count;
     //散射角度
-    public float targetAngle;
+    private float targetAngle;
     //记录发射粒子的数量
     private int count;
 

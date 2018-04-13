@@ -54,10 +54,13 @@ public class brickController : MonoBehaviour {
 
     public virtual void throwOutBrokenParts()
     {
+        //刷新破碎部件
         GameObject broken = Instantiate(brokenBrick, gameObject.transform.position, gameObject.transform.rotation);
         broken.transform.localScale = transform.localScale;
         brickBrokenController ctrl = broken.GetComponent<brickBrokenController>();
         ctrl.throwout(ball.transform.position);
+        //销毁物体并减少计数
         Destroy(gameObject);
+        levelController.leftBricks--;
     }
 }

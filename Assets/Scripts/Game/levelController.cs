@@ -58,6 +58,17 @@ public class levelController : MonoBehaviour {
         }
     }
 
+    //砖块
+    public static int leftBricks;
+    public static GameObject[] bricks;
+
+    //粒子
+    //刷新球的特效
+    public static GameObject particle_ray_launcher;
+    //公共
+    //非静态
+    public GameObject m_particle_ray_launcher;
+
     private void Start()
     {
         //关卡开始时寻找板子
@@ -65,13 +76,28 @@ public class levelController : MonoBehaviour {
         {
             pad = GameObject.Find("Pad");
         }
-        //传递ball给静态变量
+        //传递assest ball给静态变量
         if (m_ball != null)
         {
             _ball = m_ball;
         }
+
+        //获取环境中的预置Brick
+        bricks = GameObject.FindGameObjectsWithTag("Bricks");
+        leftBricks = bricks.Length;
+
+        //传递粒子给静态变量
+        particle_ray_launcher=m_particle_ray_launcher;
         //新建一个球
         newBall();
+    }
+
+    private void Update()
+    {
+        if (isLevelStarted)
+        {
+            checkGameStatus();
+        }
     }
 
     public static void newBall()
@@ -87,10 +113,26 @@ public class levelController : MonoBehaviour {
             //抓取不到pad，使用默认位置
             position = new Vector3(0, -4.15f, 0);
         }
-        //刷新球
-        GameObject ball_new = Instantiate(_ball, position, new Quaternion(0, 0, 0, 0));
+
+        //刷新球    
+        //初始球不刷新特效
+        if (isLevelStarted)
+        {
+            Instantiate(particle_ray_launcher, position, new Quaternion(0, 0, 0, 0));
+        }
+        //刷新新球
+        GameObject ball_new = Instantiate(_ball, position, new Quaternion(0, 0, 0, 0));        
         ballController ctrl = ball_new.GetComponent<ballController>();
         //让球附在板子上
         ctrl.isAttracted = true;
+    }
+
+    //游戏状态检查
+    void checkGameStatus()
+    {
+        if (leftBricks <= 0)
+        {
+            Debug.Log("Clear!");
+        }
     }
 }

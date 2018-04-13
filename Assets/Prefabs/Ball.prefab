@@ -26,7 +26,7 @@ GameObject:
   - component: {fileID: 114926723961681060}
   m_Layer: 0
   m_Name: Ball
-  m_TagString: Untagged
+  m_TagString: Ball
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -37,8 +37,8 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1005448619725424}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -4.15, z: 0}
+  m_LocalRotation: {x: 0, y: 0, z: -0.004251347, w: 0.999991}
+  m_LocalPosition: {x: 3.257075, y: -1.9744914, z: 0}
   m_LocalScale: {x: 0.10000001, y: 0.10000001, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -97,6 +97,8 @@ TrailRenderer:
   - {fileID: 2100000, guid: fecdef417d15ac64b8f030ed2246df01, type: 2}
   - {fileID: 2100000, guid: fecdef417d15ac64b8f030ed2246df01, type: 2}
   - {fileID: 2100000, guid: fecdef417d15ac64b8f030ed2246df01, type: 2}
+  - {fileID: 2100000, guid: fecdef417d15ac64b8f030ed2246df01, type: 2}
+  - {fileID: 2100000, guid: fecdef417d15ac64b8f030ed2246df01, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -116,25 +118,25 @@ TrailRenderer:
   m_SortingLayerID: -76780709
   m_SortingLayer: 2
   m_SortingOrder: 0
-  m_Time: 0.4
+  m_Time: 0.35
   m_Parameters:
     serializedVersion: 2
-    widthMultiplier: 0.3
+    widthMultiplier: 0.28
     widthCurve:
       serializedVersion: 2
       m_Curve:
       - serializedVersion: 2
         time: 0
         value: 0.9907398
-        inSlope: -0.44479203
-        outSlope: -0.44479203
+        inSlope: -4.212398
+        outSlope: -4.212398
         tangentMode: 0
       - serializedVersion: 2
-        time: 0.20289141
+        time: 0.22928911
         value: 0
-        inSlope: -1.4451979
-        outSlope: -1.4451979
-        tangentMode: 0
+        inSlope: -4.3209195
+        outSlope: -4.3209195
+        tangentMode: 34
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 0
@@ -187,7 +189,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isAttracted: 0
   pad: {fileID: 0}
-  initMoveSpeed: 150
+  initMoveSpeed: 180
   time_check_deadline: 4.5
   check_limit: 0.12
 --- !u!212 &212914708102828526

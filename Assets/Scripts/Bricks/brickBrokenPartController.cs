@@ -24,7 +24,7 @@ public class brickBrokenPartController : MonoBehaviour {
         rigidbody.centerOfMass = centerofMass.position;
 
         //deltaAlpha初始化
-        if ((liveTime * 20) > 0)
+        if (liveTime > 0)
         {
             deltaAlpha = 1f / (liveTime*60);
         }
