@@ -33,10 +33,17 @@ public class ballController : MonoBehaviour {
         {
             isAttracted = true;
         }
-        //如果pad没有指定则查找
+        //如果pad没有指定则获取levelController的公共变量pad或查找
         if (pad == null)
         {
-            pad = GameObject.Find("Pad");
+            if (levelController.pad != null)
+            {
+                pad = levelController.pad;
+            } else
+            {
+                pad = GameObject.Find("Pad");
+                levelController.pad = pad;
+            }            
         }
         //初始化变量
         recordedPosition = transform.position;
@@ -100,13 +107,13 @@ public class ballController : MonoBehaviour {
                     //分左右两侧给球施加一个反向外力解决卡位
                     if (transform.position.x <= 0)
                     {
-                        Vector2 force = new Vector2(10f, 0f);
+                        Vector2 force = new Vector2(20f, 0f);
                         this.gameObject.GetComponent<Rigidbody2D>().AddForce(force);
                         updateRecordPosition();
                     }
                     else
                     {
-                        Vector2 force = new Vector2(-10f, 0);
+                        Vector2 force = new Vector2(-20f, 0);
                         this.gameObject.GetComponent<Rigidbody2D>().AddForce(force);
                         updateRecordPosition();
                     }
@@ -136,12 +143,12 @@ public class ballController : MonoBehaviour {
                     //分上下两侧给球施加一个反向外力解决卡位
                     if (transform.position.y <= 0)
                     {
-                        Vector2 force = new Vector2(0, 10f);
+                        Vector2 force = new Vector2(0, 20f);
                         this.gameObject.GetComponent<Rigidbody2D>().AddForce(force);
                         updateRecordPosition();
                     } else
                     {
-                        Vector2 force = new Vector2(0, -10f);
+                        Vector2 force = new Vector2(0, -20f);
                         this.gameObject.GetComponent<Rigidbody2D>().AddForce(force);
                         updateRecordPosition();
                     }
