@@ -190,8 +190,8 @@ MonoBehaviour:
   isAttracted: 0
   pad: {fileID: 0}
   initMoveSpeed: 180
-  time_check_deadline: 4.5
-  check_limit: 0.12
+  time_check_deadline: 3
+  check_limit: 0.1
 --- !u!212 &212914708102828526
 SpriteRenderer:
   m_ObjectHideFlags: 1

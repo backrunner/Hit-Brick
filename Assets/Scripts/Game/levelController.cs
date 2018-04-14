@@ -69,6 +69,10 @@ public class levelController : MonoBehaviour {
     //非静态
     public GameObject m_particle_ray_launcher;
 
+    //特效
+    //游戏结束特效
+    public GameObject gameoverEffect;
+
     private void Start()
     {
         //关卡开始时寻找板子
