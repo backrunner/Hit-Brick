@@ -12,6 +12,7 @@ public class hardBrickController : brickController {
 
     //Particles
     public GameObject particleLauncher;
+    public GameObject particleLauncher_star;
 
     private void Start()
     {
@@ -20,10 +21,10 @@ public class hardBrickController : brickController {
 
     public override void ballHit_collision()
     {
+        //收到击打，次数减少
+        brokenTimes--;
         if (brokenTimes > 0)
-        {
-            //收到击打，次数减少
-            brokenTimes--;
+        {            
             Color t = randomColor();
             render.color = t;
             //粒子特效
@@ -33,8 +34,26 @@ public class hardBrickController : brickController {
         }
         else
         {
+            throwOutBrokenParts();
+            //刷新星星特效
+            GameObject launcher = Instantiate(particleLauncher_star, ball.transform.position, new Quaternion(0, 0, 0, 0));
+            particle_hardBrick_star_launcher ctrl = launcher.GetComponent<particle_hardBrick_star_launcher>();
+            ctrl.particle_color = render.color;
+            //回收游戏物体
             Destroy(gameObject);
         }
+    }
+
+    public override void throwOutBrokenParts()
+    {
+        //刷新破碎部件
+        GameObject broken = Instantiate(brokenBrick, gameObject.transform.position, gameObject.transform.rotation);
+        broken.transform.localScale = transform.localScale;
+        hardBrickBrokenController ctrl = broken.GetComponent<hardBrickBrokenController>();
+        ctrl.brickColor = render.color;
+        ctrl.throwout(ball.transform.position);
+        //销毁物体并减少计数
+        levelController.leftBricks--;
     }
 
     //随机一个淡色
