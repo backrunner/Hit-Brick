@@ -26,7 +26,7 @@ public class particle_rect_launcher : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        int t = Random.Range(1, 3);
+        int t = Random.Range(1, 4);
         //计数
         count += t;
         for (int i = 0; i < t; i++)

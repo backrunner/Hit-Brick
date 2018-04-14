@@ -15,7 +15,7 @@ public class particle_ray_launcher : MonoBehaviour {
 
 	void Start () {
         //初始化
-        particle_count = Random.Range(5, 8);
+        particle_count = Random.Range(5, 9);
         targetAngle = Random.Range(0f, 360f);
         deltaAngle = 360f / particle_count;
         //定义存放

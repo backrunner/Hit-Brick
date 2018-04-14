@@ -26,7 +26,7 @@ public class levelController : MonoBehaviour {
     
     //球
     //用于刷新的球obj
-    public static GameObject _ball;
+    private static GameObject _ball;
     //剩余球
     private static int _leftBall;
     //非静态量，用于编辑器中指定
@@ -81,6 +81,8 @@ public class levelController : MonoBehaviour {
         {
             _ball = m_ball;
         }
+        //传递编辑器的指定量给静态变量
+        leftBall = m_leftBall;
 
         //获取环境中的预置Brick
         bricks = GameObject.FindGameObjectsWithTag("Bricks");
@@ -125,7 +127,7 @@ public class levelController : MonoBehaviour {
         ballController ctrl = ball_new.GetComponent<ballController>();
         //让球附在板子上
         ctrl.isAttracted = true;
-    }
+    }    
 
     //游戏状态检查
     void checkGameStatus()
@@ -133,6 +135,10 @@ public class levelController : MonoBehaviour {
         if (leftBricks <= 0)
         {
             Debug.Log("Clear!");
+        }
+        if (leftBall < 0)
+        {
+            Debug.Log("Game Over!");
         }
     }
 }

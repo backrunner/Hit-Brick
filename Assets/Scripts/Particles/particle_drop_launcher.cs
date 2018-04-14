@@ -18,7 +18,7 @@ public class particle_drop_launcher : MonoBehaviour
     void Start()
     {
         //随机数量
-        particle_count = Random.Range(7, particle_count);
+        particle_count = Random.Range(7, particle_count+1);
         //随机一个targetAngle初值
         targetAngle = Random.Range(0f, 360f);
     }
