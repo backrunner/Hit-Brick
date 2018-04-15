@@ -53,7 +53,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 3.2
-  liveTime: 0.5
+  liveTime: 0.35
 --- !u!212 &212692892418806988
 SpriteRenderer:
   m_ObjectHideFlags: 1

@@ -142,6 +142,7 @@ public class levelController : MonoBehaviour {
         }
         if (leftBall < 0)
         {
+            Instantiate(gameoverEffect, new Vector3(0, 0, 0), new Quaternion(0, 0, 0, 0));
             Debug.Log("Game Over!");
         }
     }

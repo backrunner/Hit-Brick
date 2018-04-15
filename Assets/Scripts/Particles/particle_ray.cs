@@ -17,11 +17,12 @@ public class particle_ray : MonoBehaviour {
 
     void Start () {
         //初始化render
-        render = GetComponent<SpriteRenderer>();
-        deltaAlpha = 1f / (liveTime * 60);
+        render = GetComponent<SpriteRenderer>();              
         //随机长度
         Vector3 scale = new Vector3(Random.Range(0.85f, 1f), Random.Range(0.8f, 1.2f), 1);
         transform.localScale = scale;
+        //计算差值
+        deltaAlpha = 1f / (liveTime / Time.deltaTime);
     }
 	
 	void Update () {
@@ -37,7 +38,7 @@ public class particle_ray : MonoBehaviour {
 
     //处理Alpha
     void processAlpha()
-    {
+    {        
         Color t = render.color;
         //当物体因为透明度改变不可见时删除该物体
         if (t.a - deltaAlpha <= 0)

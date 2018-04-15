@@ -18,7 +18,7 @@ public class particle_rect : MonoBehaviour
         float randomScale = Random.Range(0.25f, 0.75f);
         transform.localScale = new Vector3(randomScale, randomScale, 1);
         //计算每次缩放的差值
-        deltaScale = transform.localScale.x / (liveTime * Random.Range(0.7f, 1.5f));
+        deltaScale = transform.localScale.x / (liveTime / Time.deltaTime);
     }
 
     // Update is called once per frame
@@ -32,13 +32,13 @@ public class particle_rect : MonoBehaviour
         this.transform.transform.Translate(new Vector3(0, 1, 0) * moveSpeed * Time.deltaTime);
         //缩放
         Vector3 scale = transform.localScale;
-        scale.x -= Time.deltaTime * deltaScale;
+        scale.x = scale.x - deltaScale;
         //如果粒子缩放到不可见则销毁
         if (scale.x <= 0)
         {
             Destroy(gameObject);
         }
-        scale.y -= Time.deltaTime * deltaScale;
+        scale.y = scale.y - deltaScale;
         transform.localScale = scale;
     }
 }

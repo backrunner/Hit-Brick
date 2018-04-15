@@ -22,6 +22,7 @@ GameObject:
   - component: {fileID: 212628641671025356}
   - component: {fileID: 60527029507579714}
   - component: {fileID: 114484387994717606}
+  - component: {fileID: 114744688745403878}
   m_Layer: 0
   m_Name: StaticBrick
   m_TagString: Untagged
@@ -98,6 +99,19 @@ MonoBehaviour:
   brokenBrick: {fileID: 0}
   ball: {fileID: 0}
   collision_type: 1
+--- !u!114 &114744688745403878
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1195992322986498}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bb3ab10a2308619409598ae73cb8355b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  particle_launcher: {fileID: 1653619500487294, guid: c904dfa0b15a4114dbe5611271eacb48,
+    type: 2}
 --- !u!212 &212628641671025356
 SpriteRenderer:
   m_ObjectHideFlags: 1

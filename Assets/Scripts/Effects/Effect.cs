@@ -7,7 +7,7 @@ public class Effect : MonoBehaviour {
     public float liveTime;
     public new Camera camera;
 
-    private void Start()
+    private void Awake()
     {
         //设置特效的相机
         SetCamera();
