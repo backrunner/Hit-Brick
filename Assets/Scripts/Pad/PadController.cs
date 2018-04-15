@@ -11,7 +11,11 @@ public class PadController : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        moveWithMouse();
+        //游戏未结束的情况下允许移动
+        if (!levelController.isGameOver)
+        {
+            moveWithMouse();
+        }
 	}
 
     void moveWithMouse()

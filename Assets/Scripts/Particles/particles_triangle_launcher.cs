@@ -16,14 +16,14 @@ public class particles_triangle_launcher : MonoBehaviour {
     // Use this for initialization
     void Start () {
         //随机数量
-        particle_count = Random.Range(8, particle_count+1);
+        particle_count = Random.Range(6, particle_count+1);
         //随机一个targetAngle初值
         targetAngle = Random.Range(0f, 360f);
 	}
 	
 	// Update is called once per frame
 	void Update () {
-        int t = Random.Range(1, 5);
+        int t = Random.Range(1, 4);
         //计数
         count += t;
         for (int i = 0; i < t; i++)

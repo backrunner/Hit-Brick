@@ -20,7 +20,7 @@ public class particle_hardBrick_rect_launcher : MonoBehaviour {
     void Start()
     {
         //随机数量
-        particle_count = Random.Range(5, 9);
+        particle_count = Random.Range(5, 10);
         //随机一个targetAngle初值
         targetAngle = Random.Range(0f, 360f);
     }

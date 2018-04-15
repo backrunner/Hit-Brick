@@ -8,6 +8,7 @@ public class levelController : MonoBehaviour {
     public string level_name;
     //关卡开关
     public static bool isLevelStarted;
+    public static bool isGameOver;
 
     //板子
     private static GameObject _pad;
@@ -45,7 +46,7 @@ public class levelController : MonoBehaviour {
     }
     //非静态ball，用于编辑器中指定obj
     public GameObject m_ball;
-    //公共变量
+    //公共变量_obj
     public GameObject ball
     {
         get
@@ -57,6 +58,8 @@ public class levelController : MonoBehaviour {
             _ball = value;
         }
     }
+    //静态变量 当前球
+    public static GameObject currentBall;
 
     //砖块
     public static int leftBricks;
@@ -70,10 +73,10 @@ public class levelController : MonoBehaviour {
     public GameObject m_particle_ray_launcher;
 
     //特效
-    //游戏结束特效
+    public GameObject clearEffect;
     public GameObject gameoverEffect;
 
-    private void Start()
+    private void Awake()
     {
         //关卡开始时寻找板子
         if (pad == null)
@@ -127,7 +130,8 @@ public class levelController : MonoBehaviour {
             Instantiate(particle_ray_launcher, position, new Quaternion(0, 0, 0, 0));
         }
         //刷新新球
-        GameObject ball_new = Instantiate(_ball, position, new Quaternion(0, 0, 0, 0));        
+        GameObject ball_new = Instantiate(_ball, position, new Quaternion(0, 0, 0, 0));
+        currentBall = ball_new;
         ballController ctrl = ball_new.GetComponent<ballController>();
         //让球附在板子上
         ctrl.isAttracted = true;
@@ -138,10 +142,18 @@ public class levelController : MonoBehaviour {
     {
         if (leftBricks <= 0)
         {
+            //标识游戏结束
+            isLevelStarted = false;
+            isGameOver = true;
+            Instantiate(clearEffect, new Vector3(0, 0, 0), new Quaternion(0, 0, 0, 0));
             Debug.Log("Clear!");
         }
         if (leftBall < 0)
         {
+            //标识游戏结束
+            isLevelStarted = false;
+            isGameOver = true;
+            //触发特效
             Instantiate(gameoverEffect, new Vector3(0, 0, 0), new Quaternion(0, 0, 0, 0));
             Debug.Log("Game Over!");
         }

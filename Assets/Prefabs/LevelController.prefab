@@ -34,7 +34,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1333407394828428}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1.3602396, y: -2.9397025, z: 0.062705226}
+  m_LocalPosition: {x: 3.99, y: 0.58, z: 0.062705226}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -52,3 +52,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   level_name: Test
+  m_leftBall: 5
+  m_ball: {fileID: 1005448619725424, guid: fba7fe4b22197484a967781c8cf8e0db, type: 2}
+  m_particle_ray_launcher: {fileID: 1717511841759248, guid: d672ea738cc5b39459b5da7c1e5ff590,
+    type: 2}
+  clearEffect: {fileID: 1855798279602602, guid: 7972ea4a345ce9745a97e5c885d08448,
+    type: 2}
+  gameoverEffect: {fileID: 1472862313936248, guid: 23e0d4d8fca55a841bb66a324063b2fd,
+    type: 2}

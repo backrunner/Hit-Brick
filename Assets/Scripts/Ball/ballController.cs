@@ -60,8 +60,11 @@ public class ballController : MonoBehaviour {
             launchBall();
         } else
         {
-            //如果球未吸附在pad上，则检测球的位置是否出现卡死
-            checkPosition();
+            if (levelController.isLevelStarted)
+            {
+                //如果球未吸附在pad上，则检测球的位置是否出现卡死
+                checkPosition();
+            }
         }
 	}
 
@@ -84,11 +87,11 @@ public class ballController : MonoBehaviour {
                 levelController.isLevelStarted = true;
                 //取消附着状态
                 this.isAttracted = false;
-                //向ball施加自定义力
-                Vector2 force = new Vector2(0f,initMoveSpeed);
-                this.gameObject.GetComponent<Rigidbody2D>().AddForce(force);
                 //开启ball的trail render
                 this.gameObject.GetComponent<TrailRenderer>().enabled = true;
+                //向ball施加自定义力
+                Vector2 force = new Vector2(0f,initMoveSpeed);
+                this.gameObject.GetComponent<Rigidbody2D>().AddForce(force);                
             }
         }
     }

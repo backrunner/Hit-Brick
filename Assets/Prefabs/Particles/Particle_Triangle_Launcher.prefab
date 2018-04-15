@@ -53,5 +53,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   particle_triangle: {fileID: 1818282221480268, guid: b643a0c564b26ec409a98a6cec9b3a12,
     type: 2}
-  particle_count: 18
-  targetAngle: 0
+  particle_count: 13
