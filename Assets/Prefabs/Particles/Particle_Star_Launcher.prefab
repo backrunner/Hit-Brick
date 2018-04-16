@@ -20,7 +20,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4236351225885086}
   - component: {fileID: 114234698455446070}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Particle_Star_Launcher
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -54,4 +54,3 @@ MonoBehaviour:
   particle_star: {fileID: 1989282630488468, guid: 7d7a238991ea0944594f56841141e93c,
     type: 2}
   particle_count: 12
-  targetAngle: 0

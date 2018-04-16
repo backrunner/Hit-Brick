@@ -22,7 +22,7 @@ GameObject:
   - component: {fileID: 212470293744066882}
   - component: {fileID: 114195870960334802}
   - component: {fileID: 50136855200192880}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Particle_Star
   m_TagString: Untagged
   m_Icon: {fileID: 0}

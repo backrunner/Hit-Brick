@@ -22,7 +22,7 @@ GameObject:
   - component: {fileID: 212912167353657812}
   - component: {fileID: 114796847724401316}
   - component: {fileID: 50421628032682558}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: normalBrick_broken_right
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -40,7 +40,7 @@ GameObject:
   - component: {fileID: 212302894762944984}
   - component: {fileID: 114183578721801796}
   - component: {fileID: 50030023211787120}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: normalBrick_broken_left
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -56,7 +56,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4581477982135302}
   - component: {fileID: 114597537658569874}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: normalBrick_broken
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -71,7 +71,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4341390693023534}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: centerofMass
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -86,7 +86,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4193477644467992}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: centerofMass
   m_TagString: Untagged
   m_Icon: {fileID: 0}

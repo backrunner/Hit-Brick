@@ -20,7 +20,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4868585430820048}
   - component: {fileID: 114039950571506060}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Partcle_Rect_Launcher
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -54,4 +54,3 @@ MonoBehaviour:
   particle_rect: {fileID: 1051662113948604, guid: d610f2d590db59d4bb7c9d2c3b2f4ac1,
     type: 2}
   particle_count: 0
-  targetAngle: 0

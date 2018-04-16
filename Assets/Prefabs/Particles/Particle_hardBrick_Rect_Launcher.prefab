@@ -20,7 +20,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4696836448818106}
   - component: {fileID: 114959249477952084}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Particle_hardBrick_Rect_Launcher
   m_TagString: Untagged
   m_Icon: {fileID: 0}

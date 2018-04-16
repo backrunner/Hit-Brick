@@ -23,7 +23,7 @@ GameObject:
   - component: {fileID: 60527029507579714}
   - component: {fileID: 114484387994717606}
   - component: {fileID: 114744688745403878}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: StaticBrick
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -51,7 +51,7 @@ PolygonCollider2D:
   m_GameObject: {fileID: 1195992322986498}
   m_Enabled: 1
   m_Density: 1
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: 1c3f75fada154b44da2ec927f4104f3b, type: 2}
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0

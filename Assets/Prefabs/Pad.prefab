@@ -23,7 +23,8 @@ GameObject:
   - component: {fileID: 60965289110022644}
   - component: {fileID: 114493143029308672}
   - component: {fileID: 114974405552140912}
-  m_Layer: 0
+  - component: {fileID: 50184485909971952}
+  m_Layer: 14
   m_Name: Pad
   m_TagString: Pad
   m_Icon: {fileID: 0}
@@ -43,6 +44,26 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!50 &50184485909971952
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1628784433460054}
+  m_BodyType: 1
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 1
+  m_Material: {fileID: 0}
+  m_Interpolate: 0
+  m_SleepingMode: 0
+  m_CollisionDetection: 1
+  m_Constraints: 0
 --- !u!60 &60965289110022644
 PolygonCollider2D:
   m_ObjectHideFlags: 1
@@ -146,7 +167,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -76780709
   m_SortingLayer: 2
-  m_SortingOrder: 0
+  m_SortingOrder: 201
   m_Sprite: {fileID: 21300000, guid: 35ad13ce46b49ff49a7b61b5c4630eba, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0

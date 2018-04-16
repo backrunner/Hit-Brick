@@ -23,7 +23,7 @@ GameObject:
   - component: {fileID: 114453048318857626}
   - component: {fileID: 114927164049033672}
   - component: {fileID: 60013769492953452}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: HollowBrick
   m_TagString: Bricks
   m_Icon: {fileID: 0}

@@ -20,7 +20,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4133733946126256}
   - component: {fileID: 114704897498830178}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Particle_hardBrick_star_launcher
   m_TagString: Untagged
   m_Icon: {fileID: 0}

@@ -21,7 +21,7 @@ GameObject:
   - component: {fileID: 4731352210570626}
   - component: {fileID: 212097597245222950}
   - component: {fileID: 114297515095854434}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Particle_hardBrick_Rect
   m_TagString: Untagged
   m_Icon: {fileID: 0}

@@ -21,7 +21,7 @@ GameObject:
   - component: {fileID: 4945204939691380}
   - component: {fileID: 212360077376018968}
   - component: {fileID: 114708507774374166}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Particle_Drop
   m_TagString: Untagged
   m_Icon: {fileID: 0}

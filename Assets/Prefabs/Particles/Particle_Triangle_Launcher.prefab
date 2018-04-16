@@ -20,7 +20,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4020507033077720}
   - component: {fileID: 114809899746933072}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Particle_Triangle_Launcher
   m_TagString: Untagged
   m_Icon: {fileID: 0}

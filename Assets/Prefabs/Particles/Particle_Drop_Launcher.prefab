@@ -20,7 +20,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4639834781582460}
   - component: {fileID: 114757814344976290}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Particle_Drop_Launcher
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -54,4 +54,3 @@ MonoBehaviour:
   particle_drop: {fileID: 1375578478520210, guid: 6ecedb6ed676f474a9c0ad663a8fae51,
     type: 2}
   particle_count: 14
-  targetAngle: 0

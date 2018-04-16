@@ -20,7 +20,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4080560556138260}
   - component: {fileID: 114237556560332512}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Particle_Ray_Launcher
   m_TagString: Untagged
   m_Icon: {fileID: 0}
