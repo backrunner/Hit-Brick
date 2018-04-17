@@ -9,6 +9,7 @@ public class levelController : MonoBehaviour {
     //关卡开关
     public static bool isLevelStarted;
     public static bool isGameOver;
+    public static bool isLevelPaused;
 
     //板子
     private static GameObject _pad;

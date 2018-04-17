@@ -95,7 +95,7 @@ public class ballController : MonoBehaviour
             Vector2 force = new Vector2(0f, initMoveSpeed);
             this.gameObject.GetComponent<Rigidbody2D>().AddForce(force);
             //开启ball的trail render
-            this.gameObject.GetComponent<TrailRenderer>().enabled = true;
+            StartCoroutine(delayToEnableTrailRender(0.1f));
         }
     }
 
@@ -187,5 +187,12 @@ public class ballController : MonoBehaviour
         position_deltaTime = 0;
         isStack_x = false;
         isStack_y = false;
+    }
+
+    //延迟开启球的尾迹渲染
+    private IEnumerator delayToEnableTrailRender(float time)
+    {
+        yield return new WaitForSeconds(time);
+        this.gameObject.GetComponent<TrailRenderer>().enabled = true;
     }
 }
