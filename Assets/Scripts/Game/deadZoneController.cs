@@ -4,8 +4,16 @@ using UnityEngine;
 
 public class deadZoneController : MonoBehaviour {
 
+    //UI
+    public gameUIContorller uictrl;
+
+    private void Start()
+    {
+        
+    }
+
     //物体进入（球）
-	private void OnTriggerEnter2D(Collider2D collision)
+    private void OnTriggerEnter2D(Collider2D collision)
     {
         ballController ctrl = collision.gameObject.GetComponent<ballController>();
         if (ctrl != null)
@@ -20,6 +28,9 @@ public class deadZoneController : MonoBehaviour {
                     levelController.newBall();
                 }
                 levelController.leftBall = levelController.leftBall - 1;
+                //更新UI
+                gameUIContorller.updateLeftBallUI();
+                //销毁游戏物体
                 Destroy(collision.gameObject);
             } else
             {

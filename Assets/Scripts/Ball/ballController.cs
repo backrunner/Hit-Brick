@@ -90,12 +90,12 @@ public class ballController : MonoBehaviour
                 levelController.isLevelStarted = true;
             }
             //取消附着状态
-            this.isAttracted = false;
-            //开启ball的trail render
-            this.gameObject.GetComponent<TrailRenderer>().enabled = true;
+            this.isAttracted = false;            
             //向ball施加自定义力
             Vector2 force = new Vector2(0f, initMoveSpeed);
             this.gameObject.GetComponent<Rigidbody2D>().AddForce(force);
+            //开启ball的trail render
+            this.gameObject.GetComponent<TrailRenderer>().enabled = true;
         }
     }
 

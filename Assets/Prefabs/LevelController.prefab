@@ -20,6 +20,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4938293519892786}
   - component: {fileID: 114484970607445636}
+  - component: {fileID: 114673347323340066}
   m_Layer: 13
   m_Name: LevelController
   m_TagString: Untagged
@@ -60,3 +61,15 @@ MonoBehaviour:
     type: 2}
   gameoverEffect: {fileID: 1472862313936248, guid: 23e0d4d8fca55a841bb66a324063b2fd,
     type: 2}
+--- !u!114 &114673347323340066
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1333407394828428}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e129f1182c868f1479fccae42f0eaac7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  text_leftBall: {fileID: 0}

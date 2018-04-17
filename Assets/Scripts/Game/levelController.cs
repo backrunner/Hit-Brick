@@ -92,7 +92,7 @@ public class levelController : MonoBehaviour {
         leftBricks = bricks.Length;
 
         //传递粒子给静态变量
-        particle_ray_launcher=m_particle_ray_launcher;        
+        particle_ray_launcher=m_particle_ray_launcher;               
     }
 
     private void Start()
@@ -101,6 +101,9 @@ public class levelController : MonoBehaviour {
         findPad();
         //新建一个球
         newBall();
+
+        //更新UI
+        gameUIContorller.updateLeftBallUI();
     }
 
     private void Update()
@@ -139,7 +142,7 @@ public class levelController : MonoBehaviour {
         {
             findPad();
         }
-        pad_ctrl.ballLaunchList.Add(ball_new);
+        pad_ctrl.addBallToLaunchList(ball_new);
         ballController ctrl = ball_new.GetComponent<ballController>();
         //让球附在板子上
         ctrl.isAttracted = true;
