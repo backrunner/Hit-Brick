@@ -78,6 +78,13 @@ public class levelController : MonoBehaviour {
     public GameObject clearEffect;
     public GameObject gameoverEffect;
 
+    //UI
+    //canvas
+    public static GameObject canvas;
+    //暂停图标
+    public GameObject image_Pause;  //用于编辑器指定Prefabs
+    private GameObject _image_Pause;    //用于记录代码生成的obj
+
     private void Awake()
     {        
         //传递assest ball给静态变量
@@ -109,12 +116,46 @@ public class levelController : MonoBehaviour {
 
     private void Update()
     {
+        //检查暂停
+        checkPause();
+        //检查游戏状态
         if (isLevelStarted)
         {
             checkGameStatus();
         }
     }
 
+    //检查暂停状态
+    private void checkPause()
+    {
+        if (Input.GetButtonDown("Pause"))
+        {
+            if (!isLevelPaused)
+            {
+                //更改状态和时间缩放
+                isLevelPaused = true;
+                Time.timeScale = 0;
+                //UI
+                Vector3 image_pause_position = new Vector3(8f, 4.2f, 1f);
+                _image_Pause = Instantiate(image_Pause, image_pause_position, new Quaternion(0, 0, 0, 0));
+                //置于canvas下
+                _image_Pause.transform.SetParent(canvas.transform);
+                //修改scale
+                _image_Pause.transform.localScale = new Vector3(1, 1, 1);
+                Debug.Log("Game Paused");
+            } else
+            {
+                //更改状态和时间缩放
+                isLevelPaused = false;
+                Time.timeScale = 1;
+                //UI
+                Destroy(_image_Pause);
+                Debug.Log("Game Resumed");
+            }
+        }
+    }
+
+    //用于刷新新球的静态方法
     public static void newBall()
     {
         Vector3 position;

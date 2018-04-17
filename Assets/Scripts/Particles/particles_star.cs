@@ -18,7 +18,15 @@ public class particles_star : MonoBehaviour
         float randomScale = Random.Range(0.35f, 0.62f);
         transform.localScale = new Vector3(randomScale, randomScale, 1);
         //计算每次缩放的差值
-        deltaScale = transform.localScale.x / (liveTime / Time.deltaTime);
+        if (Time.deltaTime > 0)
+        {
+            deltaScale = transform.localScale.x / (liveTime / Time.deltaTime);
+        }
+        else
+        {
+            //防止暂停获取的Time.deltaTime为0
+            deltaScale = transform.localScale.x / (liveTime / 0.0167f);
+        }
     }
 
     // Update is called once per frame

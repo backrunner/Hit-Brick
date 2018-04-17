@@ -9,7 +9,7 @@ public class PadController : MonoBehaviour {
     public ArrayList ballLaunchList;
 
     //UI
-    public GameObject canvas;
+    private GameObject canvas;
     public GameObject text_waitforLaunch;
     private GameObject text_waitforLaunch_inscene;
 
@@ -21,9 +21,13 @@ public class PadController : MonoBehaviour {
     void Start()
     {
         //初始化canvas
-        if (canvas == null)
+        if (levelController.canvas == null)
         {
             canvas = GameObject.Find("Canvas");
+            levelController.canvas = canvas;
+        } else
+        {
+            canvas = levelController.canvas;
         }
     }
 
@@ -31,8 +35,8 @@ public class PadController : MonoBehaviour {
     void Update () {
         //检查launchBall的操作
         ballLaunchCheck();
-        //游戏未结束的情况下允许移动
-        if (!levelController.isGameOver)
+        //游戏未结束且没有暂停的情况下允许移动
+        if (!levelController.isGameOver && !levelController.isLevelPaused)
         {
             moveWithMouse();
         }

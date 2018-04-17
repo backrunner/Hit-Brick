@@ -61,6 +61,8 @@ MonoBehaviour:
     type: 2}
   gameoverEffect: {fileID: 1472862313936248, guid: 23e0d4d8fca55a841bb66a324063b2fd,
     type: 2}
+  image_Pause: {fileID: 1227544442173910, guid: 69c63054c2700214998c1ffa37b1944f,
+    type: 2}
 --- !u!114 &114673347323340066
 MonoBehaviour:
   m_ObjectHideFlags: 1

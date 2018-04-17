@@ -22,7 +22,13 @@ public class particle_ray : MonoBehaviour {
         Vector3 scale = new Vector3(Random.Range(0.85f, 1f), Random.Range(0.8f, 1.2f), 1);
         transform.localScale = scale;
         //计算差值
-        deltaAlpha = 1f / (liveTime / Time.deltaTime);
+        if (Time.deltaTime > 0)
+        {
+            deltaAlpha = 1f / (liveTime / Time.deltaTime);
+        } else
+        {
+            deltaAlpha = 1f / (liveTime / 0.0167f);
+        }
     }
 	
 	void Update () {

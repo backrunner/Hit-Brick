@@ -11,7 +11,7 @@ public class gameUIContorller : MonoBehaviour {
     //用于编辑器指定的非静态变量
     public Text text_leftBall;
     //前缀
-    public const string leftBall_prefix = "Left Ball: ";
+    public const string leftBall_prefix = "Life: ";
 
     private void Start()
     {

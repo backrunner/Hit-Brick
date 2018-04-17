@@ -64,7 +64,7 @@ public class ballController : MonoBehaviour
         }
         else
         {
-            if (levelController.isLevelStarted)
+            if (levelController.isLevelStarted && !levelController.isLevelPaused)
             {
                 //如果球未吸附在pad上，则检测球的位置是否出现卡死
                 checkPosition();
