@@ -24,7 +24,8 @@ public class levelController : MonoBehaviour {
             _pad = value;
         }
     }
-    
+    public static PadController pad_ctrl;
+
     //球
     //用于刷新的球obj
     private static GameObject _ball;
@@ -77,12 +78,7 @@ public class levelController : MonoBehaviour {
     public GameObject gameoverEffect;
 
     private void Awake()
-    {
-        //关卡开始时寻找板子
-        if (pad == null)
-        {
-            pad = GameObject.Find("Pad");
-        }
+    {        
         //传递assest ball给静态变量
         if (m_ball != null)
         {
@@ -96,7 +92,13 @@ public class levelController : MonoBehaviour {
         leftBricks = bricks.Length;
 
         //传递粒子给静态变量
-        particle_ray_launcher=m_particle_ray_launcher;
+        particle_ray_launcher=m_particle_ray_launcher;        
+    }
+
+    private void Start()
+    {
+        //寻找板子
+        findPad();
         //新建一个球
         newBall();
     }
@@ -132,6 +134,12 @@ public class levelController : MonoBehaviour {
         //刷新新球
         GameObject ball_new = Instantiate(_ball, position, new Quaternion(0, 0, 0, 0));
         currentBall = ball_new;
+        //加入待发射列表
+        if (pad_ctrl == null)
+        {
+            findPad();
+        }
+        pad_ctrl.ballLaunchList.Add(ball_new);
         ballController ctrl = ball_new.GetComponent<ballController>();
         //让球附在板子上
         ctrl.isAttracted = true;
@@ -156,6 +164,15 @@ public class levelController : MonoBehaviour {
             //触发特效
             Instantiate(gameoverEffect, new Vector3(0, 0, 0), new Quaternion(0, 0, 0, 0));
             Debug.Log("Game Over!");
+        }
+    }
+
+    //寻找板子
+    public static void findPad() {        
+        if (pad == null)
+        {
+            pad = GameObject.Find("Pad");
+            pad_ctrl = pad.GetComponent<PadController>();
         }
     }
 }

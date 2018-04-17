@@ -2,7 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ballController : MonoBehaviour {
+public class ballController : MonoBehaviour
+{
 
     public bool isAttracted;
 
@@ -26,10 +27,11 @@ public class ballController : MonoBehaviour {
     private bool isStack_x;
     private bool isStack_y;
 
-	// Use this for initialization
-	void Start () {
+    // Use this for initialization
+    void Start()
+    {
         //游戏未开始ball附在pad上
-		if (!levelController.isLevelStarted)
+        if (!levelController.isLevelStarted)
         {
             isAttracted = true;
         }
@@ -39,26 +41,28 @@ public class ballController : MonoBehaviour {
             if (levelController.pad != null)
             {
                 pad = levelController.pad;
-            } else
+            }
+            else
             {
                 pad = GameObject.Find("Pad");
                 levelController.pad = pad;
-            }            
+            }
         }
         //初始化变量
         recordedPosition = transform.position;
         position_deltaTime = 0;
         isStack_x = false;
         isStack_y = false;
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		if (isAttracted)
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        if (isAttracted)
         {
             attachToPad();
-            launchBall();
-        } else
+        }
+        else
         {
             if (levelController.isLevelStarted)
             {
@@ -66,7 +70,7 @@ public class ballController : MonoBehaviour {
                 checkPosition();
             }
         }
-	}
+    }
 
     //绑定ball与pad的运动
     void attachToPad()
@@ -76,23 +80,22 @@ public class ballController : MonoBehaviour {
         this.gameObject.transform.position = position;
     }
 
-    void launchBall()
+    public void launchBall()
     {
         if (this.isAttracted)
         {
-            //判断自定义按键launchBall
-            if (Input.GetButton("launchBall"))
+            //关卡开始
+            if (!levelController.isLevelStarted)
             {
-                //关卡开始
                 levelController.isLevelStarted = true;
-                //取消附着状态
-                this.isAttracted = false;
-                //开启ball的trail render
-                this.gameObject.GetComponent<TrailRenderer>().enabled = true;
-                //向ball施加自定义力
-                Vector2 force = new Vector2(0f,initMoveSpeed);
-                this.gameObject.GetComponent<Rigidbody2D>().AddForce(force);                
             }
+            //取消附着状态
+            this.isAttracted = false;
+            //开启ball的trail render
+            this.gameObject.GetComponent<TrailRenderer>().enabled = true;
+            //向ball施加自定义力
+            Vector2 force = new Vector2(0f, initMoveSpeed);
+            this.gameObject.GetComponent<Rigidbody2D>().AddForce(force);
         }
     }
 
@@ -104,7 +107,7 @@ public class ballController : MonoBehaviour {
         {
             if (Mathf.Abs(recordedPosition.x - transform.position.x) <= check_limit)
             {
-                isStack_x = true;              
+                isStack_x = true;
                 position_deltaTime += Time.deltaTime;
                 //当卡住的时间超过限定时间
                 if (position_deltaTime > time_check_deadline)
@@ -152,7 +155,8 @@ public class ballController : MonoBehaviour {
                         Vector2 force = new Vector2(0, 20f);
                         this.gameObject.GetComponent<Rigidbody2D>().AddForce(force);
                         updateRecordPosition();
-                    } else
+                    }
+                    else
                     {
                         Vector2 force = new Vector2(0, -20f);
                         this.gameObject.GetComponent<Rigidbody2D>().AddForce(force);
