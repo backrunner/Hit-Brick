@@ -11,7 +11,7 @@ public class text_leftBall : MonoBehaviour {
         ballController ctrl = collision.gameObject.GetComponent<ballController>();
         if (ctrl != null)
         {
-            playAnim("fadein");
+            playAnim("fadeout");
         }
     }
 
@@ -20,13 +20,13 @@ public class text_leftBall : MonoBehaviour {
         ballController ctrl = collision.gameObject.GetComponent<ballController>();
         if (ctrl != null)
         {
-            playAnim("fadeout");
+            playAnim("fadein");
         }
     }
 
     void playAnim(string type)
     {
-        Transform anim_transform = transform.Find("Anim_Text_Fade");
+        Transform anim_transform = transform.Find("Anim_Text_Fade(Clone)");
         if (anim_transform == null)
         {
             GameObject anim = Instantiate(anim_fade, transform);

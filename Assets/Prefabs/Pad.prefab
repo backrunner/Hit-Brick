@@ -121,8 +121,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 269b1546eed65834981d7bcf10e8320b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  canvas: {fileID: 0}
+  targetScale: 0
+  maxScale: 1.8
+  minScale: 0
+  deltaScale: 0
   text_waitforLaunch: {fileID: 1435118467006508, guid: 9aa4305a5640fbf46a20cea147220eb9,
+    type: 2}
+  anim_padlength: {fileID: 1386226312864720, guid: 9199082524dd880439846011ad35959a,
     type: 2}
 --- !u!114 &114974405552140912
 MonoBehaviour:

@@ -8,6 +8,15 @@ public class Prop : MonoBehaviour {
     //移动方向
     private Vector3 moveToward;
 
+    private void Awake()
+    {
+        //初始化
+        if (moveSpeed <= 0)
+        {
+            moveSpeed = 2;
+        }
+    }
+
     public virtual void Start()
     {
         //沿y轴负方向运动

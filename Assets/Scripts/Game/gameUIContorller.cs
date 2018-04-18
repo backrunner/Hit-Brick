@@ -13,7 +13,7 @@ public class gameUIContorller : MonoBehaviour {
     //前缀
     public const string leftBall_prefix = "Life: ";
 
-    private void Start()
+    private void Awake()
     {
         //初始化静态变量
         if (text_leftBall != null)

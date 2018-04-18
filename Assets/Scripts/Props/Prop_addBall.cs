@@ -6,7 +6,6 @@ public class Prop_addBall : Prop {
 
     public override void padGot()
     {
-        Debug.Log("Got");
         levelController.newBall();
         Destroy(gameObject);
     }
