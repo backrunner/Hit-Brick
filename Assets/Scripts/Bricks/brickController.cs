@@ -8,6 +8,9 @@ public class brickController : MonoBehaviour {
     //球
     public GameObject ball;
 
+    //Particles
+    public GameObject particle_destory;
+
     //砖块的碰撞类型
     //default - none
     //1 - collision
@@ -44,12 +47,25 @@ public class brickController : MonoBehaviour {
 
     public virtual void ballHit_trigger()
     {
-        throwOutBrokenParts();
+        destroyBrick();
     }
 
     public virtual void ballHit_collision()
     {
+        destroyBrick();
+    }
+
+    //销毁砖块的公共方法
+    public virtual void destroyBrick()
+    {
+        playDestoryParticle();
         throwOutBrokenParts();
+        destoryObj();
+    }
+
+    public virtual void playDestoryParticle()
+    {
+        Instantiate(particle_destory, ball.transform.position, new Quaternion(0, 0, 0, 0));
     }
 
     public virtual void throwOutBrokenParts()
@@ -58,7 +74,12 @@ public class brickController : MonoBehaviour {
         GameObject broken = Instantiate(brokenBrick, gameObject.transform.position, gameObject.transform.rotation);
         broken.transform.localScale = transform.localScale;
         brickBrokenController ctrl = broken.GetComponent<brickBrokenController>();
-        ctrl.throwout(ball.transform.position);
+        ctrl.throwout(ball.transform.position);        
+    }
+
+    //销毁砖块obj
+    public virtual void destoryObj()
+    {
         //销毁物体并减少计数
         Destroy(gameObject);
         levelController.leftBricks--;

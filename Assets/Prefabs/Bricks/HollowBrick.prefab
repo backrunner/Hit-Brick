@@ -21,7 +21,6 @@ GameObject:
   - component: {fileID: 4001804102414368}
   - component: {fileID: 212112600751326868}
   - component: {fileID: 114453048318857626}
-  - component: {fileID: 114927164049033672}
   - component: {fileID: 60013769492953452}
   m_Layer: 9
   m_Name: HollowBrick
@@ -110,20 +109,9 @@ MonoBehaviour:
   brokenBrick: {fileID: 1476186353195142, guid: 5bd0e8d565811be47ad561b207d72da1,
     type: 2}
   ball: {fileID: 0}
-  collision_type: 2
---- !u!114 &114927164049033672
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1032432221238258}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4e043228665fc8849b2bfbbe75f94d70, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  particle_launcher: {fileID: 1736212172954054, guid: a57c951412fc81043b78925053ee528f,
+  particle_destory: {fileID: 1736212172954054, guid: a57c951412fc81043b78925053ee528f,
     type: 2}
+  collision_type: 2
 --- !u!212 &212112600751326868
 SpriteRenderer:
   m_ObjectHideFlags: 1

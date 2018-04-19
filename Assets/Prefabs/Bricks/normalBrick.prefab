@@ -22,7 +22,6 @@ GameObject:
   - component: {fileID: 212653805237318424}
   - component: {fileID: 60031416824110466}
   - component: {fileID: 114510212418424800}
-  - component: {fileID: 114383379300178246}
   m_Layer: 9
   m_Name: normalBrick
   m_TagString: Bricks
@@ -97,19 +96,6 @@ PolygonCollider2D:
       - {x: 0.3443749, y: 0.18818855}
       - {x: 0.3213358, y: 0.19909811}
       - {x: 0.30153513, y: 0.19992423}
---- !u!114 &114383379300178246
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1448902725853222}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bb3ab10a2308619409598ae73cb8355b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  particle_launcher: {fileID: 1736212172954054, guid: a57c951412fc81043b78925053ee528f,
-    type: 2}
 --- !u!114 &114510212418424800
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -124,6 +110,8 @@ MonoBehaviour:
   brokenBrick: {fileID: 1875512836332822, guid: 9fd327eef8cbff740aa82f273d4d7a0b,
     type: 2}
   ball: {fileID: 0}
+  particle_destory: {fileID: 1736212172954054, guid: a57c951412fc81043b78925053ee528f,
+    type: 2}
   collision_type: 1
 --- !u!212 &212653805237318424
 SpriteRenderer:

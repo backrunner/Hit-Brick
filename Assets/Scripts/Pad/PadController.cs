@@ -147,6 +147,15 @@ public class PadController : MonoBehaviour
     //压缩板子长度
     public void compactPad()
     {
-
+        if (targetScale > minScale)
+        {
+            Debug.Log("Change");
+            targetScale -= deltaScale;
+            Transform anim_trans = transform.Find("Anim_padLength(Clone)");
+            if (anim_trans == null)
+            {
+                Instantiate(anim_padlength, transform);
+            }
+        }
     }
 }
