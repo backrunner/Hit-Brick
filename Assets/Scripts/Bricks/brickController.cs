@@ -28,6 +28,16 @@ public class brickController : MonoBehaviour {
             //如果球打到了砖块则不认为球卡住
             ball_ctrl.updateRecordPosition();
             ballHit_collision();
+        } else {
+            //检测到bullet
+            Prop_shoot_bullet bullet_ctrl = collision.gameObject.GetComponent<Prop_shoot_bullet>();
+            if (bullet_ctrl != null && collision_type == 1) 
+            {
+                //将bullet视作ball
+                ball = collision.gameObject;
+                ballHit_collision();
+                Destroy(collision.gameObject);
+            }
         }
     }
 
@@ -42,6 +52,15 @@ public class brickController : MonoBehaviour {
             //如果球打到了砖块则不认为球卡住
             ball_ctrl.updateRecordPosition();
             ballHit_trigger();
+        } else
+        {
+            Prop_shoot_bullet bullet_ctrl = collision.gameObject.GetComponent<Prop_shoot_bullet>();
+            if (bullet_ctrl != null && collision_type == 2)
+            {
+                ball = collision.gameObject;
+                ballHit_trigger();
+                Destroy(collision.gameObject);
+            }
         }
     }
 

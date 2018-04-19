@@ -22,7 +22,7 @@ GameObject:
   - component: {fileID: 212491518368455408}
   - component: {fileID: 60817514857211504}
   - component: {fileID: 114379054749850452}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Prop_extendPad
   m_TagString: Untagged
   m_Icon: {fileID: 0}

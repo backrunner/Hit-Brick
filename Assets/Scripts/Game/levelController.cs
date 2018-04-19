@@ -100,13 +100,14 @@ public class levelController : MonoBehaviour {
         leftBricks = bricks.Length;
 
         //传递粒子给静态变量
-        particle_ray_launcher=m_particle_ray_launcher;               
+        particle_ray_launcher=m_particle_ray_launcher;
+
+        //寻找板子
+        findPad();
     }
 
     private void Start()
-    {
-        //寻找板子
-        findPad();
+    {        
         //新建一个球
         newBall();
 
