@@ -221,4 +221,12 @@ public class levelController : MonoBehaviour {
             pad_ctrl = pad.GetComponent<PadController>();
         }
     }
+
+    //添加一条命
+    public static void addLeftBall()
+    {
+        leftBall++;
+        //更新UI
+        gameUIContorller.updateLeftBallUI();
+    }
 }

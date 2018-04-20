@@ -6,7 +6,7 @@ public class Prop_addBall : Prop {
 
     public override void padGot()
     {
-        levelController.newBall();
+        levelController.addLeftBall();
         Destroy(gameObject);
     }
 }
