@@ -5,22 +5,7 @@ using UnityEngine;
 public class Prop_shoot : Prop {
 
     //pad
-    private GameObject pad;
     public GameObject shoot_launcher;
-
-    public override void Start()
-    {
-        //初始化pad
-        if (levelController.pad != null)
-        {
-            pad = levelController.pad;
-        } else
-        {
-            pad = GameObject.Find("Pad");
-            levelController.pad = pad;
-        }
-        base.Start();
-    }
 
     public override void padGot()
     {

@@ -8,7 +8,7 @@ public class prop_extendPad : Prop {
     {
         if (levelController.pad != null)
         {
-            PadController ctrl = levelController.pad.GetComponent<PadController>();
+            PadController ctrl = pad.GetComponent<PadController>();
             ctrl.extendPad();
             Destroy(gameObject);
         }

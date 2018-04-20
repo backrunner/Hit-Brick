@@ -8,6 +8,9 @@ public class Prop : MonoBehaviour {
     //移动方向
     private Vector3 moveToward;
 
+    //pad
+    public GameObject pad;
+
     private void Awake()
     {
         //初始化
@@ -31,6 +34,7 @@ public class Prop : MonoBehaviour {
     {
         PadController ctrl = collision.gameObject.GetComponent<PadController>();
         if (ctrl != null){
+            pad = collision.gameObject;
             padGot();
         }
     }

@@ -8,7 +8,7 @@ public class Prop_compactPad : Prop {
     {
         if (levelController.pad != null)
         {
-            PadController ctrl = levelController.pad.GetComponent<PadController>();
+            PadController ctrl = pad.GetComponent<PadController>();
             ctrl.compactPad();
             Destroy(gameObject);
         }
