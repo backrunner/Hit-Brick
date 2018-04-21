@@ -62,6 +62,10 @@ public class levelController : MonoBehaviour {
     }
     //静态变量 当前球
     public static GameObject currentBall;
+    //球列表
+    public static ArrayList ballList;
+    //球初始y轴偏移量
+    public static float ballInitOffset;
 
     //砖块
     public static int leftBricks;
@@ -95,6 +99,9 @@ public class levelController : MonoBehaviour {
         //传递编辑器的指定量给静态变量
         leftBall = m_leftBall;
 
+        //初始化列表
+        ballList = new ArrayList();
+
         //获取环境中的预置Brick
         bricks = GameObject.FindGameObjectsWithTag("Bricks");
         leftBricks = bricks.Length;
@@ -104,6 +111,9 @@ public class levelController : MonoBehaviour {
 
         //寻找板子
         findPad();
+
+        //变量初始化
+        ballInitOffset = 0.3f;
     }
 
     private void Start()
@@ -164,7 +174,7 @@ public class levelController : MonoBehaviour {
         {
             //获取位置并做偏移
             position = pad.transform.position;
-            position.y += 0.25f;
+            position.y += ballInitOffset;
         } else
         {
             //抓取不到pad，使用默认位置
@@ -180,6 +190,8 @@ public class levelController : MonoBehaviour {
         //刷新新球
         GameObject ball_new = Instantiate(_ball, position, new Quaternion(0, 0, 0, 0));
         currentBall = ball_new;
+        //把球加入到球列表
+        ballList.Add(ball_new);
         //加入待发射列表
         if (pad_ctrl == null)
         {

@@ -27,7 +27,37 @@ public class ballController : MonoBehaviour
     private bool isStack_x;
     private bool isStack_y;
 
-    // Use this for initialization
+    //目标缩放
+    public float targetScale;
+    //缩放相关
+    public float originScale; //原始大小
+    public float minScale; //下限
+    public float maxScale; //上限
+    public float deltaScale;
+    public float deltaScale_reverse;
+
+    //anim
+    public GameObject anim_ballSize;
+
+    //吸附板的偏移量
+    public float attractedOffset;
+
+    private void Awake()
+    {
+        //初始化attractedOffset
+        attractedOffset = levelController.ballInitOffset;
+        //初始化originScale
+        originScale = transform.localScale.x;
+        targetScale = originScale;
+        //初始化minScale deltaScale targetScale
+        if (minScale == 0)
+        {
+            minScale = originScale * (maxScale - originScale) / originScale;
+        }
+        deltaScale = (maxScale - originScale) / 2;
+        deltaScale_reverse = (originScale - minScale) / 2;
+    }
+
     void Start()
     {
         //游戏未开始ball附在pad上
@@ -55,7 +85,6 @@ public class ballController : MonoBehaviour
         isStack_y = false;
     }
 
-    // Update is called once per frame
     void Update()
     {
         if (isAttracted)
@@ -76,7 +105,7 @@ public class ballController : MonoBehaviour
     void attachToPad()
     {
         Vector3 position = pad.transform.position;
-        position.y += 0.25f;
+        position.y += attractedOffset;
         this.gameObject.transform.position = position;
     }
 
@@ -90,7 +119,7 @@ public class ballController : MonoBehaviour
                 levelController.isLevelStarted = true;
             }
             //取消附着状态
-            this.isAttracted = false;            
+            this.isAttracted = false;
             //向ball施加自定义力
             Vector2 force = new Vector2(0f, initMoveSpeed);
             this.gameObject.GetComponent<Rigidbody2D>().AddForce(force);
@@ -194,5 +223,60 @@ public class ballController : MonoBehaviour
     {
         yield return new WaitForSeconds(time);
         this.gameObject.GetComponent<TrailRenderer>().enabled = true;
+    }
+
+    //改变球体大小
+    public void upBallSize()
+    {
+        if (targetScale < maxScale)
+        {
+            if (targetScale >= originScale)
+            {
+                targetScale += deltaScale;
+            } else
+            {
+                targetScale += deltaScale_reverse;
+            }
+            //改变球的位置以免发生碰撞
+            if (this.isAttracted)
+            {
+                attractedOffset += 0.025f;
+            }
+            //调整尾部
+            gameObject.GetComponent<TrailRenderer>().widthMultiplier += 0.1f;
+            //动画
+            Transform anim_trans = transform.Find("Anim_ballSize(Clone)");
+            if (anim_trans == null)
+            {
+                Instantiate(anim_ballSize, transform);
+            }
+        }
+    }
+
+    public void downBallSize()
+    {
+        if (targetScale > minScale)
+        {
+            if (targetScale > originScale)
+            {
+                targetScale -= deltaScale;
+            } else
+            {
+                targetScale -= deltaScale_reverse;
+            }
+            //改变球的位置以免发生碰撞
+            if (this.isAttracted)
+            {
+                attractedOffset -= 0.025f;
+            }
+            //调整尾部
+            gameObject.GetComponent<TrailRenderer>().widthMultiplier -= 0.1f;
+            //动画
+            Transform anim_trans = transform.Find("Anim_ballSize(Clone)");
+            if (anim_trans == null)
+            {
+                Instantiate(anim_ballSize, transform);
+            }
+        }
     }
 }

@@ -39,6 +39,7 @@ public class anim_padlength : Anim {
                 scale = pad_ctrl.targetScale;
                 pad.transform.localScale = new Vector3(scale, 1, 1);
                 Destroy(gameObject);
+                return;
             }
             pad.transform.localScale = new Vector3(scale, 1, 1);
         } else
@@ -49,6 +50,7 @@ public class anim_padlength : Anim {
                 scale = pad_ctrl.targetScale;
                 pad.transform.localScale = new Vector3(scale, 1, 1);
                 Destroy(gameObject);
+                return;
             }
             pad.transform.localScale = new Vector3(scale, 1, 1);
         }

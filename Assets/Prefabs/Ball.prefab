@@ -39,7 +39,7 @@ Transform:
   m_GameObject: {fileID: 1005448619725424}
   m_LocalRotation: {x: 0, y: 0, z: -0.004251347, w: 0.999991}
   m_LocalPosition: {x: 3.257075, y: -1.9744914, z: 0}
-  m_LocalScale: {x: 0.10000001, y: 0.10000001, z: 1}
+  m_LocalScale: {x: 0.1, y: 0.1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -192,6 +192,15 @@ MonoBehaviour:
   initMoveSpeed: 180
   time_check_deadline: 4
   check_limit: 0.1
+  targetScale: 0
+  originScale: 0
+  minScale: 0.05
+  maxScale: 0.16
+  deltaScale: 0
+  deltaScale_reverse: 0
+  anim_ballSize: {fileID: 1964509774389532, guid: 76d3e92ec57384544aeb1d02f32a39bd,
+    type: 2}
+  attractedOffset: 0
 --- !u!212 &212914708102828526
 SpriteRenderer:
   m_ObjectHideFlags: 1

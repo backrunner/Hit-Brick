@@ -7,11 +7,6 @@ public class deadZoneController : MonoBehaviour {
     //UI
     public gameUIContorller uictrl;
 
-    private void Start()
-    {
-        
-    }
-
     //物体进入（球）
     private void OnTriggerEnter2D(Collider2D collision)
     {
@@ -44,6 +39,10 @@ public class deadZoneController : MonoBehaviour {
 
     //物体离开（其他）
     private void OnTriggerExit2D(Collider2D collision)
+    {
+        Destroy(collision.gameObject);
+    }
+    private void OnCollisionExit2D(Collision2D collision)
     {
         Destroy(collision.gameObject);
     }
