@@ -10,6 +10,10 @@ public class Prop_powerful_child : MonoBehaviour {
     //ball
     private GameObject ball;
     private ballController ctrl;
+    //Anim
+    public GameObject anim_ballColor;   //obj
+    private GameObject anim;
+    private anim_ballColor anim_ctrl;
 
     private void Awake()
     {
@@ -20,6 +24,18 @@ public class Prop_powerful_child : MonoBehaviour {
     void Start () {
         //初始化ball
         ball = transform.parent.gameObject;
+        //动画控制
+        Transform anim_trans = ball.transform.Find("Anim_ballColor(Clone)");
+        if (anim_trans != null)
+        {
+            anim = anim_trans.gameObject;
+            anim_ctrl = anim.GetComponent<anim_ballColor>();
+            anim_ctrl.toward = true;
+        } else
+        {
+            anim = Instantiate(anim_ballColor, ball.transform);
+            anim_ctrl = anim.GetComponent<anim_ballColor>();
+        }
         ctrl = ball.GetComponent<ballController>();
         ctrl.isPowerful = true;
         //修改砖块的碰撞参数
@@ -44,6 +60,20 @@ public class Prop_powerful_child : MonoBehaviour {
                 {
                     obj.GetComponent<PolygonCollider2D>().isTrigger = false;
                 }
+            }
+            //动画反向
+            Transform anim_trans = ball.transform.Find("Anim_ballColor(Clone)");
+            if (anim_trans != null)
+            {
+                anim = anim_trans.gameObject;
+                anim_ctrl = anim.GetComponent<anim_ballColor>();
+                anim_ctrl.toward = false;
+            }
+            else
+            {
+                anim = Instantiate(anim_ballColor, ball.transform);
+                anim_ctrl = anim.GetComponent<anim_ballColor>();
+                anim_ctrl.toward = false;
             }
             Destroy(gameObject);
         }

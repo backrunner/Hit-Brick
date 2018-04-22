@@ -52,3 +52,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   liveTime: 5
+  anim_ballColor: {fileID: 1191717148565268, guid: 0d2f1e1cfee71444b9a9c567d2b996b3,
+    type: 2}
