@@ -11,6 +11,7 @@ public class Prop_compactPad : Prop {
             PadController ctrl = pad.GetComponent<PadController>();
             ctrl.compactPad();
             Destroy(gameObject);
+            base.padGot();
         }
     }
 }

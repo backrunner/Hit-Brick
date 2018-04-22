@@ -20,5 +20,6 @@ public class Prop_shoot : Prop {
             ctrl.resetliveTime();
         }
         Destroy(gameObject);
+        base.padGot();
     }
 }

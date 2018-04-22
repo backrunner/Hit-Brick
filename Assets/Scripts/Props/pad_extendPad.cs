@@ -12,5 +12,6 @@ public class Prop_extendPad : Prop {
             ctrl.extendPad();
             Destroy(gameObject);
         }
+        base.padGot();
     }
 }

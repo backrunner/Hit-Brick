@@ -14,6 +14,6 @@ public class Prop_addBallToScene : Prop {
             levelController.newBall();
         }
         Destroy(gameObject);
+        base.padGot();
     }
-
 }

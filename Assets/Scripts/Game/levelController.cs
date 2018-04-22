@@ -68,8 +68,7 @@ public class levelController : MonoBehaviour {
     public static float ballInitOffset;
 
     //砖块
-    public static int leftBricks;
-    public static GameObject[] bricks;
+    public static ArrayList bricks;
 
     //粒子
     //刷新球的特效
@@ -101,10 +100,14 @@ public class levelController : MonoBehaviour {
 
         //初始化列表
         ballList = new ArrayList();
+        bricks = new ArrayList();
 
         //获取环境中的预置Brick
-        bricks = GameObject.FindGameObjectsWithTag("Bricks");
-        leftBricks = bricks.Length;
+        GameObject[] brickObjs = GameObject.FindGameObjectsWithTag("Bricks");
+        for (int i = 0; i < brickObjs.Length; i++)
+        {
+            bricks.Add(brickObjs[i]);
+        }
 
         //传递粒子给静态变量
         particle_ray_launcher=m_particle_ray_launcher;
@@ -206,7 +209,7 @@ public class levelController : MonoBehaviour {
     //游戏状态检查
     void checkGameStatus()
     {
-        if (leftBricks <= 0)
+        if (bricks.Count <= 0)
         {
             //标识游戏结束
             isLevelStarted = false;

@@ -21,6 +21,7 @@ public class Prop_reverse : Prop {
             ctrl.resetliveTime();
         }
         Destroy(gameObject);
+        base.padGot();
     }
 
 }

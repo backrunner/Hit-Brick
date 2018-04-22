@@ -13,5 +13,6 @@ public class Prop_ballSizeUp : Prop {
             ctrl.upBallSize();
         }
         Destroy(gameObject);
+        base.padGot();
     }
 }

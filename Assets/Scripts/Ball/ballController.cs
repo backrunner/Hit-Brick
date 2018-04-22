@@ -13,6 +13,9 @@ public class ballController : MonoBehaviour
     //初始球速
     public float initMoveSpeed;
 
+    //是否开启powerful状态
+    public bool isPowerful;
+
     //位置卡死检测的时间线
     //卡住判定时间
     public float time_check_deadline;
@@ -42,6 +45,9 @@ public class ballController : MonoBehaviour
     //吸附板的偏移量
     public float attractedOffset;
 
+    //启用Powerful的子物体
+    public GameObject powerful_child;
+
     private void Awake()
     {
         //初始化attractedOffset
@@ -56,6 +62,9 @@ public class ballController : MonoBehaviour
         }
         deltaScale = (maxScale - originScale) / 2;
         deltaScale_reverse = (originScale - minScale) / 2;
+
+        //初始化变量
+        isPowerful = false;
     }
 
     void Start()
@@ -252,7 +261,6 @@ public class ballController : MonoBehaviour
             }
         }
     }
-
     public void downBallSize()
     {
         if (targetScale > minScale)
@@ -277,6 +285,22 @@ public class ballController : MonoBehaviour
             {
                 Instantiate(anim_ballSize, transform);
             }
+        }
+    }
+
+    //powerful的启用
+    public void enablePowerful()
+    {
+        //检测重复物体
+        Transform child = transform.Find("Prop_powerful_child(Clone)");
+        if (child != null)
+        {
+            //存在重复，重置时间
+            Prop_powerful_child ctrl = child.gameObject.GetComponent<Prop_powerful_child>();
+            ctrl.resetLiveTime();
+        } else
+        {
+            Instantiate(powerful_child, transform);
         }
     }
 }

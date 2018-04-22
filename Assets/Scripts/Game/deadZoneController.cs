@@ -26,15 +26,31 @@ public class deadZoneController : MonoBehaviour {
                 //更新UI
                 gameUIContorller.updateLeftBallUI();
                 //销毁游戏物体
-                Destroy(collision.gameObject);
+                destoryBall(collision.gameObject);
             } else
             {
-                Destroy(collision.gameObject);
+                destoryBall(collision.gameObject);
                 //更改levelController的currentBall为场景内的球
                 ballList = GameObject.FindGameObjectsWithTag("Ball");
                 levelController.currentBall = ballList[0];
             }             
         }
+    }
+
+    void destoryBall(GameObject obj)
+    {
+        if (obj.transform.Find("Prop_powerful_child(Clone)") != null)
+        {
+            for (int i = 0; i < levelController.bricks.Count; i++)
+            {
+                GameObject brick = (GameObject)levelController.bricks[i];
+                if (brick.GetComponent<brickController>().collision_type == 1)
+                {
+                    brick.GetComponent<PolygonCollider2D>().isTrigger = false;
+                }
+            }
+        }
+        Destroy(obj);
     }
 
     //物体离开（其他）

@@ -24,10 +24,20 @@ public class brickController : MonoBehaviour {
         //检测碰撞的物体是否为ball
         if (ball_ctrl != null && collision_type == 1)
         {
+            //指定球物体
             ball = collision.gameObject;
-            //如果球打到了砖块则不认为球卡住
-            ball_ctrl.updateRecordPosition();
-            ballHit_collision();
+            if (!ball_ctrl.isPowerful)
+            {                
+                //如果球打到了砖块则不认为球卡住
+                ball_ctrl.updateRecordPosition();
+                ballHit_collision();
+            } else
+            {
+                //如果球打到了砖块则不认为球卡住
+                ball_ctrl.updateRecordPosition();
+                //Powerful状态下直接摧毁砖块
+                destroyBrick();
+            }
         } else {
             //检测到bullet
             Prop_shoot_bullet bullet_ctrl = collision.gameObject.GetComponent<Prop_shoot_bullet>();
@@ -46,12 +56,25 @@ public class brickController : MonoBehaviour {
     {
         ballController ball_ctrl = collision.gameObject.GetComponent<ballController>();
         //检测碰撞的物体是否为ball
-        if (ball_ctrl != null && collision_type == 2)
+        if (ball_ctrl != null)
         {
-            ball = collision.gameObject;
-            //如果球打到了砖块则不认为球卡住
-            ball_ctrl.updateRecordPosition();
-            ballHit_trigger();
+            if (ball_ctrl.isPowerful || collision_type == 2)
+            {
+                ball = collision.gameObject;
+                if (!ball_ctrl.isPowerful)
+                {
+                    //如果球打到了砖块则不认为球卡住
+                    ball_ctrl.updateRecordPosition();
+                    ballHit_trigger();
+                }
+                else
+                {
+                    //如果球打到了砖块则不认为球卡住
+                    ball_ctrl.updateRecordPosition();
+                    //Powerful状态下直接摧毁砖块
+                    destroyBrick();
+                }
+            }
         } else
         {
             Prop_shoot_bullet bullet_ctrl = collision.gameObject.GetComponent<Prop_shoot_bullet>();
@@ -100,7 +123,7 @@ public class brickController : MonoBehaviour {
     public virtual void destoryObj()
     {
         //销毁物体并减少计数
-        Destroy(gameObject);
-        levelController.leftBricks--;
+        levelController.bricks.Remove(gameObject);
+        Destroy(gameObject);        
     }
 }

@@ -190,6 +190,7 @@ MonoBehaviour:
   isAttracted: 0
   pad: {fileID: 0}
   initMoveSpeed: 180
+  isPowerful: 0
   time_check_deadline: 4
   check_limit: 0.1
   targetScale: 0
@@ -201,6 +202,8 @@ MonoBehaviour:
   anim_ballSize: {fileID: 1964509774389532, guid: 76d3e92ec57384544aeb1d02f32a39bd,
     type: 2}
   attractedOffset: 0
+  powerful_child: {fileID: 1859664665079466, guid: 19b0dd57472797e4aa36f48c06df194c,
+    type: 2}
 --- !u!212 &212914708102828526
 SpriteRenderer:
   m_ObjectHideFlags: 1

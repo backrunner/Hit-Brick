@@ -11,6 +11,7 @@ public class prop_extendPad : Prop {
             PadController ctrl = pad.GetComponent<PadController>();
             ctrl.extendPad();
             Destroy(gameObject);
+            base.padGot();
         }
     }
 }

@@ -4,8 +4,7 @@ using UnityEngine;
 
 public class staticBrickController : brickController {
 
-    public override void ballHit_collision()
+    public override void destroyBrick()
     {
-        
     }
 }
