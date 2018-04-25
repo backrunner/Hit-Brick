@@ -6,12 +6,12 @@ public class Prop_compactPad : Prop {
 
     public override void padGot()
     {
-        if (levelController.pad != null)
+        if (pad != null)
         {
             PadController ctrl = pad.GetComponent<PadController>();
-            ctrl.compactPad();
-            Destroy(gameObject);
-            base.padGot();
+            ctrl.compactPad();                   
         }
+        Destroy(gameObject);
+        base.padGot();
     }
 }

@@ -178,6 +178,7 @@ public class PadController : MonoBehaviour
         moveToward = 1;
     }
 
+    //发射激光
     public void launchLaser()
     {
         Instantiate(laser, new Vector3(transform.position.x, transform.position.y + 0.25f, transform.position.z),new Quaternion(0,0,0,0));

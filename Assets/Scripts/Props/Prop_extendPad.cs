@@ -6,12 +6,12 @@ public class prop_extendPad : Prop {
 
     public override void padGot()
     {
-        if (levelController.pad != null)
+        if (pad != null)
         {
             PadController ctrl = pad.GetComponent<PadController>();
-            ctrl.extendPad();
-            Destroy(gameObject);
-            base.padGot();
+            ctrl.extendPad();         
         }
+        Destroy(gameObject);
+        base.padGot();
     }
 }
