@@ -21,7 +21,8 @@ public class particle_drop : MonoBehaviour
         if (Time.deltaTime > 0)
         {
             deltaScale = transform.localScale.x / (liveTime / Time.deltaTime);
-        } else
+        }
+        else
         {
             //防止暂停获取的Time.deltaTime为0
             deltaScale = transform.localScale.x / (liveTime / 0.0167f);
@@ -46,6 +47,6 @@ public class particle_drop : MonoBehaviour
             Destroy(gameObject);
         }
         scale.y -= deltaScale;
-        transform.localScale = scale;        
+        transform.localScale = scale;
     }
 }

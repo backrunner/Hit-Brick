@@ -28,6 +28,9 @@ public class PadController : MonoBehaviour
     //Anim
     public GameObject anim_padlength; //板子长度变化动画
 
+    //Laser
+    public GameObject laser;
+
     void Awake()
     {
         //初始化列表
@@ -173,5 +176,10 @@ public class PadController : MonoBehaviour
     public void removeReverse()
     {
         moveToward = 1;
+    }
+
+    public void launchLaser()
+    {
+        Instantiate(laser, new Vector3(transform.position.x, transform.position.y + 0.25f, transform.position.z),new Quaternion(0,0,0,0));
     }
 }
