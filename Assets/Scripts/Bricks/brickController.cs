@@ -107,7 +107,13 @@ public class brickController : MonoBehaviour {
 
     public virtual void playDestoryParticle()
     {
-        Instantiate(particle_destory, ball.transform.position, new Quaternion(0, 0, 0, 0));
+        if (ball != null)
+        {
+            Instantiate(particle_destory, ball.transform.position, new Quaternion(0, 0, 0, 0));
+        } else
+        {
+            Instantiate(particle_destory, transform.position, new Quaternion(0, 0, 0, 0));
+        }
     }
 
     public virtual void throwOutBrokenParts()
@@ -116,7 +122,13 @@ public class brickController : MonoBehaviour {
         GameObject broken = Instantiate(brokenBrick, gameObject.transform.position, gameObject.transform.rotation);
         broken.transform.localScale = transform.localScale;
         brickBrokenController ctrl = broken.GetComponent<brickBrokenController>();
-        ctrl.throwout(ball.transform.position);        
+        if (ball != null)
+        {
+            ctrl.throwout(ball.transform.position);
+        } else
+        {
+            ctrl.throwout(transform.position);
+        }
     }
 
     //销毁砖块obj

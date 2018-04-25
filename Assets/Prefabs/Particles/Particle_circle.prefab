@@ -53,6 +53,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b80b43f14e15ed84abaabde45a9d3ea5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  delayTime: 1
   pad: {fileID: 0}
 --- !u!198 &198920621406853894
 ParticleSystem:
@@ -61,7 +62,7 @@ ParticleSystem:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1050701308796608}
   serializedVersion: 5
-  lengthInSec: 2
+  lengthInSec: 1.5
   simulationSpeed: 1
   stopAction: 0
   looping: 0
