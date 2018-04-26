@@ -9,9 +9,16 @@ public class ballController : MonoBehaviour
 
     //GameObjects
     public GameObject pad;
+    //rigidbody
+    public Rigidbody2D rigid;
 
     //初始球速
     public float initMoveSpeed;
+    //current speed scale
+    public float speedScale;
+    //上下限
+    public float minSpeedScale;
+    public float maxSpeedScale;
 
     //是否开启powerful状态
     public bool isPowerful;
@@ -65,6 +72,9 @@ public class ballController : MonoBehaviour
 
         //初始化变量
         isPowerful = false;
+
+        //init rigidbody
+        rigid = GetComponent<Rigidbody2D>();
     }
 
     void Start()
@@ -131,7 +141,7 @@ public class ballController : MonoBehaviour
             this.isAttracted = false;
             //向ball施加自定义力
             Vector2 force = new Vector2(0f, initMoveSpeed);
-            this.gameObject.GetComponent<Rigidbody2D>().AddForce(force);
+            rigid.AddForce(force);
             //开启ball的trail render
             StartCoroutine(delayToEnableTrailRender(0.1f));
         }
@@ -302,5 +312,33 @@ public class ballController : MonoBehaviour
         {
             Instantiate(powerful_child, transform);
         }
+    }
+
+    //球速加减控制
+    public void addSpeed()
+    {
+        if (speedScale * 1.5f > maxSpeedScale)
+        {
+            rigid.velocity = rigid.velocity * (maxScale / speedScale);
+        }
+        else
+        {
+            rigid.velocity = rigid.velocity * 1.5f;
+            speedScale *= 1.2f;
+        }
+    }
+
+    public void downSpeed()
+    {
+        if (speedScale * (1 / 1.5f) < minSpeedScale)
+        {
+            rigid.velocity = rigid.velocity * (minScale / speedScale);
+        }
+        else
+        {
+            rigid.velocity = rigid.velocity * (1 / 1.5f);
+            speedScale *= 1 / 1.5f;
+        }
+        
     }
 }

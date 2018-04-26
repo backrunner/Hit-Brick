@@ -189,7 +189,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isAttracted: 0
   pad: {fileID: 0}
+  rigid: {fileID: 0}
   initMoveSpeed: 180
+  speedScale: 0
+  minSpeedScale: 0.45
+  maxSpeedScale: 2
   isPowerful: 0
   time_check_deadline: 4
   check_limit: 0.1
