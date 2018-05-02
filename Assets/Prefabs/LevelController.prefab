@@ -97,7 +97,8 @@ MonoBehaviour:
   - 0.94
   - 0.97
   - 1
-  _totalRate: 0.12
+  _totalRate: 0.075
+  _anim_prop: {fileID: 0}
 --- !u!114 &114673347323340066
 MonoBehaviour:
   m_ObjectHideFlags: 1

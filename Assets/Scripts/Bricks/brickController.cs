@@ -87,11 +87,13 @@ public class brickController : MonoBehaviour {
         }
     }
 
+    //Trigger类型被击中
     public virtual void ballHit_trigger()
     {
         destroyBrick();
     }
 
+    //Collision类型被击中
     public virtual void ballHit_collision()
     {
         destroyBrick();
@@ -128,13 +130,19 @@ public class brickController : MonoBehaviour {
                 }
                 //取出obj
                 GameObject prop = levelController.propList[index];
-                Instantiate(prop, transform.position, new Quaternion(0, 0, 0, 0));
+                GameObject prop_clone = Instantiate(prop, transform.position, new Quaternion(0, 0, 0, 0));
+                if (levelController.anim_prop != null)
+                {
+                    prop_clone.transform.localScale = new Vector3(0, 0, 1); //缩放调整至0，使其不可见
+                    Instantiate(levelController.anim_prop, prop_clone.transform);
+                }                
             }
         }
     }
 
     public virtual void playDestoryParticle()
     {
+        //播放破坏的粒子特效
         if (ball != null)
         {
             Instantiate(particle_destory, ball.transform.position, new Quaternion(0, 0, 0, 0));

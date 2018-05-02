@@ -51,6 +51,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: af6d6c09c8e79d64bb9e9c27f657a8e8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  liveTime: 5
+  liveTime: 8
   anim_ballColor: {fileID: 1191717148565268, guid: 0d2f1e1cfee71444b9a9c567d2b996b3,
     type: 2}

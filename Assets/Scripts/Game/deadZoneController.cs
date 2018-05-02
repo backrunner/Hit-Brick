@@ -50,6 +50,8 @@ public class deadZoneController : MonoBehaviour {
                 }
             }
         }
+        //从列表里移除
+        levelController.ballList.Remove(obj);
         Destroy(obj);
     }
 

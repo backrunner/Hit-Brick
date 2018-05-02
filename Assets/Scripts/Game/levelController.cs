@@ -95,6 +95,8 @@ public class levelController : MonoBehaviour {
     public float[] _propRateList; //编辑器内指定
     public static float totalRate; //总爆率
     public float _totalRate;
+    public GameObject _anim_prop; //动画
+    public static GameObject anim_prop;
 
     private void Awake()
     {        
@@ -121,6 +123,9 @@ public class levelController : MonoBehaviour {
 
         //初始化总爆率
         totalRate = _totalRate;
+
+        //初始化动画
+        anim_prop = _anim_prop;
 
         //获取环境中的预置Brick
         GameObject[] brickObjs = GameObject.FindGameObjectsWithTag("Bricks");
