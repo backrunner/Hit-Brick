@@ -21,7 +21,7 @@ GameObject:
   - component: {fileID: 4439042006421402}
   - component: {fileID: 212491518368455408}
   - component: {fileID: 60817514857211504}
-  - component: {fileID: 114379054749850452}
+  - component: {fileID: 114463770837994564}
   m_Layer: 10
   m_Name: Prop_extendPad
   m_TagString: Untagged
@@ -36,7 +36,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1486511213128168}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.9897, y: -2.6797, z: 0}
+  m_LocalPosition: {x: -9.5722, y: -3.2540534, z: 0}
   m_LocalScale: {x: 0.15, y: 0.15, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -132,7 +132,7 @@ PolygonCollider2D:
       - {x: -0.42999998, y: 0.13}
       - {x: 0.44, y: -0.01}
       - {x: 0.45999998, y: -0.01}
---- !u!114 &114379054749850452
+--- !u!114 &114463770837994564
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -144,6 +144,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 2
+  pad: {fileID: 0}
 --- !u!212 &212491518368455408
 SpriteRenderer:
   m_ObjectHideFlags: 1

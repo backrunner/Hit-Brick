@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class prop_extendPad : Prop {
+public class Prop_extendPad : Prop {
 
     public override void padGot()
     {

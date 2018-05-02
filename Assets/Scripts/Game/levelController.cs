@@ -88,6 +88,14 @@ public class levelController : MonoBehaviour {
     public GameObject image_Pause;  //用于编辑器指定Prefabs
     private GameObject _image_Pause;    //用于记录代码生成的obj
 
+    //道具
+    public static GameObject[] propList;  //道具obj列表
+    public GameObject[] _propList;  //编辑器内指定Prefabs
+    public static float[] propRateList; //爆率表
+    public float[] _propRateList; //编辑器内指定
+    public static float totalRate; //总爆率
+    public float _totalRate;
+
     private void Awake()
     {        
         //传递assest ball给静态变量
@@ -101,6 +109,18 @@ public class levelController : MonoBehaviour {
         //初始化列表
         ballList = new ArrayList();
         bricks = new ArrayList();
+        //道具列表赋给静态变量
+        if (_propList != null)
+        {
+            propList = _propList;
+        }
+        if (_propRateList != null)
+        {
+            propRateList = _propRateList;
+        }
+
+        //初始化总爆率
+        totalRate = _totalRate;
 
         //获取环境中的预置Brick
         GameObject[] brickObjs = GameObject.FindGameObjectsWithTag("Bricks");

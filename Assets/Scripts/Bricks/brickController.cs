@@ -15,7 +15,7 @@ public class brickController : MonoBehaviour {
     //default - none
     //1 - collision
     //2 - trigger
-    public short collision_type;      
+    public short collision_type;
 
     //Collision
     private void OnCollisionEnter2D(Collision2D collision)
@@ -103,6 +103,34 @@ public class brickController : MonoBehaviour {
         playDestoryParticle();
         throwOutBrokenParts();
         destoryObj();
+        spawnProp();
+    }
+
+    //打爆之后刷新道具
+    public virtual void spawnProp()
+    {
+        //随机一个0-1的数和爆率比较
+        float t = Random.value;
+        if (t <= levelController.totalRate)
+        {
+            if (levelController.propList.Length > 0)
+            {
+                //生成一个新的随机数
+                t = Random.value;
+                int index = 0;
+                //比对爆率表
+                for (index = 0; index < levelController.propRateList.Length; index++)
+                {
+                    if (t < levelController.propRateList[index])
+                    {
+                        break;
+                    }
+                }
+                //取出obj
+                GameObject prop = levelController.propList[index];
+                Instantiate(prop, transform.position, new Quaternion(0, 0, 0, 0));
+            }
+        }
     }
 
     public virtual void playDestoryParticle()
