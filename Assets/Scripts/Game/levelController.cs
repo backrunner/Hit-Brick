@@ -5,7 +5,8 @@ using UnityEngine;
 public class levelController : MonoBehaviour {
 
     //关卡名称
-    public string level_name;
+    public static string level_name; //静态
+    public string _level_name; //用于编辑器指定
     //关卡开关
     public static bool isLevelStarted;
     public static bool isGameOver;
@@ -142,6 +143,7 @@ public class levelController : MonoBehaviour {
 
         //变量初始化
         ballInitOffset = 0.3f;
+        level_name = _level_name;
     }
 
     private void Start()
