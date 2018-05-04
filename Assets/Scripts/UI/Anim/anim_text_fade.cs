@@ -3,12 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class anim_text_fade : MonoBehaviour {
+public class anim_text_fade : UIAnim {
 
     //动画的类型
     public string type;
-    //持续时间
-    public float liveTime;
     //目标Alpha
     public float targetAlpha;
     //deltaAlpha
