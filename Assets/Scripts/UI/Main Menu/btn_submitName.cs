@@ -5,9 +5,14 @@ using UnityEngine.UI;
 
 public class btn_submitName : MonoBehaviour {
 
+    //预置
+    public GameObject mainMenu;
+
+    //UI Obj
     public GameObject _txt_warn;
     public GameObject _input_name;
 
+    //UI元件
     private InputField input_name;
     private Text txt_warn;
 
@@ -33,23 +38,19 @@ public class btn_submitName : MonoBehaviour {
     }
 
     //点击触发
-    private void onClick()
+    public void onClick()
     {
         string name = input_name.text.Trim();
         if (name != "")
         {
             txt_warn.text = "";
-            PlayerPrefs.SetString("player_name", name);
-            gameObject.transform.parent.gameObject.AddComponent<anim_panel_inputName_close>();
-            Messenger.AddListener("input name panel closed",displayMainMenu);
+            gameController.setPlayerName(name);
+            //播放动画
+            Animation anim = gameObject.transform.parent.gameObject.GetComponent<Animation>();
+            anim.Play("anim_initname_close");
         } else
         {
             txt_warn.text = "请输入昵称";
         }
-    }
-
-    void displayMainMenu()
-    {
-
     }
 }

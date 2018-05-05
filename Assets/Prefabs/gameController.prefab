@@ -20,6 +20,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4875869568438150}
   - component: {fileID: 114993991956417870}
+  - component: {fileID: 114970081924786842}
   m_Layer: 0
   m_Name: gameController
   m_TagString: Untagged
@@ -34,12 +35,23 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1441231818177696}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1.6506345, y: 1.6602647, z: -0.14200777}
+  m_LocalPosition: {x: -9.710615, y: -2.1446674, z: -0.14200777}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &114970081924786842
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1441231818177696}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 99c24827df6952644b6795bee667ce99, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &114993991956417870
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -51,3 +63,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 57121a9967271b145ae07f52d71d1512, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _panel_mainMenu: {fileID: 1842150796826156, guid: f18ad2465305e374cad09c841d14a7ab,
+    type: 2}
