@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class levelName : MonoBehaviour {
+public class btn_level : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {

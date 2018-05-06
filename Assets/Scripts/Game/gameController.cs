@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class gameController : MonoBehaviour {
 
@@ -21,10 +22,16 @@ public class gameController : MonoBehaviour {
     public GameObject _panel_selectLevel;
     private static GameObject panel_selectLevel;
     public static GameObject panel_selectLevel_inscene;
+    public GameObject _btn_level;
+    private static GameObject btn_level;
 
     //Level
     public string[] _levels;
     public static string[] levels;
+    public string[] _levels_filename;
+    public static string[] levels_filename;
+
+    public static int currentLevelIndex;
 
     //开关
     public static bool isMainMenuSpawned = false;
@@ -35,7 +42,10 @@ public class gameController : MonoBehaviour {
         //初始化静态变量
         panel_mainMenu = _panel_mainMenu;
         panel_selectLevel = _panel_selectLevel;
+        btn_level = _btn_level;
+        //初始化关卡列表
         levels = _levels;
+        levels_filename = _levels_filename;
         //Prefs
         isInited = PlayerPrefs.HasKey("player_name");        
         if (isInited)
@@ -87,6 +97,24 @@ public class gameController : MonoBehaviour {
         if (!isSelectLevelSpawned)
         {
             panel_selectLevel_inscene = Instantiate(panel_selectLevel, canvas.transform);
+            //添加按钮
+            GameObject content = panel_selectLevel_inscene.transform.Find("scroll_levels").Find("Viewport").Find("content_btns").gameObject;
+            for (int i = 0; i < levels.Length; i++)
+            {
+                GameObject btn = Instantiate(btn_level, content.transform);
+                GameObject text_obj = btn.transform.Find("txt_btn_level").gameObject;
+                Text text = text_obj.GetComponent<Text>();
+                text.text = levels[i];
+            }
+            //设置content高度
+            RectTransform rect = content.GetComponent<RectTransform>();
+            if (levels.Length > 5)
+            {
+                rect.sizeDelta = new Vector2(rect.sizeDelta.x, levels.Length * 148 - 48);
+            } else
+            {
+                rect.sizeDelta = new Vector2(rect.sizeDelta.x, levels.Length * 148);
+            }
             //播放动画
             Animation anim_selectlevel = panel_selectLevel_inscene.GetComponent<Animation>();
             anim_selectlevel.Play("anim_panel_selectLevel");
