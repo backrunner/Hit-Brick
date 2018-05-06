@@ -112,6 +112,7 @@ public class levelController : MonoBehaviour {
         //初始化列表
         ballList = new ArrayList();
         bricks = new ArrayList();
+
         //道具列表赋给静态变量
         if (_propList != null)
         {
@@ -141,9 +142,15 @@ public class levelController : MonoBehaviour {
         //寻找板子
         findPad();
 
+        //初始化开关
+        isLevelStarted = false;
+        isLevelPaused = false;
+        isGameOver = false;
+
         //变量初始化
         ballInitOffset = 0.3f;
         level_name = _level_name;
+        currentBall = null;
     }
 
     private void Start()

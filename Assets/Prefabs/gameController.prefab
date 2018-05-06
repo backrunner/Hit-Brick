@@ -65,3 +65,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _panel_mainMenu: {fileID: 1842150796826156, guid: f18ad2465305e374cad09c841d14a7ab,
     type: 2}
+  _panel_selectLevel: {fileID: 1419485691519628, guid: 4c0589ab557594f49bcb21420892f465,
+    type: 2}
+  _levels: []

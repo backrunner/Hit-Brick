@@ -3,25 +3,11 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class btn_exitGame : MonoBehaviour {
+public class btn_exitGame : btn_mainmenu {
 
-    private Button btn;
-
-    private void Awake()
+    public override void clicked()
     {
-        btn = GetComponent<Button>();
-    }
-
-    private void Start()
-    {
-        //绑定事件
-        btn.onClick.AddListener(onClick);
-    }
-
-    public void onClick()
-    {
-        Debug.Log("Application Quit...");
-        UnityEditor.EditorApplication.isPlaying = false; //Editor
-        Application.Quit();
+        gameController.exitGame();
+        base.clicked();
     }
 }
