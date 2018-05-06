@@ -93,6 +93,7 @@ GameObject:
   - component: {fileID: 222710089017095918}
   - component: {fileID: 114600879817927444}
   - component: {fileID: 114529202371229024}
+  - component: {fileID: 111666670768040056}
   m_Layer: 5
   m_Name: Panel_mainMenu
   m_TagString: Untagged
@@ -164,6 +165,21 @@ Animation:
   - {fileID: 7400000, guid: b2571c1c6dbdda64eaad12db2bbc24e4, type: 2}
   m_WrapMode: 0
   m_PlayAutomatically: 0
+  m_AnimatePhysics: 0
+  m_CullingType: 0
+--- !u!111 &111666670768040056
+Animation:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1842150796826156}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Animation: {fileID: 0}
+  m_Animations:
+  - {fileID: 7400000, guid: 4b98fc317fae9c9499b791eb92ffa141, type: 2}
+  m_WrapMode: 0
+  m_PlayAutomatically: 1
   m_AnimatePhysics: 0
   m_CullingType: 0
 --- !u!114 &114005251806041470

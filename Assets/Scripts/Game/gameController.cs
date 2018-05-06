@@ -17,12 +17,17 @@ public class gameController : MonoBehaviour {
     public GameObject _panel_mainMenu;
     private static GameObject panel_mainMenu;
 
+    //Level
+    public string[] _levels;
+    public static string[] levels;
+
     private void Awake()
     {
         //初始化静态变量
         if (_panel_mainMenu != null){
             panel_mainMenu = _panel_mainMenu;
         }
+        levels = _levels;
         //Prefs
         isInited = PlayerPrefs.HasKey("player_name");        
         if (isInited)
