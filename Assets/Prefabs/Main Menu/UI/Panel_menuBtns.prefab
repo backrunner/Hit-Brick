@@ -22,6 +22,7 @@ GameObject:
   - component: {fileID: 222183831290217632}
   - component: {fileID: 114466324038464598}
   - component: {fileID: 114379680250957204}
+  - component: {fileID: 114864144398214924}
   m_Layer: 5
   m_Name: btn_exitGame
   m_TagString: Untagged
@@ -582,6 +583,17 @@ MonoBehaviour:
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
+--- !u!114 &114864144398214924
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1009092447597122}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 97befc8d375c8ae469757c03c7e59368, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &114979377249342778
 MonoBehaviour:
   m_ObjectHideFlags: 1
