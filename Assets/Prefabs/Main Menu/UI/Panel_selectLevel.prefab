@@ -87,6 +87,7 @@ GameObject:
   - component: {fileID: 222387241443165152}
   - component: {fileID: 114148339433473802}
   - component: {fileID: 114046946740707768}
+  - component: {fileID: 114102404132045874}
   m_Layer: 5
   m_Name: btn_back
   m_TagString: Untagged
@@ -105,6 +106,7 @@ GameObject:
   - component: {fileID: 222871563416561858}
   - component: {fileID: 114360936955246182}
   - component: {fileID: 111164495798851800}
+  - component: {fileID: 114153345772505758}
   m_Layer: 5
   m_Name: Panel_selectLevel
   m_TagString: Untagged
@@ -363,6 +365,19 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.Scrollbar+ScrollEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
+--- !u!114 &114102404132045874
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1333290592614306}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8a0ce2b8cf092b3428e221e3a2474b16, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  btn: {fileID: 0}
+  mainmenu: {fileID: 0}
 --- !u!114 &114148339433473802
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -390,6 +405,17 @@ MonoBehaviour:
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
+--- !u!114 &114153345772505758
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1419485691519628}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f0e30d2e5251bfa4db8ef12d4bf0f7e8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &114154864902199280
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -441,7 +467,7 @@ MonoBehaviour:
   m_Elasticity: 0.2
   m_Inertia: 1
   m_DecelerationRate: 0.135
-  m_ScrollSensitivity: 148
+  m_ScrollSensitivity: 37
   m_Viewport: {fileID: 224044312139964622}
   m_HorizontalScrollbar: {fileID: 114098460646269646}
   m_VerticalScrollbar: {fileID: 114915954822395816}
@@ -923,7 +949,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -796.1, y: 394.4}
+  m_AnchoredPosition: {x: -794.5, y: 394.4}
   m_SizeDelta: {x: 64, y: 64}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &224729909192516082

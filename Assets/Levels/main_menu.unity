@@ -401,7 +401,7 @@ Prefab:
     - target: {fileID: 114993991956417870, guid: d41ddc22423929942995997cd1fb5724,
         type: 2}
       propertyPath: _levels.Array.size
-      value: 8
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 114993991956417870, guid: d41ddc22423929942995997cd1fb5724,
         type: 2}
