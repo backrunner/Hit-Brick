@@ -61,7 +61,7 @@ MonoBehaviour:
     type: 2}
   gameoverEffect: {fileID: 1472862313936248, guid: 23e0d4d8fca55a841bb66a324063b2fd,
     type: 2}
-  image_Pause: {fileID: 1227544442173910, guid: 69c63054c2700214998c1ffa37b1944f,
+  panel_pause: {fileID: 1785793007622688, guid: 05e52d41fd2a2be4192ba6055b7f4a6a,
     type: 2}
   _propList:
   - {fileID: 1514372787086504, guid: 92545c4cc4fda1443b75b391ba2fb0c0, type: 2}

@@ -85,9 +85,9 @@ public class levelController : MonoBehaviour {
     //UI
     //canvas
     public static GameObject canvas;
-    //暂停图标
-    public GameObject image_Pause;  //用于编辑器指定Prefabs
-    private GameObject _image_Pause;    //用于记录代码生成的obj
+    //暂停面板
+    public GameObject panel_pause;  //用于编辑器指定Prefabs
+    private GameObject panel_pause_inscene;    //用于记录代码生成的obj
 
     //道具
     public static GameObject[] propList;  //道具obj列表
@@ -182,14 +182,12 @@ public class levelController : MonoBehaviour {
             {
                 //更改状态和时间缩放
                 isLevelPaused = true;
-                Time.timeScale = 0;
+                
                 //UI
-                Vector3 image_pause_position = new Vector3(8f, 4.2f, 1f);
-                _image_Pause = Instantiate(image_Pause, image_pause_position, new Quaternion(0, 0, 0, 0));
-                //置于canvas下
-                _image_Pause.transform.SetParent(canvas.transform);
-                //修改scale
-                _image_Pause.transform.localScale = new Vector3(1, 1, 1);
+                panel_pause_inscene = Instantiate(panel_pause, canvas.transform);
+                Animation anim = panel_pause_inscene.GetComponent<Animation>();
+                anim.Play("Anim_pause");
+                Time.timeScale = 0;
                 Debug.Log("Game Paused");
             } else
             {
@@ -197,7 +195,7 @@ public class levelController : MonoBehaviour {
                 isLevelPaused = false;
                 Time.timeScale = 1;
                 //UI
-                Destroy(_image_Pause);
+                
                 Debug.Log("Game Resumed");
             }
         }

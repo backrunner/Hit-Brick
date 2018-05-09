@@ -132,4 +132,10 @@ public class gameController : MonoBehaviour {
         Application.Quit();
     }
 
+    //刷新canvas
+    public static void refreshCanvas()
+    {
+        canvas = GameObject.Find("canvas");
+    }
+
 }
