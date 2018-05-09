@@ -160,6 +160,9 @@ public class levelController : MonoBehaviour {
 
         //更新UI
         gameUIContorller.updateLeftBallUI();
+
+        //消息监听
+        Messenger.AddListener("Anim_pause rewinded", resumeGame);
     }
 
     private void Update()
@@ -182,23 +185,31 @@ public class levelController : MonoBehaviour {
             {
                 //更改状态和时间缩放
                 isLevelPaused = true;
-                
+                Time.timeScale = 0;
                 //UI
                 panel_pause_inscene = Instantiate(panel_pause, canvas.transform);
                 Animation anim = panel_pause_inscene.GetComponent<Animation>();
-                anim.Play("Anim_pause");
-                Time.timeScale = 0;
+                anim.Play("Anim_pause");                
                 Debug.Log("Game Paused");
             } else
             {
-                //更改状态和时间缩放
-                isLevelPaused = false;
-                Time.timeScale = 1;
                 //UI
-                
+                Animation anim = panel_pause_inscene.GetComponent<Animation>();             
+                anim["Anim_pause"].speed = -2;
+                anim.Play("Anim_pause");
+                //设置倒放
+                anim_unscaledTime ctrl = panel_pause_inscene.GetComponent<anim_unscaledTime>();
+                ctrl.progress = 0.85f;
+                ctrl.isReverse = true;                
                 Debug.Log("Game Resumed");
             }
         }
+    }
+
+    public void resumeGame()
+    {
+        Time.timeScale = 1;
+        isLevelPaused = false;
     }
 
     //用于刷新新球的静态方法

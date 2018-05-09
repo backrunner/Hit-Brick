@@ -71,6 +71,7 @@ public class gameController : MonoBehaviour {
             //显示主菜单
             displayMainMenu();
         }
+       
 	}
 
     public static void setPlayerName(string name)
