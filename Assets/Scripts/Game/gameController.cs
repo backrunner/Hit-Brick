@@ -71,6 +71,7 @@ public class gameController : MonoBehaviour {
             //显示主菜单
             displayMainMenu();
         }
+       
 	}
 
     public static void setPlayerName(string name)
@@ -130,6 +131,12 @@ public class gameController : MonoBehaviour {
         Debug.Log("Application Quit...");
         UnityEditor.EditorApplication.isPlaying = false; //Editor
         Application.Quit();
+    }
+
+    //刷新canvas
+    public static void refreshCanvas()
+    {
+        canvas = GameObject.Find("canvas");
     }
 
 }

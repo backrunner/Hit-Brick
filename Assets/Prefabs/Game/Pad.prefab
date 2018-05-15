@@ -123,7 +123,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   targetScale: 0
   maxScale: 1.8
-  minScale: 0
+  maxScaleMulti: 0.8
+  minScaleMulti: 0.4
   deltaScale: 0
   moveToward: 0
   text_waitforLaunch: {fileID: 1435118467006508, guid: 9aa4305a5640fbf46a20cea147220eb9,

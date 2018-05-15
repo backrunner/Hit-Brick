@@ -85,9 +85,9 @@ public class levelController : MonoBehaviour {
     //UI
     //canvas
     public static GameObject canvas;
-    //暂停图标
-    public GameObject image_Pause;  //用于编辑器指定Prefabs
-    private GameObject _image_Pause;    //用于记录代码生成的obj
+    //暂停面板
+    public GameObject panel_pause;  //用于编辑器指定Prefabs
+    public static GameObject panel_pause_inscene; //用于记录代码生成的obj (静态)
 
     //道具
     public static GameObject[] propList;  //道具obj列表
@@ -160,6 +160,9 @@ public class levelController : MonoBehaviour {
 
         //更新UI
         gameUIContorller.updateLeftBallUI();
+
+        //消息监听
+        Messenger.AddListener("Anim_pause rewinded", resumeGame);
     }
 
     private void Update()
@@ -184,23 +187,29 @@ public class levelController : MonoBehaviour {
                 isLevelPaused = true;
                 Time.timeScale = 0;
                 //UI
-                Vector3 image_pause_position = new Vector3(8f, 4.2f, 1f);
-                _image_Pause = Instantiate(image_Pause, image_pause_position, new Quaternion(0, 0, 0, 0));
-                //置于canvas下
-                _image_Pause.transform.SetParent(canvas.transform);
-                //修改scale
-                _image_Pause.transform.localScale = new Vector3(1, 1, 1);
+                panel_pause_inscene = Instantiate(panel_pause, canvas.transform);
+                Animation anim = panel_pause_inscene.GetComponent<Animation>();
+                anim.Play("Anim_pause");                
                 Debug.Log("Game Paused");
             } else
             {
-                //更改状态和时间缩放
-                isLevelPaused = false;
-                Time.timeScale = 1;
                 //UI
-                Destroy(_image_Pause);
+                Animation anim = panel_pause_inscene.GetComponent<Animation>();             
+                anim["Anim_pause"].speed = -2;
+                anim.Play("Anim_pause");
+                //设置倒放
+                anim_unscaledTime ctrl = panel_pause_inscene.GetComponent<anim_unscaledTime>();
+                ctrl.progress = 0.85f;
+                ctrl.isReverse = true;                
                 Debug.Log("Game Resumed");
             }
         }
+    }
+
+    public void resumeGame()
+    {
+        Time.timeScale = 1;
+        isLevelPaused = false;
     }
 
     //用于刷新新球的静态方法
