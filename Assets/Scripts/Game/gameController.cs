@@ -57,6 +57,9 @@ public class gameController : MonoBehaviour {
         //初始化开关
         isMainMenuSpawned = false;
         isSelectLevelSpawned = false;
+
+        //保留的游戏物件
+        DontDestroyOnLoad(gameObject);
     }
 
     void Start () {
@@ -70,8 +73,7 @@ public class gameController : MonoBehaviour {
         {
             //显示主菜单
             displayMainMenu();
-        }
-       
+        }       
 	}
 
     public static void setPlayerName(string name)
@@ -106,6 +108,8 @@ public class gameController : MonoBehaviour {
                 GameObject text_obj = btn.transform.Find("txt_btn_level").gameObject;
                 Text text = text_obj.GetComponent<Text>();
                 text.text = levels[i];
+                btn_level ctrl = btn.GetComponent<btn_level>();
+                ctrl.filename = levels_filename[i];
             }
             //设置content高度
             RectTransform rect = content.GetComponent<RectTransform>();

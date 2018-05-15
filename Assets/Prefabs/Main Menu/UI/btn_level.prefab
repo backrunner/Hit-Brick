@@ -22,6 +22,7 @@ GameObject:
   - component: {fileID: 222042819516224316}
   - component: {fileID: 114339053986911746}
   - component: {fileID: 114815573267085554}
+  - component: {fileID: 114141872648249652}
   m_Layer: 5
   m_Name: btn_level
   m_TagString: Untagged
@@ -46,6 +47,20 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!114 &114141872648249652
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1309173251071530}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7d5bb980449b15b40b6b36bb35e4eeea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  panel_loading: {fileID: 1643218106656408, guid: f42fe7cb777eb934c974fce06026ae73,
+    type: 2}
+  filename: 
 --- !u!114 &114339053986911746
 MonoBehaviour:
   m_ObjectHideFlags: 1
