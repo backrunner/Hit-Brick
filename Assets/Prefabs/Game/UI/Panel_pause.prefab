@@ -22,6 +22,7 @@ GameObject:
   - component: {fileID: 222956489444018030}
   - component: {fileID: 114279645304094428}
   - component: {fileID: 114868856730910598}
+  - component: {fileID: 114303487717636204}
   m_Layer: 5
   m_Name: btn_resume
   m_TagString: Untagged
@@ -231,6 +232,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bfdf053dac4a0a44fa11e097cc4dc380, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  progress: 0
+  isReverse: 0
   animName: Anim_pause
 --- !u!114 &114210238780050964
 MonoBehaviour:
@@ -309,6 +312,17 @@ MonoBehaviour:
   m_Spacing: {x: 110, y: 0}
   m_Constraint: 0
   m_ConstraintCount: 2
+--- !u!114 &114303487717636204
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1116695326273044}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: be2e1af30e427c144ad51307d370d0d0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &114347357860624640
 MonoBehaviour:
   m_ObjectHideFlags: 1

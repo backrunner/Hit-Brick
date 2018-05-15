@@ -57,8 +57,11 @@ public class effect_clear : Effect {
     void move()
     {
         //用平滑阻尼平移相机
-        float position_x = Mathf.SmoothDamp(camera.transform.position.x, ball.transform.position.x, ref velocity_x, smoothTime);
-        float position_y = Mathf.SmoothDamp(camera.transform.position.y, ball.transform.position.y, ref velocity_y, smoothTime);
-        camera.transform.position = new Vector3(position_x, position_y, -10);
+        if (ball != null)
+        {
+            float position_x = Mathf.SmoothDamp(camera.transform.position.x, ball.transform.position.x, ref velocity_x, smoothTime);
+            float position_y = Mathf.SmoothDamp(camera.transform.position.y, ball.transform.position.y, ref velocity_y, smoothTime);
+            camera.transform.position = new Vector3(position_x, position_y, -10);
+        }
     }
 }

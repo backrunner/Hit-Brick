@@ -195,7 +195,7 @@ MonoBehaviour:
   minSpeedScale: 0.45
   maxSpeedScale: 2
   isPowerful: 0
-  time_check_deadline: 4
+  time_check_deadline: 2.85
   check_limit: 0.1
   targetScale: 0
   originScale: 0

@@ -87,7 +87,7 @@ public class levelController : MonoBehaviour {
     public static GameObject canvas;
     //暂停面板
     public GameObject panel_pause;  //用于编辑器指定Prefabs
-    private GameObject panel_pause_inscene;    //用于记录代码生成的obj
+    public static GameObject panel_pause_inscene; //用于记录代码生成的obj (静态)
 
     //道具
     public static GameObject[] propList;  //道具obj列表

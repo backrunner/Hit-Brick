@@ -72,6 +72,7 @@ public class ballController : MonoBehaviour
 
         //初始化变量
         isPowerful = false;
+        speedScale = 1;
 
         //init rigidbody
         rigid = GetComponent<Rigidbody2D>();
@@ -330,14 +331,14 @@ public class ballController : MonoBehaviour
 
     public void downSpeed()
     {
-        if (speedScale * (1 / 1.5f) < minSpeedScale)
+        if (speedScale * (1f / 1.5f) < minSpeedScale)
         {
             rigid.velocity = rigid.velocity * (minScale / speedScale);
         }
         else
         {
-            rigid.velocity = rigid.velocity * (1 / 1.5f);
-            speedScale *= 1 / 1.5f;
+            rigid.velocity = rigid.velocity * (1f / 1.5f);
+            speedScale *= 1f / 1.5f;
         }
         
     }

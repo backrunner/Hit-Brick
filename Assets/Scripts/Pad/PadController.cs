@@ -10,7 +10,10 @@ public class PadController : MonoBehaviour
     public float targetScale;
     //限定最大的scale
     public float maxScale;
-    public float minScale; //默认为2-maxScale
+    private float minScale; //2-maxScale
+    //scale乘数
+    public float maxScaleMulti;
+    public float minScaleMulti;
     //每次改变的scale 最多改变2次
     public float deltaScale;
 
@@ -144,7 +147,14 @@ public class PadController : MonoBehaviour
         if (targetScale < maxScale)
         {
             Debug.Log("Change");
-            targetScale += deltaScale;
+            if (targetScale >= 1)
+            {
+                targetScale += deltaScale * maxScaleMulti;
+            }
+            else
+            {
+                targetScale += deltaScale * minScaleMulti;
+            }
             Transform anim_trans = transform.Find("Anim_padLength(Clone)");
             if (anim_trans == null)
             {
@@ -159,7 +169,14 @@ public class PadController : MonoBehaviour
         if (targetScale > minScale)
         {
             Debug.Log("Change");
-            targetScale -= deltaScale;
+            if (targetScale <= 1)
+            {
+                targetScale -= deltaScale * minScaleMulti;
+            }
+            else
+            {
+                targetScale -= deltaScale * maxScaleMulti;
+            }
             Transform anim_trans = transform.Find("Anim_padLength(Clone)");
             if (anim_trans == null)
             {
