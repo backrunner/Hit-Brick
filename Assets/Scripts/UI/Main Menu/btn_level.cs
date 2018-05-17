@@ -12,6 +12,8 @@ public class btn_level : MonoBehaviour {
     private GameObject canvas;
     //关卡名称
     public string filename;
+    //关卡序号
+    public int index;
 
     void Start() {
         btn = GetComponent<Button>();
@@ -28,8 +30,13 @@ public class btn_level : MonoBehaviour {
 	
 	public void onClick()
     {
-        GameObject panel_in_scene = Instantiate(panel_loading,canvas.transform);
-        anim_ctrl_loading ctrl = panel_in_scene.GetComponent<anim_ctrl_loading>();
-        ctrl.filename = filename;
+        if (!gameController.isLoadingPanelSpawned)
+        {
+            GameObject panel_in_scene = Instantiate(panel_loading, canvas.transform);
+            anim_ctrl_loading ctrl = panel_in_scene.GetComponent<anim_ctrl_loading>();
+            ctrl.filename = filename;
+            gameController.currentLevelIndex = index;
+            gameController.isLoadingPanelSpawned = true;
+        }
     }
 }

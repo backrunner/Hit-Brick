@@ -4,11 +4,12 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
-public class anim_ctrl_loading : MonoBehaviour {
+public class anim_ctrl_loading : MonoBehaviour
+{
 
     //level
     public string filename;
-
+    public int levelIndex = -1;
     //progressbar
     private Image progressbar;
 
@@ -17,23 +18,56 @@ public class anim_ctrl_loading : MonoBehaviour {
 
     private AsyncOperation progress;
 
+    private void Awake()
+    {
+        //初始化
+        levelIndex = -1;
+    }
+
     private void Start()
     {
         progressbar = gameObject.transform.Find("progressbar").GetComponent<Image>();
         anim = gameObject.GetComponent<Animation>();
+        DontDestroyOnLoad(gameController.canvas);
     }
 
     public void animFinished()
     {
-        progress = SceneManager.LoadSceneAsync(filename);
+        if (levelIndex > -1)
+        {
+            if (levelIndex < SceneManager.sceneCountInBuildSettings)
+            {
+                progress = SceneManager.LoadSceneAsync(levelIndex);
+            }
+            else
+            {
+                progress = SceneManager.LoadSceneAsync(0);
+                //清空物件
+                Destroy(gameController.eventSystem);
+                Destroy(gameController.panel_mainMenu_inscene);
+                Destroy(gameController.thisgameObj);
+            }
+        }
+        else
+        {
+            progress = SceneManager.LoadSceneAsync(filename);
+        }
+        Destroy(gameController.panel_selectLevel_inscene);
+        gameController.isSelectLevelSpawned = false;    //重置开关
         StartCoroutine(loadScene());
+    }
+
+    public void outAnimFinished()
+    {
+        levelController.isLevelPaused = false;
+        gameController.isLoadingPanelSpawned = false;
+        Destroy(gameObject);
     }
 
     //设置滑动条  
     private void setProgressValue(int value)
     {
         progressbar.fillAmount = (float)value / 100;
-        Debug.Log((float)value / 100);
     }
 
     private IEnumerator loadScene()
@@ -50,7 +84,7 @@ public class anim_ctrl_loading : MonoBehaviour {
 
             while (showProgress < toProgress)
             {
-                showProgress+=4;
+                showProgress += 4;
                 setProgressValue(showProgress);
                 yield return new WaitForEndOfFrame(); //等待一帧  
             }
@@ -58,11 +92,12 @@ public class anim_ctrl_loading : MonoBehaviour {
         toProgress = 100;
         while (showProgress < toProgress)
         {
-            showProgress+=4;
+            showProgress += 4;
             setProgressValue(showProgress);
             yield return new WaitForEndOfFrame(); //等待一帧  
         }
 
+        anim.Play("anim_panel_loading_out");
         //跳转
         progress.allowSceneActivation = true;
     }

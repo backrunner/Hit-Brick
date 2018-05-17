@@ -136,6 +136,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 2
+  pad: {fileID: 0}
 --- !u!212 &212930345187698290
 SpriteRenderer:
   m_ObjectHideFlags: 1

@@ -5,6 +5,8 @@ using UnityEngine.UI;
 
 public class gameController : MonoBehaviour {
 
+    public static GameObject thisgameObj;
+
     //游戏初始化
     public static bool isInited;
 
@@ -13,7 +15,8 @@ public class gameController : MonoBehaviour {
 
     //UI
     public static GameObject canvas;
-
+    public static GameObject eventSystem;
+    public GameObject _eventSystem;
     //UI预置
     public GameObject _panel_mainMenu;
     private static GameObject panel_mainMenu;
@@ -25,17 +28,20 @@ public class gameController : MonoBehaviour {
     public GameObject _btn_level;
     private static GameObject btn_level;
 
-    //Level
+    //关卡
     public string[] _levels;
     public static string[] levels;
     public string[] _levels_filename;
     public static string[] levels_filename;
 
+    //关卡索引
     public static int currentLevelIndex;
+    public static int levelindexoffset = 3; //关卡序号偏移量
 
     //开关
     public static bool isMainMenuSpawned = false;
     public static bool isSelectLevelSpawned = false;
+    public static bool isLoadingPanelSpawned = false;
 
     private void Awake()
     {
@@ -43,6 +49,8 @@ public class gameController : MonoBehaviour {
         panel_mainMenu = _panel_mainMenu;
         panel_selectLevel = _panel_selectLevel;
         btn_level = _btn_level;
+        eventSystem = _eventSystem;
+        thisgameObj = gameObject;
         //初始化关卡列表
         levels = _levels;
         levels_filename = _levels_filename;
@@ -57,9 +65,11 @@ public class gameController : MonoBehaviour {
         //初始化开关
         isMainMenuSpawned = false;
         isSelectLevelSpawned = false;
+        isLoadingPanelSpawned = false;
 
         //保留的游戏物件
         DontDestroyOnLoad(gameObject);
+        DontDestroyOnLoad(eventSystem);
     }
 
     void Start () {
@@ -110,6 +120,7 @@ public class gameController : MonoBehaviour {
                 text.text = levels[i];
                 btn_level ctrl = btn.GetComponent<btn_level>();
                 ctrl.filename = levels_filename[i];
+                ctrl.index = i; //设置序号
             }
             //设置content高度
             RectTransform rect = content.GetComponent<RectTransform>();

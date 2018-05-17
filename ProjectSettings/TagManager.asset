@@ -9,6 +9,7 @@ TagManager:
   - Bricks
   - BackGround
   - Particles
+  - LoadingScreen
   layers:
   - Default
   - TransparentFX
@@ -54,4 +55,7 @@ TagManager:
     locked: 0
   - name: UI
     uniqueID: 892712601
+    locked: 0
+  - name: GUI
+    uniqueID: 1974058049
     locked: 0

@@ -160,6 +160,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 2
+  pad: {fileID: 0}
   count: 3
 --- !u!212 &212176573957946186
 SpriteRenderer:

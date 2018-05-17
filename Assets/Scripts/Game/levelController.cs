@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -7,6 +8,9 @@ public class levelController : MonoBehaviour {
     //关卡名称
     public static string level_name; //静态
     public string _level_name; //用于编辑器指定
+    public static string level_filename;
+    public string _level_filename;
+
     //关卡开关
     public static bool isLevelStarted;
     public static bool isGameOver;
@@ -85,9 +89,13 @@ public class levelController : MonoBehaviour {
     //UI
     //canvas
     public static GameObject canvas;
+    public GameObject _canvas;
     //暂停面板
     public GameObject panel_pause;  //用于编辑器指定Prefabs
     public static GameObject panel_pause_inscene; //用于记录代码生成的obj (静态)
+    //clear面板
+    public GameObject panel_clear;
+    public static GameObject panel_clear_inscene;
 
     //道具
     public static GameObject[] propList;  //道具obj列表
@@ -139,18 +147,38 @@ public class levelController : MonoBehaviour {
         //传递粒子给静态变量
         particle_ray_launcher=m_particle_ray_launcher;
 
+        //获取canvas
+        if (_canvas != null)
+        {
+            canvas = _canvas;
+        } else
+        {
+            canvas = GameObject.Find("Canvas");
+        }
+
         //寻找板子
         findPad();
 
         //初始化开关
         isLevelStarted = false;
-        isLevelPaused = false;
+        isLevelPaused = true;
         isGameOver = false;
 
         //变量初始化
         ballInitOffset = 0.3f;
         level_name = _level_name;
+        level_filename = _level_filename;
         currentBall = null;
+
+        //调整渲染camera
+        try
+        {
+            Canvas canvas_ctrl = gameController.canvas.GetComponent<Canvas>();
+            canvas_ctrl.worldCamera = Camera.main;
+        } catch(Exception e)
+        {
+            Debug.LogError(e);
+        }
     }
 
     private void Start()
@@ -179,7 +207,7 @@ public class levelController : MonoBehaviour {
     //检查暂停状态
     private void checkPause()
     {
-        if (Input.GetButtonDown("Pause"))
+        if (Input.GetButtonDown("Pause") && !isGameOver)
         {
             if (!isLevelPaused)
             {
@@ -187,10 +215,13 @@ public class levelController : MonoBehaviour {
                 isLevelPaused = true;
                 Time.timeScale = 0;
                 //UI
-                panel_pause_inscene = Instantiate(panel_pause, canvas.transform);
-                Animation anim = panel_pause_inscene.GetComponent<Animation>();
-                anim.Play("Anim_pause");                
-                Debug.Log("Game Paused");
+                if (panel_pause_inscene == null)
+                {
+                    panel_pause_inscene = Instantiate(panel_pause, canvas.transform);
+                    Animation anim = panel_pause_inscene.GetComponent<Animation>();
+                    anim.Play("Anim_pause");
+                    Debug.Log("Game Paused");
+                }
             } else
             {
                 //UI
@@ -254,20 +285,32 @@ public class levelController : MonoBehaviour {
     {
         if (bricks.Count <= 0)
         {
-            //标识游戏结束
-            isLevelStarted = false;
-            isGameOver = true;
-            Instantiate(clearEffect, new Vector3(0, 0, 0), new Quaternion(0, 0, 0, 0));
-            Debug.Log("Clear!");
+            if (isLevelStarted && !isGameOver)
+            {
+                //标识游戏结束
+                isLevelStarted = false;
+                isGameOver = true;
+                Instantiate(clearEffect, new Vector3(0, 0, 0), new Quaternion(0, 0, 0, 0));
+                Debug.Log("Clear!");
+                if (panel_clear_inscene == null)
+                {
+                    panel_clear_inscene = Instantiate(panel_clear, canvas.transform);
+                    Animation anim = panel_clear_inscene.GetComponent<Animation>();
+                    anim.Play("Anim_clear");
+                }
+            }
         }
         if (leftBall < 0)
         {
-            //标识游戏结束
-            isLevelStarted = false;
-            isGameOver = true;
-            //触发特效
-            Instantiate(gameoverEffect, new Vector3(0, 0, 0), new Quaternion(0, 0, 0, 0));
-            Debug.Log("Game Over!");
+            if (isLevelStarted && !isGameOver)
+            {
+                //标识游戏结束
+                isLevelStarted = false;
+                isGameOver = true;
+                //触发特效
+                Instantiate(gameoverEffect, new Vector3(0, 0, 0), new Quaternion(0, 0, 0, 0));
+                Debug.Log("Game Over!");
+            }
         }
     }
 

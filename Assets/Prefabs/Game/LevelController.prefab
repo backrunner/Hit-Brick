@@ -53,6 +53,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _level_name: 
+  _level_filename: 
   m_leftBall: 5
   m_ball: {fileID: 1005448619725424, guid: fba7fe4b22197484a967781c8cf8e0db, type: 2}
   m_particle_ray_launcher: {fileID: 1717511841759248, guid: d672ea738cc5b39459b5da7c1e5ff590,
@@ -61,7 +62,10 @@ MonoBehaviour:
     type: 2}
   gameoverEffect: {fileID: 1472862313936248, guid: 23e0d4d8fca55a841bb66a324063b2fd,
     type: 2}
+  _canvas: {fileID: 0}
   panel_pause: {fileID: 1785793007622688, guid: 05e52d41fd2a2be4192ba6055b7f4a6a,
+    type: 2}
+  panel_clear: {fileID: 1695387449430054, guid: 507fd6216230ce840bec9aaff50ebed2,
     type: 2}
   _propList:
   - {fileID: 1514372787086504, guid: 92545c4cc4fda1443b75b391ba2fb0c0, type: 2}

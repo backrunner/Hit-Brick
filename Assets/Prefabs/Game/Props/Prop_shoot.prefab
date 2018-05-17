@@ -156,6 +156,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 2
+  pad: {fileID: 0}
   shoot_launcher: {fileID: 1968571474123004, guid: e446a385c93b4cc47a2d782da1cb051a,
     type: 2}
 --- !u!212 &212114526056439000
