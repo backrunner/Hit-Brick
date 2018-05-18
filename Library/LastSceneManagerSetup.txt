@@ -1,4 +1,4 @@
 sceneSetups:
-- path: Assets/Levels/main_menu.unity
+- path: Assets/Levels/logoscreen.unity
   isLoaded: 1
   isActive: 1
