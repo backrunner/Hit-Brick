@@ -144,7 +144,7 @@ public class gameController : MonoBehaviour {
     public static void exitGame()
     {
         Debug.Log("Application Quit...");
-        UnityEditor.EditorApplication.isPlaying = false; //Editor
+        //UnityEditor.EditorApplication.isPlaying = false; //Editor
         Application.Quit();
     }
 

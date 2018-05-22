@@ -339,7 +339,6 @@ public class ballController : MonoBehaviour
         {
             rigid.velocity = rigid.velocity * (1f / 1.5f);
             speedScale *= 1f / 1.5f;
-        }
-        
+        }        
     }
 }

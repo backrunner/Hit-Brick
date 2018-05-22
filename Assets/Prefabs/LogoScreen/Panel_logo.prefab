@@ -22,6 +22,7 @@ GameObject:
   - component: {fileID: 222702707551751812}
   - component: {fileID: 114695526723985484}
   - component: {fileID: 111945125221077416}
+  - component: {fileID: 114532795427918848}
   m_Layer: 5
   m_Name: Panel_logo
   m_TagString: Untagged
@@ -57,10 +58,24 @@ Animation:
   m_Animation: {fileID: 0}
   m_Animations:
   - {fileID: 7400000, guid: e75ff41a75fe7fc4caa0dbdc985e3d20, type: 2}
+  - {fileID: 7400000, guid: f1868d99606483b41bebfc616e72ee7f, type: 2}
   m_WrapMode: 0
   m_PlayAutomatically: 0
   m_AnimatePhysics: 0
   m_CullingType: 0
+--- !u!114 &114532795427918848
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1088321112077766}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 77039b419782523489c227373e9a48fa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mainmenu_filename: main_menu
+  mainmenu_index: 1
 --- !u!114 &114695526723985484
 MonoBehaviour:
   m_ObjectHideFlags: 1

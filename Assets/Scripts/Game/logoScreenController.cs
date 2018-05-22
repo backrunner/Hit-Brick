@@ -15,7 +15,6 @@ public class logoScreenController : MonoBehaviour
         {
             canvas = GameObject.Find("Canvas");
         }
-        DontDestroyOnLoad(canvas);
         if (panel_logo != null)
         {
             panel_logo_inscene = Instantiate(panel_logo, canvas.transform);
