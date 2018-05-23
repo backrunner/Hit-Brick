@@ -118,6 +118,19 @@ public class gameController : MonoBehaviour {
                 GameObject text_obj = btn.transform.Find("txt_btn_level").gameObject;
                 Text text = text_obj.GetComponent<Text>();
                 text.text = levels[i];
+                //设置clear图片
+                if (PlayerPrefs.HasKey("clearedLevel"))
+                {
+                    string clearedlevel = PlayerPrefs.GetString("clearedLevel");
+                    if (clearedlevel.Contains(levels_filename[i]))
+                    {
+                        GameObject img_clear = btn.transform.Find("img_clear").gameObject;
+                        Image img = img_clear.GetComponent<Image>();
+                        Color t = img.color;
+                        t.a = 1;
+                        img.color = t;
+                    }
+                }
                 btn_level ctrl = btn.GetComponent<btn_level>();
                 ctrl.filename = levels_filename[i];
                 ctrl.index = i; //设置序号

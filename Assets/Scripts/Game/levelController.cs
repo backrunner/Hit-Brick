@@ -292,6 +292,19 @@ public class levelController : MonoBehaviour {
                 isGameOver = true;
                 Instantiate(clearEffect, new Vector3(0, 0, 0), new Quaternion(0, 0, 0, 0));
                 Debug.Log("Clear!");
+                //记录clear
+                if (PlayerPrefs.HasKey("clearedLevel"))
+                {
+                    string clearedlevel = PlayerPrefs.GetString("clearedLevel");
+                    if (!clearedlevel.Contains(level_filename))
+                    {
+                        clearedlevel += "," + level_filename;
+                        PlayerPrefs.SetString("clearedLevel", clearedlevel);
+                    }
+                } else
+                {
+                    PlayerPrefs.SetString("clearedLevel", level_filename);
+                }
                 if (panel_clear_inscene == null)
                 {
                     panel_clear_inscene = Instantiate(panel_clear, canvas.transform);
