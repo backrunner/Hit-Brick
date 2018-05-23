@@ -131,7 +131,7 @@ public class ballController : MonoBehaviour
 
     public void launchBall()
     {
-        if (isAttracted && !levelController.isLevelPaused && !levelController.isGameOver)
+        if (isAttracted)
         {
             //关卡开始
             if (!levelController.isLevelStarted)

@@ -94,17 +94,20 @@ public class PadController : MonoBehaviour
             {
                 GameObject ball = (GameObject)ballLaunchList[0];
                 ballController ball_ctrl = ball.GetComponent<ballController>();
-                ball_ctrl.launchBall();
-                ballLaunchList.Remove(ball);
-                //如果发射后球数小于等于1则删除text
-                if (ballLaunchList.Count <= 1)
+                if (!levelController.isLevelPaused && !levelController.isGameOver)
                 {
-                    Destroy(text_waitforLaunch_inscene);
-                }
-                else
-                {
-                    Text text = text_waitforLaunch_inscene.GetComponent<Text>();
-                    text.text = "+" + (ballLaunchList.Count - 1);
+                    ball_ctrl.launchBall();
+                    ballLaunchList.Remove(ball);
+                    //如果发射后球数小于等于1则删除text
+                    if (ballLaunchList.Count <= 1)
+                    {
+                        Destroy(text_waitforLaunch_inscene);
+                    }
+                    else
+                    {
+                        Text text = text_waitforLaunch_inscene.GetComponent<Text>();
+                        text.text = "+" + (ballLaunchList.Count - 1);
+                    }
                 }
             }
         }
