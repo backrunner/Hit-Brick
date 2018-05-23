@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class levelController : MonoBehaviour {
 
@@ -222,6 +223,10 @@ public class levelController : MonoBehaviour {
                 if (panel_pause_inscene == null)
                 {
                     panel_pause_inscene = Instantiate(panel_pause, canvas.transform);
+                    //设置关卡名Text
+                    GameObject txt_levelname = panel_pause_inscene.transform.Find("txt_levelname").gameObject;
+                    Text txt = txt_levelname.GetComponent<Text>();
+                    txt.text = level_name;
                     Animation anim = panel_pause_inscene.GetComponent<Animation>();
                     anim.Play("Anim_pause");
                     Debug.Log("Game Paused");
