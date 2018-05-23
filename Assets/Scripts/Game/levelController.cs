@@ -96,6 +96,10 @@ public class levelController : MonoBehaviour {
     //clear面板
     public GameObject panel_clear;
     public static GameObject panel_clear_inscene;
+    //gameover面板
+    public GameObject panel_gameover;
+    public static GameObject panel_gameover_inscene;
+
 
     //道具
     public static GameObject[] propList;  //道具obj列表
@@ -323,6 +327,12 @@ public class levelController : MonoBehaviour {
                 //触发特效
                 Instantiate(gameoverEffect, new Vector3(0, 0, 0), new Quaternion(0, 0, 0, 0));
                 Debug.Log("Game Over!");
+                if (panel_gameover_inscene == null)
+                {
+                    panel_gameover_inscene = Instantiate(panel_gameover, canvas.transform);
+                    Animation anim = panel_gameover_inscene.GetComponent<Animation>();
+                    anim.Play("Anim_clear");
+                }
             }
         }
     }
