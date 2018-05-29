@@ -42,6 +42,8 @@ public class gameController : MonoBehaviour {
     public static bool isMainMenuSpawned = false;
     public static bool isSelectLevelSpawned = false;
     public static bool isLoadingPanelSpawned = false;
+    public static bool isStatPanelSpawned = false;
+
 
     private void Awake()
     {

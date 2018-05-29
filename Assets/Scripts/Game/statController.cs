@@ -9,7 +9,6 @@ public class statController : MonoBehaviour {
     public static long normalBrickCount;    //普通砖块打碎数
     public static long hardBrickCount;  //硬砖块打碎数
     //props
-    public static long propCount;   //总掉落道具
     public static long propPickedCount; //拾取了的道具
     //game
     public static long deadBallCount;   //死球数
@@ -21,11 +20,30 @@ public class statController : MonoBehaviour {
 
     private void Awake()
     {
-        
+        initStatData();
     }
 
     void initStatData()
     {
+        hollowBrickCount = getData("hollowBrickCount");
+        normalBrickCount = getData("normalBrickCount");
+        hardBrickCount = getData("hardBrickCount");
+        propPickedCount = getData("propPickedCount");
+        deadBallCount = getData("deadBallCount");
+        pauseCount = getData("pauseCount");
+        levelplayCount = getData("levelplayCount");
+        gameoverCount = getData("gameoverCount");
+        clearCount = getData("clearCount");
+    }
 
+    private int getData(string key)
+    {
+        if (PlayerPrefs.HasKey(key))
+        {
+            return PlayerPrefs.GetInt(key);
+        } else
+        {
+            return 0;
+        }
     }
 }
