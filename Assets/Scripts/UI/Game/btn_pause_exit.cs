@@ -26,6 +26,8 @@ public class btn_pause_exit : MonoBehaviour {
             anim_ctrl_loading ctrl = panel_in_scene.GetComponent<anim_ctrl_loading>();
             ctrl.filename = "main_menu_blank";
             gameController.isLoadingPanelSpawned = true;
+            //stat
+            statController.saveData();
         }
     }
 }

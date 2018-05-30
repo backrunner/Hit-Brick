@@ -107,6 +107,7 @@ GameObject:
   - component: {fileID: 222400131497530936}
   - component: {fileID: 114702787763863492}
   - component: {fileID: 114350557066337062}
+  - component: {fileID: 114979373954789080}
   m_Layer: 5
   m_Name: btn_back
   m_TagString: Untagged
@@ -141,6 +142,8 @@ GameObject:
   - component: {fileID: 224346480332175448}
   - component: {fileID: 222298364606783408}
   - component: {fileID: 114089276789192616}
+  - component: {fileID: 111082945834917500}
+  - component: {fileID: 114680865661690118}
   m_Layer: 5
   m_Name: Panel_stuff
   m_TagString: Untagged
@@ -148,6 +151,22 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!111 &111082945834917500
+Animation:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1693169374226890}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Animation: {fileID: 0}
+  m_Animations:
+  - {fileID: 7400000, guid: 10c74e09125fe864b86aa0b027ad81f0, type: 2}
+  - {fileID: 7400000, guid: 9e6ae65b018ea944cb5679f6afbe8550, type: 2}
+  m_WrapMode: 0
+  m_PlayAutomatically: 0
+  m_AnimatePhysics: 0
+  m_CullingType: 0
 --- !u!114 &114024189710703624
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -315,6 +334,17 @@ MonoBehaviour:
     m_VerticalOverflow: 0
     m_LineSpacing: 1
   m_Text: 
+--- !u!114 &114680865661690118
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1693169374226890}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 233b940d83bdadc43861f3e96d94a1a4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &114702787763863492
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -429,6 +459,19 @@ MonoBehaviour:
     m_VerticalOverflow: 0
     m_LineSpacing: 1
   m_Text: "\u4F5C\u8005\uFF1ABackRunner\n"
+--- !u!114 &114979373954789080
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1435330560660522}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c5d8f689a2f77794dad814c786f35be2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  btn: {fileID: 0}
+  mainmenu: {fileID: 0}
 --- !u!222 &222000348048348690
 CanvasRenderer:
   m_ObjectHideFlags: 1
@@ -535,7 +578,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 1920, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &224350691765043602

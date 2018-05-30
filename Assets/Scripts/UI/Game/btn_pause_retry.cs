@@ -26,6 +26,8 @@ public class btn_pause_retry : MonoBehaviour {
             anim_ctrl_loading ctrl = panel_in_scene.GetComponent<anim_ctrl_loading>();
             ctrl.filename = levelController.level_filename;
             gameController.isLoadingPanelSpawned = true;
+            //stat
+            statController.saveData();
         }
     }
 }

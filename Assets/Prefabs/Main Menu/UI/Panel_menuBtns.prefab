@@ -147,6 +147,7 @@ GameObject:
   - component: {fileID: 222643066515281452}
   - component: {fileID: 114767508895790940}
   - component: {fileID: 114183470476873980}
+  - component: {fileID: 114843519459091266}
   m_Layer: 5
   m_Name: btn_stuff
   m_TagString: Untagged
@@ -536,8 +537,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   canvas: {fileID: 0}
-  panel_selectLevel: {fileID: 1419485691519628, guid: 4c0589ab557594f49bcb21420892f465,
-    type: 2}
 --- !u!114 &114741943021299984
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -598,6 +597,18 @@ MonoBehaviour:
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
+--- !u!114 &114843519459091266
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1632274382626246}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7688e2f24b9368e409b760ef8ab50a2e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  canvas: {fileID: 0}
 --- !u!114 &114864144398214924
 MonoBehaviour:
   m_ObjectHideFlags: 1

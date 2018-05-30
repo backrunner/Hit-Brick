@@ -54,6 +54,7 @@ public class gameController : MonoBehaviour {
         //初始化静态变量
         panel_mainMenu = _panel_mainMenu;
         panel_selectLevel = _panel_selectLevel;
+        panel_stuff = _panel_stuff;
         btn_level = _btn_level;
         eventSystem = _eventSystem;
         thisgameObj = gameObject;
@@ -115,7 +116,7 @@ public class gameController : MonoBehaviour {
     }
 
     public static void displaySelectLevel() {
-        if (!isSelectLevelSpawned)
+        if (!isSelectLevelSpawned && !isStuffPanelSpawned)
         {
             panel_selectLevel_inscene = Instantiate(panel_selectLevel, canvas.transform);
             //添加按钮
@@ -159,6 +160,21 @@ public class gameController : MonoBehaviour {
             anim_mainmenu.Play("anim_panel_mainmenu_out");
             //设定开关
             isSelectLevelSpawned = true;
+        }
+    }
+
+    public static void displayStuff()
+    {
+        if (!isSelectLevelSpawned && !isStuffPanelSpawned)
+        {
+            //ui
+            panel_stuff_inscene = Instantiate(panel_stuff, canvas.transform);
+            isStuffPanelSpawned = true;
+            //anim
+            Animation anim = panel_stuff_inscene.GetComponent<Animation>();
+            anim.Play("anim_panel_stuff");
+            Animation anim_mainmenu = panel_mainMenu_inscene.GetComponent<Animation>();
+            anim_mainmenu.Play("anim_panel_mainmenu_out");
         }
     }
 
