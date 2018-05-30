@@ -39,7 +39,8 @@ public class btn_stat : MonoBehaviour {
         panel_inscene = Instantiate(panel_stat, canvas.transform);
         gameController.panel_stat_inscene = panel_inscene;
         gameController.isStatPanelSpawned = true;
-        //初始化物体
+        //初始化
+        statController.refreshData();
         initObjects();
         initText();
         //anim

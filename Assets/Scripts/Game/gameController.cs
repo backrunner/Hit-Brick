@@ -28,6 +28,9 @@ public class gameController : MonoBehaviour {
     public GameObject _btn_level;
     private static GameObject btn_level;
     public static GameObject panel_stat_inscene;
+    public GameObject _panel_stuff;
+    private static GameObject panel_stuff;
+    public static GameObject panel_stuff_inscene;
 
     //关卡
     public string[] _levels;
@@ -44,7 +47,7 @@ public class gameController : MonoBehaviour {
     public static bool isSelectLevelSpawned = false;
     public static bool isLoadingPanelSpawned = false;
     public static bool isStatPanelSpawned = false;
-
+    public static bool isStuffPanelSpawned = false;
 
     private void Awake()
     {
@@ -69,6 +72,8 @@ public class gameController : MonoBehaviour {
         isMainMenuSpawned = false;
         isSelectLevelSpawned = false;
         isLoadingPanelSpawned = false;
+        isStatPanelSpawned = false;
+        isStuffPanelSpawned = false;
 
         //保留的游戏物件
         DontDestroyOnLoad(gameObject);
