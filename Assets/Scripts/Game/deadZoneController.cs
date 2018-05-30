@@ -22,7 +22,7 @@ public class deadZoneController : MonoBehaviour {
                 {
                     levelController.newBall();
                 }
-                levelController.leftBall = levelController.leftBall - 1;
+                levelController.decreaseLeftBall(1);
                 //更新UI
                 gameUIContorller.updateLeftBallUI();
                 //销毁游戏物体

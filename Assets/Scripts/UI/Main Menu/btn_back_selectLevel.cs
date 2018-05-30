@@ -18,11 +18,14 @@ public class btn_back_selectLevel : btn_back {
 
     public override void Clicked()
     {
-        Animation anim_mainmenu = mainmenu.GetComponent<Animation>();
-        anim_mainmenu.Play("anim_panel_mainmenu_in");
-        Animation anim_panel = panel.GetComponent<Animation>();
-        anim_panel.Play("anim_panel_selectLevel_out");
-        base.Clicked();
+        if (!gameController.isStatPanelSpawned)
+        {
+            Animation anim_mainmenu = mainmenu.GetComponent<Animation>();
+            anim_mainmenu.Play("anim_panel_mainmenu_in");
+            Animation anim_panel = panel.GetComponent<Animation>();
+            anim_panel.Play("anim_panel_selectLevel_out");
+            base.Clicked();
+        }
     }
 
 }

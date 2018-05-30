@@ -27,6 +27,7 @@ public class gameController : MonoBehaviour {
     public static GameObject panel_selectLevel_inscene;
     public GameObject _btn_level;
     private static GameObject btn_level;
+    public static GameObject panel_stat_inscene;
 
     //关卡
     public string[] _levels;

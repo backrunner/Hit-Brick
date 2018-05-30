@@ -4,7 +4,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class levelController : MonoBehaviour {
+public class levelController : MonoBehaviour
+{
 
     //关卡名称
     public static string level_name; //静态
@@ -113,7 +114,7 @@ public class levelController : MonoBehaviour {
     public static GameObject anim_prop;
 
     private void Awake()
-    {        
+    {
         //传递assest ball给静态变量
         if (m_ball != null)
         {
@@ -150,13 +151,14 @@ public class levelController : MonoBehaviour {
         }
 
         //传递粒子给静态变量
-        particle_ray_launcher=m_particle_ray_launcher;
+        particle_ray_launcher = m_particle_ray_launcher;
 
         //获取canvas
         if (_canvas != null)
         {
             canvas = _canvas;
-        } else
+        }
+        else
         {
             canvas = GameObject.Find("Canvas");
         }
@@ -180,14 +182,15 @@ public class levelController : MonoBehaviour {
         {
             Canvas canvas_ctrl = gameController.canvas.GetComponent<Canvas>();
             canvas_ctrl.worldCamera = Camera.main;
-        } catch(Exception e)
+        }
+        catch (Exception e)
         {
             Debug.LogError(e);
         }
     }
 
     private void Start()
-    {        
+    {
         //新建一个球
         newBall();
 
@@ -214,34 +217,39 @@ public class levelController : MonoBehaviour {
     {
         if (Input.GetButtonDown("Pause") && !isGameOver)
         {
-            if (!isLevelPaused)
+            if (!gameController.isLoadingPanelSpawned)
             {
-                //更改状态和时间缩放
-                isLevelPaused = true;
-                Time.timeScale = 0;
-                //UI
-                if (panel_pause_inscene == null)
+                if ((!isLevelPaused || !isLevelStarted) && panel_pause_inscene == null)
                 {
+                    //更改状态和时间缩放
+                    isLevelPaused = true;
+                    Time.timeScale = 0;
+                    //ui
                     panel_pause_inscene = Instantiate(panel_pause, canvas.transform);
                     //设置关卡名Text
                     GameObject txt_levelname = panel_pause_inscene.transform.Find("txt_levelname").gameObject;
                     Text txt = txt_levelname.GetComponent<Text>();
                     txt.text = level_name;
+                    //anim
                     Animation anim = panel_pause_inscene.GetComponent<Animation>();
                     anim.Play("Anim_pause");
+                    //stat
+                    statController.pauseCount++;
+                    statController.saveData();
                     Debug.Log("Game Paused");
                 }
-            } else
-            {
-                //UI
-                Animation anim = panel_pause_inscene.GetComponent<Animation>();             
-                anim["Anim_pause"].speed = -2;
-                anim.Play("Anim_pause");
-                //设置倒放
-                anim_unscaledTime ctrl = panel_pause_inscene.GetComponent<anim_unscaledTime>();
-                ctrl.progress = 0.85f;
-                ctrl.isReverse = true;                
-                Debug.Log("Game Resumed");
+                else
+                {
+                    //UI
+                    Animation anim = panel_pause_inscene.GetComponent<Animation>();
+                    anim["Anim_pause"].speed = -2;
+                    anim.Play("Anim_pause");
+                    //设置倒放
+                    anim_unscaledTime ctrl = panel_pause_inscene.GetComponent<anim_unscaledTime>();
+                    ctrl.progress = 0.85f;
+                    ctrl.isReverse = true;
+                    Debug.Log("Game Resumed");
+                }
             }
         }
     }
@@ -261,7 +269,8 @@ public class levelController : MonoBehaviour {
             //获取位置并做偏移
             position = pad.transform.position;
             position.y += ballInitOffset;
-        } else
+        }
+        else
         {
             //抓取不到pad，使用默认位置
             position = new Vector3(0, -4.15f, 0);
@@ -287,7 +296,7 @@ public class levelController : MonoBehaviour {
         ballController ctrl = ball_new.GetComponent<ballController>();
         //让球附在板子上
         ctrl.isAttracted = true;
-    }    
+    }
 
     //游戏状态检查
     void checkGameStatus()
@@ -300,6 +309,9 @@ public class levelController : MonoBehaviour {
                 isLevelStarted = false;
                 isGameOver = true;
                 Instantiate(clearEffect, new Vector3(0, 0, 0), new Quaternion(0, 0, 0, 0));
+                //stat
+                statController.clearCount++;
+                statController.saveData();
                 Debug.Log("Clear!");
                 //记录clear
                 if (PlayerPrefs.HasKey("clearedLevel"))
@@ -310,7 +322,8 @@ public class levelController : MonoBehaviour {
                         clearedlevel += "," + level_filename;
                         PlayerPrefs.SetString("clearedLevel", clearedlevel);
                     }
-                } else
+                }
+                else
                 {
                     PlayerPrefs.SetString("clearedLevel", level_filename);
                 }
@@ -331,6 +344,9 @@ public class levelController : MonoBehaviour {
                 isGameOver = true;
                 //触发特效
                 Instantiate(gameoverEffect, new Vector3(0, 0, 0), new Quaternion(0, 0, 0, 0));
+                //stat
+                statController.gameoverCount++;
+                statController.saveData();
                 Debug.Log("Game Over!");
                 if (panel_gameover_inscene == null)
                 {
@@ -343,7 +359,8 @@ public class levelController : MonoBehaviour {
     }
 
     //寻找板子
-    public static void findPad() {        
+    public static void findPad()
+    {
         if (pad == null)
         {
             pad = GameObject.Find("Pad");
@@ -357,5 +374,11 @@ public class levelController : MonoBehaviour {
         leftBall++;
         //更新UI
         gameUIContorller.updateLeftBallUI();
+    }
+
+    public static void decreaseLeftBall(int count)
+    {
+        leftBall = leftBall - count;
+        statController.deadBallCount += count;
     }
 }

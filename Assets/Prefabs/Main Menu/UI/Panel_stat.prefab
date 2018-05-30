@@ -73,7 +73,7 @@ GameObject:
   - component: {fileID: 222248144197086052}
   - component: {fileID: 114478664360076610}
   m_Layer: 5
-  m_Name: txt_hollowbricks
+  m_Name: txt_normalbricks
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -90,7 +90,7 @@ GameObject:
   - component: {fileID: 222373313186991022}
   - component: {fileID: 114797473400104930}
   m_Layer: 5
-  m_Name: txt_pickedProp
+  m_Name: txt_pickedprop
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -107,6 +107,7 @@ GameObject:
   - component: {fileID: 222944181203493614}
   - component: {fileID: 114082924070555374}
   - component: {fileID: 111996585241981102}
+  - component: {fileID: 114875958563470870}
   m_Layer: 5
   m_Name: Panel_stat
   m_TagString: Untagged
@@ -125,6 +126,7 @@ GameObject:
   - component: {fileID: 222403593782018828}
   - component: {fileID: 114828636969594804}
   - component: {fileID: 114223109203110102}
+  - component: {fileID: 114301952807654742}
   m_Layer: 5
   m_Name: btn_close
   m_TagString: Untagged
@@ -346,7 +348,7 @@ GameObject:
   - component: {fileID: 222072159284211614}
   - component: {fileID: 114211231761999034}
   m_Layer: 5
-  m_Name: lbl_pickedProp
+  m_Name: lbl_pickedprop
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -712,6 +714,17 @@ MonoBehaviour:
     m_VerticalOverflow: 0
     m_LineSpacing: 1
   m_Text: "\u6D88\u8017\u7684\u751F\u547D\u603B\u6570\uFF1A"
+--- !u!114 &114301952807654742
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1284707899360828}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6144aabce034b9747851f3b434f52488, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &114370662152689024
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1106,6 +1119,17 @@ MonoBehaviour:
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
+--- !u!114 &114875958563470870
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1165857304699936}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 81b1c7ed97f7fa34f8901825002ea4f6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &114925259605573022
 MonoBehaviour:
   m_ObjectHideFlags: 1

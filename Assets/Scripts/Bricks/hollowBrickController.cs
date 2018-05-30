@@ -4,11 +4,9 @@ using UnityEngine;
 
 public class hollowBrickController : brickController {
 
-	void Start () {
-		
-	}
-	
-	void Update () {
-		
-	}
+    public override void destroyBrick()
+    {
+        statController.hollowBrickCount++;
+        base.destroyBrick();
+    }
 }
