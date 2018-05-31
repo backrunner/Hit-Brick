@@ -8,5 +8,6 @@ public class Prop_addBall : Prop {
     {
         levelController.addLeftBall();
         Destroy(gameObject);
+        base.padGot();
     }
 }

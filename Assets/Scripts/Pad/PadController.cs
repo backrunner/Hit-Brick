@@ -10,7 +10,10 @@ public class PadController : MonoBehaviour
     public float targetScale;
     //限定最大的scale
     public float maxScale;
-    public float minScale; //默认为2-maxScale
+    private float minScale; //2-maxScale
+    //scale乘数
+    public float maxScaleMulti;
+    public float minScaleMulti;
     //每次改变的scale 最多改变2次
     public float deltaScale;
 
@@ -91,17 +94,20 @@ public class PadController : MonoBehaviour
             {
                 GameObject ball = (GameObject)ballLaunchList[0];
                 ballController ball_ctrl = ball.GetComponent<ballController>();
-                ball_ctrl.launchBall();
-                ballLaunchList.Remove(ball);
-                //如果发射后球数小于等于1则删除text
-                if (ballLaunchList.Count <= 1)
+                if (!levelController.isLevelPaused && !levelController.isGameOver)
                 {
-                    Destroy(text_waitforLaunch_inscene);
-                }
-                else
-                {
-                    Text text = text_waitforLaunch_inscene.GetComponent<Text>();
-                    text.text = "+" + (ballLaunchList.Count - 1);
+                    ball_ctrl.launchBall();
+                    ballLaunchList.Remove(ball);
+                    //如果发射后球数小于等于1则删除text
+                    if (ballLaunchList.Count <= 1)
+                    {
+                        Destroy(text_waitforLaunch_inscene);
+                    }
+                    else
+                    {
+                        Text text = text_waitforLaunch_inscene.GetComponent<Text>();
+                        text.text = "+" + (ballLaunchList.Count - 1);
+                    }
                 }
             }
         }
@@ -144,7 +150,14 @@ public class PadController : MonoBehaviour
         if (targetScale < maxScale)
         {
             Debug.Log("Change");
-            targetScale += deltaScale;
+            if (targetScale >= 1)
+            {
+                targetScale += deltaScale * maxScaleMulti;
+            }
+            else
+            {
+                targetScale += deltaScale * minScaleMulti;
+            }
             Transform anim_trans = transform.Find("Anim_padLength(Clone)");
             if (anim_trans == null)
             {
@@ -159,7 +172,14 @@ public class PadController : MonoBehaviour
         if (targetScale > minScale)
         {
             Debug.Log("Change");
-            targetScale -= deltaScale;
+            if (targetScale <= 1)
+            {
+                targetScale -= deltaScale * minScaleMulti;
+            }
+            else
+            {
+                targetScale -= deltaScale * maxScaleMulti;
+            }
             Transform anim_trans = transform.Find("Anim_padLength(Clone)");
             if (anim_trans == null)
             {

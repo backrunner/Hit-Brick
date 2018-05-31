@@ -46,6 +46,7 @@ public class Prop : MonoBehaviour {
 
     public virtual void padGot()
     {
-
+        //stat
+        statController.propPickedCount++;
     }
 }

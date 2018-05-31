@@ -1,11 +1,18 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
-public class levelController : MonoBehaviour {
+public class levelController : MonoBehaviour
+{
 
     //关卡名称
-    public string level_name;
+    public static string level_name; //静态
+    public string _level_name; //用于编辑器指定
+    public static string level_filename;
+    public string _level_filename;
+
     //关卡开关
     public static bool isLevelStarted;
     public static bool isGameOver;
@@ -84,9 +91,17 @@ public class levelController : MonoBehaviour {
     //UI
     //canvas
     public static GameObject canvas;
-    //暂停图标
-    public GameObject image_Pause;  //用于编辑器指定Prefabs
-    private GameObject _image_Pause;    //用于记录代码生成的obj
+    public GameObject _canvas;
+    //暂停面板
+    public GameObject panel_pause;  //用于编辑器指定Prefabs
+    public static GameObject panel_pause_inscene; //用于记录代码生成的obj (静态)
+    //clear面板
+    public GameObject panel_clear;
+    public static GameObject panel_clear_inscene;
+    //gameover面板
+    public GameObject panel_gameover;
+    public static GameObject panel_gameover_inscene;
+
 
     //道具
     public static GameObject[] propList;  //道具obj列表
@@ -99,7 +114,7 @@ public class levelController : MonoBehaviour {
     public static GameObject anim_prop;
 
     private void Awake()
-    {        
+    {
         //传递assest ball给静态变量
         if (m_ball != null)
         {
@@ -111,6 +126,7 @@ public class levelController : MonoBehaviour {
         //初始化列表
         ballList = new ArrayList();
         bricks = new ArrayList();
+
         //道具列表赋给静态变量
         if (_propList != null)
         {
@@ -135,22 +151,54 @@ public class levelController : MonoBehaviour {
         }
 
         //传递粒子给静态变量
-        particle_ray_launcher=m_particle_ray_launcher;
+        particle_ray_launcher = m_particle_ray_launcher;
+
+        //获取canvas
+        if (_canvas != null)
+        {
+            canvas = _canvas;
+        }
+        else
+        {
+            canvas = GameObject.Find("Canvas");
+        }
 
         //寻找板子
         findPad();
 
+        //初始化开关
+        isLevelStarted = false;
+        isLevelPaused = true;
+        isGameOver = false;
+
         //变量初始化
         ballInitOffset = 0.3f;
+        level_name = _level_name;
+        level_filename = _level_filename;
+        currentBall = null;
+
+        //调整渲染camera
+        try
+        {
+            Canvas canvas_ctrl = gameController.canvas.GetComponent<Canvas>();
+            canvas_ctrl.worldCamera = Camera.main;
+        }
+        catch (Exception e)
+        {
+            Debug.LogError(e);
+        }
     }
 
     private void Start()
-    {        
+    {
         //新建一个球
         newBall();
 
         //更新UI
         gameUIContorller.updateLeftBallUI();
+
+        //消息监听
+        Messenger.AddListener("Anim_pause rewinded", resumeGame);
     }
 
     private void Update()
@@ -167,31 +215,49 @@ public class levelController : MonoBehaviour {
     //检查暂停状态
     private void checkPause()
     {
-        if (Input.GetButtonDown("Pause"))
+        if (Input.GetButtonDown("Pause") && !isGameOver)
         {
-            if (!isLevelPaused)
+            if (!gameController.isLoadingPanelSpawned)
             {
-                //更改状态和时间缩放
-                isLevelPaused = true;
-                Time.timeScale = 0;
-                //UI
-                Vector3 image_pause_position = new Vector3(8f, 4.2f, 1f);
-                _image_Pause = Instantiate(image_Pause, image_pause_position, new Quaternion(0, 0, 0, 0));
-                //置于canvas下
-                _image_Pause.transform.SetParent(canvas.transform);
-                //修改scale
-                _image_Pause.transform.localScale = new Vector3(1, 1, 1);
-                Debug.Log("Game Paused");
-            } else
-            {
-                //更改状态和时间缩放
-                isLevelPaused = false;
-                Time.timeScale = 1;
-                //UI
-                Destroy(_image_Pause);
-                Debug.Log("Game Resumed");
+                if ((!isLevelPaused || !isLevelStarted) && panel_pause_inscene == null)
+                {
+                    //更改状态和时间缩放
+                    isLevelPaused = true;
+                    Time.timeScale = 0;
+                    //ui
+                    panel_pause_inscene = Instantiate(panel_pause, canvas.transform);
+                    //设置关卡名Text
+                    GameObject txt_levelname = panel_pause_inscene.transform.Find("txt_levelname").gameObject;
+                    Text txt = txt_levelname.GetComponent<Text>();
+                    txt.text = level_name;
+                    //anim
+                    Animation anim = panel_pause_inscene.GetComponent<Animation>();
+                    anim.Play("Anim_pause");
+                    //stat
+                    statController.pauseCount++;
+                    statController.saveData();
+                    Debug.Log("Game Paused");
+                }
+                else
+                {
+                    //UI
+                    Animation anim = panel_pause_inscene.GetComponent<Animation>();
+                    anim["Anim_pause"].speed = -2;
+                    anim.Play("Anim_pause");
+                    //设置倒放
+                    anim_unscaledTime ctrl = panel_pause_inscene.GetComponent<anim_unscaledTime>();
+                    ctrl.progress = 0.85f;
+                    ctrl.isReverse = true;
+                    Debug.Log("Game Resumed");
+                }
             }
         }
+    }
+
+    public void resumeGame()
+    {
+        Time.timeScale = 1;
+        isLevelPaused = false;
     }
 
     //用于刷新新球的静态方法
@@ -203,7 +269,8 @@ public class levelController : MonoBehaviour {
             //获取位置并做偏移
             position = pad.transform.position;
             position.y += ballInitOffset;
-        } else
+        }
+        else
         {
             //抓取不到pad，使用默认位置
             position = new Vector3(0, -4.15f, 0);
@@ -229,32 +296,71 @@ public class levelController : MonoBehaviour {
         ballController ctrl = ball_new.GetComponent<ballController>();
         //让球附在板子上
         ctrl.isAttracted = true;
-    }    
+    }
 
     //游戏状态检查
     void checkGameStatus()
     {
         if (bricks.Count <= 0)
         {
-            //标识游戏结束
-            isLevelStarted = false;
-            isGameOver = true;
-            Instantiate(clearEffect, new Vector3(0, 0, 0), new Quaternion(0, 0, 0, 0));
-            Debug.Log("Clear!");
+            if (isLevelStarted && !isGameOver)
+            {
+                //标识游戏结束
+                isLevelStarted = false;
+                isGameOver = true;
+                Instantiate(clearEffect, new Vector3(0, 0, 0), new Quaternion(0, 0, 0, 0));
+                //stat
+                statController.clearCount++;
+                statController.saveData();
+                Debug.Log("Clear!");
+                //记录clear
+                if (PlayerPrefs.HasKey("clearedLevel"))
+                {
+                    string clearedlevel = PlayerPrefs.GetString("clearedLevel");
+                    if (!clearedlevel.Contains(level_filename))
+                    {
+                        clearedlevel += "," + level_filename;
+                        PlayerPrefs.SetString("clearedLevel", clearedlevel);
+                    }
+                }
+                else
+                {
+                    PlayerPrefs.SetString("clearedLevel", level_filename);
+                }
+                if (panel_clear_inscene == null)
+                {
+                    panel_clear_inscene = Instantiate(panel_clear, canvas.transform);
+                    Animation anim = panel_clear_inscene.GetComponent<Animation>();
+                    anim.Play("Anim_clear");
+                }
+            }
         }
         if (leftBall < 0)
         {
-            //标识游戏结束
-            isLevelStarted = false;
-            isGameOver = true;
-            //触发特效
-            Instantiate(gameoverEffect, new Vector3(0, 0, 0), new Quaternion(0, 0, 0, 0));
-            Debug.Log("Game Over!");
+            if (isLevelStarted && !isGameOver)
+            {
+                //标识游戏结束
+                isLevelStarted = false;
+                isGameOver = true;
+                //触发特效
+                Instantiate(gameoverEffect, new Vector3(0, 0, 0), new Quaternion(0, 0, 0, 0));
+                //stat
+                statController.gameoverCount++;
+                statController.saveData();
+                Debug.Log("Game Over!");
+                if (panel_gameover_inscene == null)
+                {
+                    panel_gameover_inscene = Instantiate(panel_gameover, canvas.transform);
+                    Animation anim = panel_gameover_inscene.GetComponent<Animation>();
+                    anim.Play("Anim_clear");
+                }
+            }
         }
     }
 
     //寻找板子
-    public static void findPad() {        
+    public static void findPad()
+    {
         if (pad == null)
         {
             pad = GameObject.Find("Pad");
@@ -268,5 +374,14 @@ public class levelController : MonoBehaviour {
         leftBall++;
         //更新UI
         gameUIContorller.updateLeftBallUI();
+    }
+
+    public static void decreaseLeftBall(int count)
+    {
+        if (!isGameOver)
+        {
+            leftBall = leftBall - count;
+            statController.deadBallCount += count;
+        }
     }
 }

@@ -33,7 +33,7 @@ public class hardBrickController : brickController {
         }
         else
         {
-            destroyBrick();
+            destroyBrick();            
         }
     }
 
@@ -53,6 +53,12 @@ public class hardBrickController : brickController {
         hardBrickBrokenController ctrl = broken.GetComponent<hardBrickBrokenController>();
         ctrl.brickColor = render.color;
         ctrl.throwout(ball.transform.position);
+    }
+
+    public override void destroyBrick()
+    {
+        statController.hardBrickCount++;
+        base.destroyBrick();
     }
 
     //随机一个淡色
