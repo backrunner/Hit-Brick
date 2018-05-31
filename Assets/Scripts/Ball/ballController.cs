@@ -14,6 +14,7 @@ public class ballController : MonoBehaviour
 
     //初始球速
     public float initMoveSpeed;
+
     //current speed scale
     public float speedScale;
     //上下限
@@ -107,6 +108,7 @@ public class ballController : MonoBehaviour
 
     void Update()
     {
+        Debug.Log(rigid.velocity);
         if (isAttracted)
         {
             attachToPad();
@@ -117,6 +119,30 @@ public class ballController : MonoBehaviour
             {
                 //如果球未吸附在pad上，则检测球的位置是否出现卡死
                 checkPosition();
+            }
+        }
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.tag == "Pad")
+        {
+            tweakMovement();
+        }
+    }
+
+    //运动调整
+    void tweakMovement()
+    {
+        if (Mathf.Abs(rigid.velocity.x) <= 0.15f)
+        {
+            if (transform.position.x >= pad.transform.position.x)
+            {
+                rigid.velocity = new Vector2(rigid.velocity.y / Mathf.Sqrt(2), rigid.velocity.y / Mathf.Sqrt(2));
+            }
+            else
+            {
+                rigid.velocity = new Vector2(-rigid.velocity.y / Mathf.Sqrt(2), rigid.velocity.y / Mathf.Sqrt(2));
             }
         }
     }
@@ -141,8 +167,7 @@ public class ballController : MonoBehaviour
             //取消附着状态
             this.isAttracted = false;
             //向ball施加自定义力
-            Vector2 force = new Vector2(0f, initMoveSpeed);
-            rigid.AddForce(force);
+            rigid.AddRelativeForce(new Vector3(0, initMoveSpeed, 0));
             //开启ball的trail render
             StartCoroutine(delayToEnableTrailRender(0.1f));
         }
@@ -190,7 +215,7 @@ public class ballController : MonoBehaviour
         //球没有卡在x轴
         if (!isStack_x)
         {
-            if (Mathf.Abs(recordedPosition.y - transform.position.y) <= check_limit)
+            if (Mathf.Abs(recordedPosition.y - transform.position.y) <= check_limit || rigid.velocity.y==0)
             {
                 isStack_y = true;
                 position_deltaTime += Time.deltaTime;
@@ -253,7 +278,8 @@ public class ballController : MonoBehaviour
             if (targetScale >= originScale)
             {
                 targetScale += deltaScale;
-            } else
+            }
+            else
             {
                 targetScale += deltaScale_reverse;
             }
@@ -279,7 +305,8 @@ public class ballController : MonoBehaviour
             if (targetScale > originScale)
             {
                 targetScale -= deltaScale;
-            } else
+            }
+            else
             {
                 targetScale -= deltaScale_reverse;
             }
@@ -309,7 +336,8 @@ public class ballController : MonoBehaviour
             //存在重复，重置时间
             Prop_powerful_child ctrl = child.gameObject.GetComponent<Prop_powerful_child>();
             ctrl.resetLiveTime();
-        } else
+        }
+        else
         {
             Instantiate(powerful_child, transform);
         }
@@ -339,6 +367,6 @@ public class ballController : MonoBehaviour
         {
             rigid.velocity = rigid.velocity * (1f / 1.5f);
             speedScale *= 1f / 1.5f;
-        }        
+        }
     }
 }
