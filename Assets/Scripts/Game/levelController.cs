@@ -378,7 +378,10 @@ public class levelController : MonoBehaviour
 
     public static void decreaseLeftBall(int count)
     {
-        leftBall = leftBall - count;
-        statController.deadBallCount += count;
+        if (!isGameOver)
+        {
+            leftBall = leftBall - count;
+            statController.deadBallCount += count;
+        }
     }
 }
