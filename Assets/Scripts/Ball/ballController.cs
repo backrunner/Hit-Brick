@@ -108,7 +108,6 @@ public class ballController : MonoBehaviour
 
     void Update()
     {
-        Debug.Log(rigid.velocity);
         if (isAttracted)
         {
             attachToPad();
