@@ -113,6 +113,19 @@ public class levelController : MonoBehaviour
     public GameObject _anim_prop; //动画
     public static GameObject anim_prop;
 
+    //shop system
+    public long _baseReward;
+    public long _randomReward;
+    public long _timeReward;
+    public long _timeRewardLimit;
+    public static long baseReward;
+    public static long randomReward;
+    public static long timeReward;
+    public static long timeRewardLimit;
+
+    //time
+    public static float currentTime;
+
     private void Awake()
     {
         //传递assest ball给静态变量
@@ -142,6 +155,12 @@ public class levelController : MonoBehaviour
 
         //初始化动画
         anim_prop = _anim_prop;
+
+        //shop system init
+        baseReward = _baseReward;
+        randomReward = _randomReward;
+        timeReward = _timeReward;
+        timeRewardLimit = _timeRewardLimit;
 
         //获取环境中的预置Brick
         GameObject[] brickObjs = GameObject.FindGameObjectsWithTag("Bricks");
@@ -176,6 +195,7 @@ public class levelController : MonoBehaviour
         level_name = _level_name;
         level_filename = _level_filename;
         currentBall = null;
+        currentTime = 0;
 
         //调整渲染camera
         try
@@ -209,6 +229,11 @@ public class levelController : MonoBehaviour
         if (isLevelStarted)
         {
             checkGameStatus();
+            if (!isGameOver)
+            {
+                //计时
+                currentTime += Time.deltaTime;
+            }
         }
     }
 
