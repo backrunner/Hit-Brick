@@ -7,7 +7,7 @@ using UnityEngine;
 
 public class Encryption : MonoBehaviour {
 
-    public static string secure_key = "backrunner!";
+    public static string secure_key = "backrunner!yUgSCYDooxTNHRmjF6iBR";
 
     public static string encrypt_aes(string data)
     {

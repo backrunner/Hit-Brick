@@ -22,9 +22,13 @@ public class btn_clear_next : MonoBehaviour {
         if (!gameController.isLoadingPanelSpawned)
         {
             GameObject panel_in_scene = Instantiate(panel_loading, canvas.transform);
+            //读取下一关卡
             anim_ctrl_loading ctrl = panel_in_scene.GetComponent<anim_ctrl_loading>();
             ctrl.levelIndex = gameController.currentLevelIndex + gameController.levelindexoffset + 1;
             gameController.isLoadingPanelSpawned = true;
+            //刷写金钱数据
+            playerController.coin = playerController.targetcoin;
+            playerController.saveData();
         }
     }
 }
