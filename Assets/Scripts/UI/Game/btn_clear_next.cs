@@ -26,6 +26,8 @@ public class btn_clear_next : MonoBehaviour {
             anim_ctrl_loading ctrl = panel_in_scene.GetComponent<anim_ctrl_loading>();
             ctrl.levelIndex = gameController.currentLevelIndex + gameController.levelindexoffset + 1;
             gameController.isLoadingPanelSpawned = true;
+            //stat
+            statController.saveData();
             //刷写金钱数据
             playerController.coin = playerController.targetcoin;
             playerController.saveData();

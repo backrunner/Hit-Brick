@@ -3,14 +3,15 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class anim_coinreward : MonoBehaviour {
+public class anim_coinreward : MonoBehaviour
+{
 
     private Text text;
 
     private long current;   //当前
     private long target;    //目标
 
-    public long delta;
+    private long delta;
 
     private bool trigger;   //开关
 
@@ -18,10 +19,7 @@ public class anim_coinreward : MonoBehaviour {
     {
         //init
         trigger = false;
-        if (delta <= 0)
-        {
-            delta = 17;
-        }
+        delta = 17;
     }
 
     private void Start()
@@ -29,8 +27,10 @@ public class anim_coinreward : MonoBehaviour {
         text = GetComponent<Text>();
         if (text != null)
         {
-            current = long.Parse(text.text);
-        } else
+            current = playerController.coin;
+            text.text = playerController.coin.ToString();
+        }
+        else
         {
             current = 0;
         }
@@ -45,6 +45,28 @@ public class anim_coinreward : MonoBehaviour {
     {
         target = number;
         trigger = true;
+        if (target - current <= 10)
+        {
+            delta = 1;
+        }
+        else
+        {
+            if (target - current <= 50)
+            {
+                delta = 3;
+            }
+            else
+            {
+                if (target - current <= 200)
+                {
+                    delta = 7;
+                }
+                else
+                {
+                    delta = 17;
+                }
+            }
+        }
     }
 
     //加数
