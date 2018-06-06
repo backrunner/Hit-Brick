@@ -105,6 +105,11 @@ MonoBehaviour:
   - 1
   _totalRate: 0.125
   _anim_prop: {fileID: 0}
+  _baseReward: 500
+  _baseReward_gameover: 0
+  _randomReward: 100
+  _timeReward: 300
+  _timeRewardLimit: 2
 --- !u!114 &114673347323340066
 MonoBehaviour:
   m_ObjectHideFlags: 1

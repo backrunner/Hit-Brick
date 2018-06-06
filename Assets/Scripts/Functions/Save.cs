@@ -8,6 +8,14 @@ public class Save : MonoBehaviour {
     {
         PlayerPrefs.SetString(Encryption.SHA512(key), Encryption.encrypt_aes(data.ToString().Trim()));
     }
+    public static void setData(string key, int data)
+    {
+        PlayerPrefs.SetString(Encryption.SHA512(key), Encryption.encrypt_aes(data.ToString().Trim()));
+    }
+    public static void setData(string key, string data)
+    {
+        PlayerPrefs.SetString(Encryption.SHA512(key), Encryption.encrypt_aes(data.Trim()));
+    }
 
     public static long getData(string key)
     {

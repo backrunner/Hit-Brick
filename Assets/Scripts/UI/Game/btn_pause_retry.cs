@@ -28,6 +28,9 @@ public class btn_pause_retry : MonoBehaviour {
             gameController.isLoadingPanelSpawned = true;
             //stat
             statController.saveData();
+            //刷写金钱数据
+            playerController.coin = playerController.targetcoin;
+            playerController.saveData();
         }
     }
 }

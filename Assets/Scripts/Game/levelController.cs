@@ -115,10 +115,12 @@ public class levelController : MonoBehaviour
 
     //shop system
     public long _baseReward;
+    public long _baseReward_gameover;
     public long _randomReward;
     public long _timeReward;
     public long _timeRewardLimit;
     public static long baseReward;
+    public static long baseReward_gameover;
     public static long randomReward;
     public static long timeReward;
     public static long timeRewardLimit;
@@ -158,6 +160,7 @@ public class levelController : MonoBehaviour
 
         //shop system init
         baseReward = _baseReward;
+        baseReward_gameover = _baseReward_gameover;
         randomReward = _randomReward;
         timeReward = _timeReward;
         timeRewardLimit = _timeRewardLimit;
@@ -356,10 +359,31 @@ public class levelController : MonoBehaviour
                 {
                     PlayerPrefs.SetString("clearedLevel", level_filename);
                 }
+                //Clear UI
                 if (panel_clear_inscene == null)
                 {
                     panel_clear_inscene = Instantiate(panel_clear, canvas.transform);
                     Animation anim = panel_clear_inscene.GetComponent<Animation>();
+                    anim_ctrl_clear ctrl = panel_clear_inscene.GetComponent<anim_ctrl_clear>();   //控制                    
+                    //添加reward
+                    ctrl.addReward("base", baseReward);
+                    playerController.targetcoin += baseReward;  //更新数据                    
+                    if (randomReward > 0) {
+                        long randReward = UnityEngine.Random.Range(0, (int)((randomReward) / 10)) * 10;
+                        ctrl.addReward("random", randReward);
+                        playerController.targetcoin += randReward;  //更新数据
+                    }
+                    if (timeReward>0 && timeRewardLimit>=(currentTime / 60))
+                    {
+                        float rate = 1 - (currentTime / 60 / timeRewardLimit);
+                        if (rate > 0 && rate <= 1)
+                        {
+                            long timereward = ((long)(timeReward * rate)) / 10 * 10;
+                            ctrl.addReward("time", timereward);
+                            playerController.targetcoin += timereward;  //更新数据
+                        }
+                    }                    
+                    //播放动画
                     anim.Play("Anim_clear");
                 }
             }
@@ -377,10 +401,11 @@ public class levelController : MonoBehaviour
                 statController.gameoverCount++;
                 statController.saveData();
                 Debug.Log("Game Over!");
+                //Gameover UI
                 if (panel_gameover_inscene == null)
                 {
                     panel_gameover_inscene = Instantiate(panel_gameover, canvas.transform);
-                    Animation anim = panel_gameover_inscene.GetComponent<Animation>();
+                    Animation anim = panel_gameover_inscene.GetComponent<Animation>();                    
                     anim.Play("Anim_clear");
                 }
             }

@@ -945,6 +945,12 @@ Prefab:
       propertyPath: _eventSystem
       value: 
       objectReference: {fileID: 606428518}
+    - target: {fileID: 114993991956417870, guid: d41ddc22423929942995997cd1fb5724,
+        type: 2}
+      propertyPath: _panel_settings
+      value: 
+      objectReference: {fileID: 1984207587245962, guid: 0f9a65e9ba6f72447a44397f2cd227a3,
+        type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: d41ddc22423929942995997cd1fb5724, type: 2}
   m_IsPrefabParent: 0

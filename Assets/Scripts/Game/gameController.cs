@@ -31,6 +31,9 @@ public class gameController : MonoBehaviour {
     public GameObject _panel_stuff;
     private static GameObject panel_stuff;
     public static GameObject panel_stuff_inscene;
+    public GameObject _panel_settings;
+    private static GameObject panel_settings;
+    public static GameObject panel_settings_inscene;
 
     //关卡
     public string[] _levels;
@@ -48,13 +51,16 @@ public class gameController : MonoBehaviour {
     public static bool isLoadingPanelSpawned = false;
     public static bool isStatPanelSpawned = false;
     public static bool isStuffPanelSpawned = false;
+    public static bool isSettingsPanelSpawned = false;
 
     private void Awake()
     {
-        //初始化静态变量
+        //静态变量_panel
         panel_mainMenu = _panel_mainMenu;
         panel_selectLevel = _panel_selectLevel;
         panel_stuff = _panel_stuff;
+        panel_settings = _panel_settings;
+        //静态变量
         btn_level = _btn_level;
         eventSystem = _eventSystem;
         thisgameObj = gameObject;
@@ -75,6 +81,7 @@ public class gameController : MonoBehaviour {
         isLoadingPanelSpawned = false;
         isStatPanelSpawned = false;
         isStuffPanelSpawned = false;
+        isSettingsPanelSpawned = false;
 
         //保留的游戏物件
         DontDestroyOnLoad(gameObject);
@@ -116,7 +123,7 @@ public class gameController : MonoBehaviour {
     }
 
     public static void displaySelectLevel() {
-        if (!isSelectLevelSpawned && !isStuffPanelSpawned)
+        if (!isSelectLevelSpawned && !isStuffPanelSpawned && !isSettingsPanelSpawned)
         {
             panel_selectLevel_inscene = Instantiate(panel_selectLevel, canvas.transform);
             //添加按钮
@@ -143,6 +150,9 @@ public class gameController : MonoBehaviour {
                 btn_level ctrl = btn.GetComponent<btn_level>();
                 ctrl.filename = levels_filename[i];
                 ctrl.index = i; //设置序号
+                //coin
+                Text txt_coin = panel_selectLevel_inscene.transform.Find("txt_coin").gameObject.GetComponent<Text>();
+                txt_coin.text = playerController.coin.ToString();
             }
             //设置content高度
             RectTransform rect = content.GetComponent<RectTransform>();
@@ -165,7 +175,7 @@ public class gameController : MonoBehaviour {
 
     public static void displayStuff()
     {
-        if (!isSelectLevelSpawned && !isStuffPanelSpawned)
+        if (!isSelectLevelSpawned && !isStuffPanelSpawned && !isSettingsPanelSpawned)
         {
             //ui
             panel_stuff_inscene = Instantiate(panel_stuff, canvas.transform);
@@ -173,6 +183,23 @@ public class gameController : MonoBehaviour {
             //anim
             Animation anim = panel_stuff_inscene.GetComponent<Animation>();
             anim.Play("anim_panel_stuff");
+            Animation anim_mainmenu = panel_mainMenu_inscene.GetComponent<Animation>();
+            anim_mainmenu.Play("anim_panel_mainmenu_out");
+        }
+    }
+
+    public static void displaySettings()
+    {
+        if (!isSelectLevelSpawned && !isStuffPanelSpawned && !isSettingsPanelSpawned)
+        {
+            //ui
+            panel_settings_inscene = Instantiate(panel_settings, canvas.transform);
+            isSettingsPanelSpawned = true;
+            Text txt_player = panel_settings_inscene.transform.Find("txt_player").GetComponent<Text>();
+            txt_player.text = "当前玩家： " + player_name;
+            //anim
+            Animation anim = panel_settings_inscene.GetComponent<Animation>();
+            anim.Play("anim_panel_settings");
             Animation anim_mainmenu = panel_mainMenu_inscene.GetComponent<Animation>();
             anim_mainmenu.Play("anim_panel_mainmenu_out");
         }

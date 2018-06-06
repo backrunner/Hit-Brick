@@ -95,5 +95,7 @@ MonoBehaviour:
   _btn_level: {fileID: 1309173251071530, guid: 480da1656d7f74447b5af58e436d8a93, type: 2}
   _panel_stuff: {fileID: 1693169374226890, guid: bad66d8270d0da0468aeaf49ad8d9be6,
     type: 2}
+  _panel_settings: {fileID: 1984207587245962, guid: 0f9a65e9ba6f72447a44397f2cd227a3,
+    type: 2}
   _levels: []
   _levels_filename: []
