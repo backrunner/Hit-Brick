@@ -143,6 +143,9 @@ public class gameController : MonoBehaviour {
                 btn_level ctrl = btn.GetComponent<btn_level>();
                 ctrl.filename = levels_filename[i];
                 ctrl.index = i; //设置序号
+                //coin
+                Text txt_coin = panel_selectLevel_inscene.transform.Find("txt_coin").gameObject.GetComponent<Text>();
+                txt_coin.text = playerController.coin.ToString();
             }
             //设置content高度
             RectTransform rect = content.GetComponent<RectTransform>();
