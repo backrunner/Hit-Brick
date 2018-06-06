@@ -230,6 +230,10 @@ public class levelController : MonoBehaviour
                     GameObject txt_levelname = panel_pause_inscene.transform.Find("txt_levelname").gameObject;
                     Text txt = txt_levelname.GetComponent<Text>();
                     txt.text = level_name;
+                    //设置coin
+                    GameObject txt_coin = panel_pause_inscene.transform.Find("txt_coin").gameObject;
+                    txt = txt_coin.GetComponent<Text>();
+                    txt.text = playerController.coin.ToString();
                     //anim
                     Animation anim = panel_pause_inscene.GetComponent<Animation>();
                     anim.Play("Anim_pause");
