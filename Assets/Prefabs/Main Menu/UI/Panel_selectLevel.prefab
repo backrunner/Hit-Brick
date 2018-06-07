@@ -52,6 +52,7 @@ GameObject:
   - component: {fileID: 222004129142324008}
   - component: {fileID: 114710886733017694}
   - component: {fileID: 114708110647238794}
+  - component: {fileID: 114996998864487070}
   m_Layer: 5
   m_Name: btn_shop
   m_TagString: Untagged
@@ -1015,6 +1016,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_ShowMaskGraphic: 0
+--- !u!114 &114996998864487070
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1105884457648994}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0f71c40ef429a8942a50b3a99d693344, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  panel_shop: {fileID: 1715872262825514, guid: 67074b5bf7cf9a3499e94e67d4f561be, type: 2}
+  panel_shop_inscene: {fileID: 0}
 --- !u!222 &222004129142324008
 CanvasRenderer:
   m_ObjectHideFlags: 1
