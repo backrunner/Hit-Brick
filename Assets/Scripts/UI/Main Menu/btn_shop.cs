@@ -35,6 +35,14 @@ public class btn_shop : MonoBehaviour {
             //text
             Text txt = panel_shop_inscene.transform.Find("txt_coin").gameObject.GetComponent<Text>();
             txt.text = playerController.coin.ToString();
+            //处理items
+            Transform items = panel_shop_inscene.transform.Find("items");
+            foreach (Transform t in items)
+            {                
+                GameObject obj = t.Find("img_soldout").gameObject;
+                shopController.soldoutImgs.Add(obj.GetComponent<Image>());
+            }
+            shopController.refreshSoldout();
         }
     }
 }

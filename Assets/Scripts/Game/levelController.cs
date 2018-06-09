@@ -137,6 +137,12 @@ public class levelController : MonoBehaviour
         }
         //传递编辑器的指定量给静态变量
         leftBall = m_leftBall;
+        //检查商品
+        ShopItem item_addlife = (ShopItem)shopController.shopItems[0];
+        if (item_addlife.soldout)
+        {
+            leftBall++;
+        }
 
         //初始化列表
         ballList = new ArrayList();
@@ -216,6 +222,12 @@ public class levelController : MonoBehaviour
     {
         //新建一个球
         newBall();
+        //检查商品
+        ShopItem item_addball = (ShopItem)shopController.shopItems[1];
+        if (item_addball.soldout)
+        {
+            newBall();
+        }
 
         //更新UI
         gameUIContorller.updateLeftBallUI();
