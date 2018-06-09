@@ -55,6 +55,8 @@ public class gameController : MonoBehaviour {
     public static bool isSettingsPanelSpawned = false;
     public static bool isShopPanelSpawned = false;
 
+    public static bool isShopDialogSpawned = false;
+
     private void Awake()
     {
         //静态变量_panel
@@ -85,6 +87,8 @@ public class gameController : MonoBehaviour {
         isStuffPanelSpawned = false;
         isSettingsPanelSpawned = false;
         isShopPanelSpawned = false;
+
+        isShopDialogSpawned = false;
 
         //保留的游戏物件
         DontDestroyOnLoad(gameObject);
