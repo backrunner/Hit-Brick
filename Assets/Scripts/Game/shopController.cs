@@ -18,9 +18,9 @@ public class shopController : MonoBehaviour {
     private void Start()
     {
         //初始化三个商品
-        shopItems.Add(new ShopItem("addlife", "增加初始生命1点", 5000));
-        shopItems.Add(new ShopItem("addball","开局增加1个球",3500));
-        shopItems.Add(new ShopItem("magnet", "可触发1次的磁铁", 3500));
+        shopItems.Add(new ShopItem("addlife", "增加初始生命1点", 5000, getShopItemStatus("addlife")));
+        shopItems.Add(new ShopItem("addball","开局增加1个球",3500, getShopItemStatus("addball")));
+        shopItems.Add(new ShopItem("magnet", "每局可触发1次的磁铁", 3500, getShopItemStatus("magnet")));
     }
 
     //刷新img的状态
@@ -39,6 +39,21 @@ public class shopController : MonoBehaviour {
                 t.a = 0;
             }
             img.color = t;
+        }
+    }
+
+    //获取商品状态
+    public static bool getShopItemStatus(string name)
+    {
+        return Save.getBool("shopitem_" + name + "_status");
+    }
+
+    //保存商品状态
+    public static void saveShopItemStatus()
+    {
+        foreach(ShopItem item in shopItems)
+        {
+            Save.setBool("shopitem_" + item.name + "_status",item.soldout);
         }
     }
 }

@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Save : MonoBehaviour {
 
@@ -29,8 +30,42 @@ public class Save : MonoBehaviour {
             return 0;
         }
     }
+
+    public static bool getBool(string key)
+    {
+        if (PlayerPrefs.HasKey(Encryption.SHA512(key)))
+        {
+            string data = PlayerPrefs.GetString(Encryption.SHA512(key));
+            if (Encryption.decrypt_aes(data.Trim()) == "true")
+            {
+                return true;
+            } else
+            {
+                return false;
+            }
+        }
+        return false;
+    }
+
+    public static void setBool(string key,bool value)
+    {
+        if (value)
+        {
+            PlayerPrefs.SetString(Encryption.SHA512(key), Encryption.encrypt_aes("true"));
+        } else
+        {
+            PlayerPrefs.SetString(Encryption.SHA512(key), Encryption.encrypt_aes("false"));
+        }
+    }
+
     public static bool checkKey(string key)
     {
         return PlayerPrefs.HasKey(Encryption.SHA512(key));
+    }
+
+    public static void purge()
+    {
+        PlayerPrefs.DeleteAll();
+        SceneManager.LoadSceneAsync(0);
     }
 }

@@ -109,6 +109,7 @@ GameObject:
   - component: {fileID: 222336918268583636}
   - component: {fileID: 114579774477842962}
   - component: {fileID: 114159685353643690}
+  - component: {fileID: 114354773368452528}
   m_Layer: 5
   m_Name: btn_clearsave
   m_TagString: Untagged
@@ -310,6 +311,19 @@ MonoBehaviour:
     m_VerticalOverflow: 0
     m_LineSpacing: 1
   m_Text: "\u5F53\u524D\u73A9\u5BB6\uFF1A"
+--- !u!114 &114354773368452528
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1957779854203200}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e03482480b4c3f942be1ae735b3291af, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  panel_settings_dialog: {fileID: 1528922247348484, guid: e4f87984b36388c489ff0294548bb5f5,
+    type: 2}
 --- !u!114 &114440896921337688
 MonoBehaviour:
   m_ObjectHideFlags: 1

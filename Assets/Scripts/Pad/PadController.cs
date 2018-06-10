@@ -50,15 +50,7 @@ public class PadController : MonoBehaviour
     void Start()
     {
         //初始化canvas
-        if (levelController.canvas == null)
-        {
-            canvas = GameObject.Find("Canvas");
-            levelController.canvas = canvas;
-        }
-        else
-        {
-            canvas = levelController.canvas;
-        }
+        canvas = levelController.canvas;
     }
 
     // Update is called once per frame
@@ -127,6 +119,10 @@ public class PadController : MonoBehaviour
             }
             else
             {
+                while (canvas == null)
+                {
+                    canvas = levelController.canvas;
+                }
                 Transform t = canvas.transform.Find("Text_waitforLaunch");
                 if (t != null)
                 {

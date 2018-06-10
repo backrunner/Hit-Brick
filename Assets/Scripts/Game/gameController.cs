@@ -56,6 +56,7 @@ public class gameController : MonoBehaviour {
     public static bool isShopPanelSpawned = false;
 
     public static bool isShopDialogSpawned = false;
+    public static bool isSettingsDialogSpawned = false;
 
     private void Awake()
     {
@@ -89,6 +90,7 @@ public class gameController : MonoBehaviour {
         isShopPanelSpawned = false;
 
         isShopDialogSpawned = false;
+        isSettingsDialogSpawned = false;
 
         //保留的游戏物件
         DontDestroyOnLoad(gameObject);
@@ -159,6 +161,7 @@ public class gameController : MonoBehaviour {
                 ctrl.index = i; //设置序号
                 //coin
                 Text txt_coin = panel_selectLevel_inscene.transform.Find("txt_coin").gameObject.GetComponent<Text>();
+                playerController.txt_selectLevel_coin_inscene = txt_coin;
                 txt_coin.text = playerController.coin.ToString();
             }
             //设置content高度

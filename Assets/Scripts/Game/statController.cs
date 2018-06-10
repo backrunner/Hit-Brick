@@ -25,57 +25,40 @@ public class statController : MonoBehaviour {
 
     void initStatData()
     {
-        hollowBrickCount = getData("hollowBrickCount");
-        normalBrickCount = getData("normalBrickCount");
-        hardBrickCount = getData("hardBrickCount");
-        propPickedCount = getData("propPickedCount");
-        deadBallCount = getData("deadBallCount");
-        pauseCount = getData("pauseCount");
-        levelplayCount = getData("levelplayCount");
-        gameoverCount = getData("gameoverCount");
-        clearCount = getData("clearCount");
+        hollowBrickCount = Save.getData("hollowBrickCount");
+        normalBrickCount = Save.getData("normalBrickCount");
+        hardBrickCount = Save.getData("hardBrickCount");
+        propPickedCount = Save.getData("propPickedCount");
+        deadBallCount = Save.getData("deadBallCount");
+        pauseCount = Save.getData("pauseCount");
+        levelplayCount = Save.getData("levelplayCount");
+        gameoverCount = Save.getData("gameoverCount");
+        clearCount = Save.getData("clearCount");
     }
 
     public static void refreshData()
     {
-        hollowBrickCount = getData("hollowBrickCount");
-        normalBrickCount = getData("normalBrickCount");
-        hardBrickCount = getData("hardBrickCount");
-        propPickedCount = getData("propPickedCount");
-        deadBallCount = getData("deadBallCount");
-        pauseCount = getData("pauseCount");
-        levelplayCount = getData("levelplayCount");
-        gameoverCount = getData("gameoverCount");
-        clearCount = getData("clearCount");
+        hollowBrickCount = Save.getData("hollowBrickCount");
+        normalBrickCount = Save.getData("normalBrickCount");
+        hardBrickCount = Save.getData("hardBrickCount");
+        propPickedCount = Save.getData("propPickedCount");
+        deadBallCount = Save.getData("deadBallCount");
+        pauseCount = Save.getData("pauseCount");
+        levelplayCount = Save.getData("levelplayCount");
+        gameoverCount = Save.getData("gameoverCount");
+        clearCount = Save.getData("clearCount");
     }
 
     public static void saveData()
     {
-        setData("hollowBrickCount", hollowBrickCount);
-        setData("normalBrickCount", normalBrickCount);
-        setData("hardBrickCount", hardBrickCount);
-        setData("propPickedCount", propPickedCount);
-        setData("deadBallCount", deadBallCount);
-        setData("pauseCount", pauseCount);
-        setData("levelplayCount", levelplayCount);
-        setData("gameoverCount", gameoverCount);
-        setData("clearCount", clearCount);
-    }
-
-    private static void setData(string key,long data)
-    {
-        PlayerPrefs.SetString(key, data.ToString().Trim());
-    }
-
-    private static long getData(string key)
-    {
-        if (PlayerPrefs.HasKey(key))
-        {
-            string data =  PlayerPrefs.GetString(key);
-            return long.Parse(data);
-        } else
-        {
-            return 0;
-        }
+        Save.setData("hollowBrickCount", hollowBrickCount);
+        Save.setData("normalBrickCount", normalBrickCount);
+        Save.setData("hardBrickCount", hardBrickCount);
+        Save.setData("propPickedCount", propPickedCount);
+        Save.setData("deadBallCount", deadBallCount);
+        Save.setData("pauseCount", pauseCount);
+        Save.setData("levelplayCount", levelplayCount);
+        Save.setData("gameoverCount", gameoverCount);
+        Save.setData("clearCount", clearCount);
     }
 }

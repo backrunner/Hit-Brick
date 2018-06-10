@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class playerController : MonoBehaviour
 {
@@ -8,6 +9,8 @@ public class playerController : MonoBehaviour
     //货币
     public static long coin;
     public static long targetcoin;
+
+    public static Text txt_selectLevel_coin_inscene;
 
     void Awake()
     {
@@ -33,5 +36,14 @@ public class playerController : MonoBehaviour
     public static void saveData()
     {
         Save.setData("coin", coin);
+        refreshText();
+    }
+
+    public static void refreshText()
+    {
+        if (txt_selectLevel_coin_inscene != null)
+        {
+            txt_selectLevel_coin_inscene.text = coin.ToString();
+        }
     }
 }

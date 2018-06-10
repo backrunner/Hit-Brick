@@ -125,6 +125,10 @@ public class levelController : MonoBehaviour
     public static long timeReward;
     public static long timeRewardLimit;
 
+    //shop item
+    public GameObject magnet_child;
+    public bool isMagnetUsed;
+
     //time
     public static float currentTime;
 
@@ -206,6 +210,8 @@ public class levelController : MonoBehaviour
         currentBall = null;
         currentTime = 0;
 
+        isMagnetUsed = false;
+
         //调整渲染camera
         try
         {
@@ -248,6 +254,31 @@ public class levelController : MonoBehaviour
             {
                 //计时
                 currentTime += Time.deltaTime;
+            }
+        }
+        //检查商店event
+        event_item_magnet();
+    }
+
+    //商品磁铁
+    private void event_item_magnet()
+    {
+        if (Input.GetButton("Use Prop"))
+        {
+            ShopItem item = (ShopItem)shopController.shopItems[2];
+            if (item.soldout && !isMagnetUsed)
+            {
+                Transform child_trans = pad.transform.Find("Prop_magnet_child(Clone)");
+                if (child_trans == null)
+                {
+                    Instantiate(magnet_child, pad.transform);
+                }
+                else
+                {
+                    Prop_magnet_child ctrl = child_trans.gameObject.GetComponent<Prop_magnet_child>();
+                    ctrl.resetLiveTime();
+                }
+                isMagnetUsed = true;
             }
         }
     }
@@ -380,8 +411,8 @@ public class levelController : MonoBehaviour
                     //添加reward
                     ctrl.addReward("base", baseReward);
                     playerController.targetcoin += baseReward;  //更新数据                    
-                    if (randomReward > 0) {
-                        long randReward = UnityEngine.Random.Range(0, (int)((randomReward) / 10)) * 10;
+                    long randReward = UnityEngine.Random.Range(0, (int)((randomReward) / 10)) * 10;
+                    if (randomReward > 0) {                        
                         ctrl.addReward("random", randReward);
                         playerController.targetcoin += randReward;  //更新数据
                     }

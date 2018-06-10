@@ -177,6 +177,7 @@ GameObject:
   - component: {fileID: 224874730779488506}
   - component: {fileID: 222385833905207988}
   - component: {fileID: 114663807507442360}
+  - component: {fileID: 114150062865062298}
   m_Layer: 5
   m_Name: txt_coin
   m_TagString: Untagged
@@ -561,7 +562,18 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "\u53EF\u89E6\u53D11\u6B21\u7684\u78C1\u94C1"
+  m_Text: "\u6BCF\u5C40\u53EF\u89E6\u53D11\u6B21\u7684\u78C1\u94C1"
+--- !u!114 &114150062865062298
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1355953269359720}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3e1802e5d026f04418b0850297921c74, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &114158327916977696
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1451,7 +1463,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 23.384}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 3, y: -74}
+  m_AnchoredPosition: {x: 3, y: -73.99999}
   m_SizeDelta: {x: 409.1, y: 163.7}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &224199873044504036

@@ -45,36 +45,60 @@ public class anim_coinreward : MonoBehaviour
     {
         target = number;
         trigger = true;
-        if (target - current <= 10)
+        if (Mathf.Abs(target - current) <= 10)
         {
             delta = 1;
         }
         else
         {
-            if (target - current <= 50)
+            if (Mathf.Abs(target - current) <= 50)
             {
                 delta = 3;
             }
             else
             {
-                if (target - current <= 200)
+                if (Mathf.Abs(target - current) <= 200)
                 {
                     delta = 7;
                 }
                 else
                 {
-                    delta = 17;
+                    if (Mathf.Abs(target - current) <= 2000)
+                    {
+                        delta = 17;
+                    }
+                    else
+                    {
+                        delta = 73;
+                    }
                 }
             }
+        }
+        if (target - current < 0)
+        {
+            delta = -delta;
         }
     }
 
     //加数
     private void forward()
     {
-        if (trigger)
+        if (trigger && delta > 0)
         {
             if (current < target)
+            {
+                current += delta;
+            }
+            else
+            {
+                current = target;
+                trigger = false;
+            }
+            text.text = current.ToString();
+        }
+        if (trigger && delta < 0)
+        {
+            if (current > target)
             {
                 current += delta;
             }
