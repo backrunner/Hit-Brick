@@ -118,12 +118,12 @@ public class levelController : MonoBehaviour
     public long _baseReward_gameover;
     public long _randomReward;
     public long _timeReward;
-    public long _timeRewardLimit;
+    public float _timeRewardLimit;
     public static long baseReward;
     public static long baseReward_gameover;
     public static long randomReward;
     public static long timeReward;
-    public static long timeRewardLimit;
+    public static float timeRewardLimit;
 
     //shop item
     public GameObject magnet_child;

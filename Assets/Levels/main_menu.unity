@@ -401,12 +401,12 @@ Prefab:
     - target: {fileID: 114993991956417870, guid: d41ddc22423929942995997cd1fb5724,
         type: 2}
       propertyPath: _levels.Array.size
-      value: 2
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 114993991956417870, guid: d41ddc22423929942995997cd1fb5724,
         type: 2}
       propertyPath: _levels_filename.Array.size
-      value: 2
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 4875869568438150, guid: d41ddc22423929942995997cd1fb5724, type: 2}
       propertyPath: m_LocalPosition.x
@@ -445,16 +445,6 @@ Prefab:
       propertyPath: _eventSystem
       value: 
       objectReference: {fileID: 606428518}
-    - target: {fileID: 114993991956417870, guid: d41ddc22423929942995997cd1fb5724,
-        type: 2}
-      propertyPath: _levels.Array.data[1]
-      value: "\u7B2C1\u5173"
-      objectReference: {fileID: 0}
-    - target: {fileID: 114993991956417870, guid: d41ddc22423929942995997cd1fb5724,
-        type: 2}
-      propertyPath: _levels_filename.Array.data[1]
-      value: l_1
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: d41ddc22423929942995997cd1fb5724, type: 2}
   m_IsPrefabParent: 0

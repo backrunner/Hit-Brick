@@ -112,6 +112,7 @@ MonoBehaviour:
   _timeRewardLimit: 2
   magnet_child: {fileID: 1268708725431390, guid: 367f1f9ac6c07cd47a14f2f1c405d86f,
     type: 2}
+  isMagnetUsed: 0
 --- !u!114 &114673347323340066
 MonoBehaviour:
   m_ObjectHideFlags: 1

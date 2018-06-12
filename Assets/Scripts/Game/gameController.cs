@@ -140,12 +140,12 @@ public class gameController : MonoBehaviour {
     {
         GameObject bg = Instantiate(img_bgblock_group, canvas.transform);
         bgblockList.Add(bg);
-        Debug.Log(currentLevelIndex);
+        //Debug.Log(currentLevelIndex);
         bg.transform.position = new Vector3(0, 0, 0);
         bg.transform.SetSiblingIndex(0);
         Animation anim = thisgameObj.GetComponent<Animation>();
         anim.Play("anim_bgblock_opacity");
-        Debug.Log("ok");
+        //Debug.Log("ok");
     }
 
     public static void clearBg()

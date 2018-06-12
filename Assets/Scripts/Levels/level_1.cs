@@ -2,10 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class level_1 : MonoBehaviour {
-
-    public GameObject normalBrick;
-
+public class level_1 : Level {
+      
     private float targetAngle = 0;
 
 	void Start () {

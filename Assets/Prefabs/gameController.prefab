@@ -130,5 +130,9 @@ MonoBehaviour:
   bgblock_opacity: 0
   _levels:
   - "\u6D4B\u8BD5\u5173\u5361"
+  - "\u7B2C1\u5173"
+  - "\u7B2C2\u5173"
   _levels_filename:
   - l_test
+  - l_1
+  - l_2
