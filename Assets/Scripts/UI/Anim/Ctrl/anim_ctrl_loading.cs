@@ -42,6 +42,7 @@ public class anim_ctrl_loading : MonoBehaviour
             else
             {
                 progress = SceneManager.LoadSceneAsync(0);
+                levelIndex = 0;
                 //清空物件
                 Destroy(gameController.eventSystem);
                 Destroy(gameController.panel_mainMenu_inscene);
@@ -50,10 +51,12 @@ public class anim_ctrl_loading : MonoBehaviour
         }
         else
         {
-            progress = SceneManager.LoadSceneAsync(filename);
+            progress = SceneManager.LoadSceneAsync(filename);            
         }
         Destroy(gameController.panel_selectLevel_inscene);
         gameController.isSelectLevelSpawned = false;    //重置开关
+        //清空背景
+        gameController.clearBg();
         StartCoroutine(loadScene());
     }
 
@@ -100,6 +103,13 @@ public class anim_ctrl_loading : MonoBehaviour
         anim.Play("anim_panel_loading_out");
         //跳转
         progress.allowSceneActivation = true;
+        yield return new WaitForFixedUpdate();
+        gameController.currentLevelIndex = SceneManager.GetActiveScene().buildIndex;
+        if (gameController.currentLevelIndex == 2)
+        {
+            //重绘背景
+            gameController.displayBg();
+        }
     }
 
 }

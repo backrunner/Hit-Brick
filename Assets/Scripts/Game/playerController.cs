@@ -20,12 +20,12 @@ public class playerController : MonoBehaviour
         if (Save.checkKey("coin"))
         {
             coin = Save.getData("coin");
-            Debug.Log("get");
+            //Debug.Log("get");
         }
         else
         {
             Save.setData("coin", 0);
-            Debug.Log("reset");
+            //Debug.Log("reset");
         }
 
         //init target

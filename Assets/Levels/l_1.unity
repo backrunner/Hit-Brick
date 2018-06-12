@@ -624,12 +624,12 @@ Prefab:
     - target: {fileID: 114484970607445636, guid: 2683ade7ea4e8054aa2ee228c476cb21,
         type: 2}
       propertyPath: _level_name
-      value: "\u6D4B\u8BD5\u5173\u5361"
+      value: "\u7B2C1\u5173"
       objectReference: {fileID: 0}
     - target: {fileID: 114484970607445636, guid: 2683ade7ea4e8054aa2ee228c476cb21,
         type: 2}
       propertyPath: _level_filename
-      value: l_test
+      value: l_1
       objectReference: {fileID: 0}
     - target: {fileID: 114484970607445636, guid: 2683ade7ea4e8054aa2ee228c476cb21,
         type: 2}

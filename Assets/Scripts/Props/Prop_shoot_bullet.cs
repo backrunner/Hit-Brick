@@ -27,7 +27,7 @@ public class Prop_shoot_bullet : MonoBehaviour {
         //处理加速度
         if (addSpeed != 0)
         {
-            moveSpeed += addSpeed;
+            moveSpeed += addSpeed * Random.Range(0.75f,1.35f);
         }
         //清除屏幕外的obj
         if (transform.position.y >= 5.5f)

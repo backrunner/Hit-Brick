@@ -24,6 +24,7 @@ GameObject:
   - component: {fileID: 114151831472302908}
   - component: {fileID: 114931971402166374}
   - component: {fileID: 114959479998818474}
+  - component: {fileID: 111288205251194916}
   m_Layer: 0
   m_Name: gameController
   m_TagString: Untagged
@@ -44,6 +45,21 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!111 &111288205251194916
+Animation:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1441231818177696}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Animation: {fileID: 0}
+  m_Animations:
+  - {fileID: 7400000, guid: d9078d303a7db574d99c7152f723b03e, type: 2}
+  m_WrapMode: 0
+  m_PlayAutomatically: 0
+  m_AnimatePhysics: 0
+  m_CullingType: 0
 --- !u!114 &114151831472302908
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -109,5 +125,10 @@ MonoBehaviour:
     type: 2}
   _panel_settings: {fileID: 1984207587245962, guid: 0f9a65e9ba6f72447a44397f2cd227a3,
     type: 2}
-  _levels: []
-  _levels_filename: []
+  _img_bgblock_group: {fileID: 1984270530135808, guid: a065ba62157a3484294c2b8d6ef5674a,
+    type: 2}
+  bgblock_opacity: 0
+  _levels:
+  - "\u6D4B\u8BD5\u5173\u5361"
+  _levels_filename:
+  - l_test

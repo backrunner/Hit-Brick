@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class gameController : MonoBehaviour {
 
@@ -36,6 +37,12 @@ public class gameController : MonoBehaviour {
     public static GameObject panel_settings_inscene;
     public static GameObject panel_shop_inscene;
 
+    public GameObject _img_bgblock_group;
+    public static GameObject img_bgblock_group;
+    public float bgblock_opacity;
+
+    public static ArrayList bgblockList;
+
     //关卡
     public string[] _levels;
     public static string[] levels;
@@ -65,13 +72,26 @@ public class gameController : MonoBehaviour {
         panel_selectLevel = _panel_selectLevel;
         panel_stuff = _panel_stuff;
         panel_settings = _panel_settings;
+
+        img_bgblock_group = _img_bgblock_group;
+
         //静态变量
         btn_level = _btn_level;
         eventSystem = _eventSystem;
         thisgameObj = gameObject;
+
         //初始化关卡列表
         levels = _levels;
         levels_filename = _levels_filename;
+
+        bgblockList = new ArrayList();
+
+        //init currentLevelIndex
+        currentLevelIndex = SceneManager.GetActiveScene().buildIndex;
+
+        //bgblock
+        bgblock_opacity = 0;
+
         //Prefs
         isInited = PlayerPrefs.HasKey("player_name");        
         if (isInited)
@@ -106,10 +126,30 @@ public class gameController : MonoBehaviour {
         //已初始化
         if (isInited)
         {
+            //显示背景
+            displayBg();
             //显示主菜单
-            displayMainMenu();
+            displayMainMenu();            
         }       
 	}
+
+    public static void displayBg()
+    {
+        GameObject bg = Instantiate(img_bgblock_group, canvas.transform);
+        bgblockList.Add(bg);
+        bg.transform.position = new Vector3(0, 0, 0);
+        bg.transform.SetSiblingIndex(0);
+        Animation anim = thisgameObj.GetComponent<Animation>();
+        anim.Play("anim_bgblock_opacity");      
+    }
+
+    public static void clearBg()
+    {
+        foreach (GameObject obj in bgblockList)
+        {
+            Destroy(obj);
+        }
+    }
 
     public static void setPlayerName(string name)
     {
