@@ -66,6 +66,8 @@ public class Save : MonoBehaviour {
     public static void purge()
     {
         PlayerPrefs.DeleteAll();
+        Destroy(gameController.eventSystem);
+        Destroy(gameController.thisgameObj);
         SceneManager.LoadSceneAsync(0);
     }
 }

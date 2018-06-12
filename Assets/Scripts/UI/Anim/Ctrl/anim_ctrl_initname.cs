@@ -14,6 +14,7 @@ public class anim_ctrl_initname : MonoBehaviour {
 
     public void closeAnimFinished()
     {
-        gameController.displayMainMenu();
+        gameController.displayBg();
+        gameController.displayMainMenu();        
     }
 }
