@@ -105,7 +105,7 @@ public class anim_ctrl_loading : MonoBehaviour
         progress.allowSceneActivation = true;
         yield return new WaitForFixedUpdate();
         gameController.currentLevelIndex = SceneManager.GetActiveScene().buildIndex;
-        if (gameController.currentLevelIndex == 2)
+        if (gameController.currentLevelIndex == 1 || gameController.currentLevelIndex == 2)
         {
             //重绘背景
             gameController.displayBg();

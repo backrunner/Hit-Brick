@@ -644,6 +644,24 @@ GameObject:
   m_PrefabParentObject: {fileID: 1573796427338626, guid: 1c969572b6f2f1549b5a1ffc02b7527b,
     type: 2}
   m_PrefabInternal: {fileID: 860474656}
+--- !u!1 &1326280300 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1333407394828428, guid: 2683ade7ea4e8054aa2ee228c476cb21,
+    type: 2}
+  m_PrefabInternal: {fileID: 1289246800}
+--- !u!114 &1326280301
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1326280300}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7ff48532f5267e943a4f04f7424a21e3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  normalBrick: {fileID: 1448902725853222, guid: c32c4654e6437d74b9e56a803ef04bf1,
+    type: 2}
 --- !u!114 &1532404763 stripped
 MonoBehaviour:
   m_PrefabParentObject: {fileID: 114237655927081836, guid: 1c969572b6f2f1549b5a1ffc02b7527b,

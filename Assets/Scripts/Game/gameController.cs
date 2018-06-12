@@ -114,7 +114,7 @@ public class gameController : MonoBehaviour {
 
         //保留的游戏物件
         DontDestroyOnLoad(gameObject);
-        DontDestroyOnLoad(eventSystem);
+        DontDestroyOnLoad(eventSystem);        
     }
 
     void Start () {
@@ -123,6 +123,9 @@ public class gameController : MonoBehaviour {
         {
             canvas = GameObject.Find("Canvas");
         }
+        //调整camera
+        Canvas canvas_ctrl = canvas.GetComponent<Canvas>();
+        canvas_ctrl.worldCamera = Camera.main;
         //已初始化
         if (isInited)
         {
@@ -137,10 +140,12 @@ public class gameController : MonoBehaviour {
     {
         GameObject bg = Instantiate(img_bgblock_group, canvas.transform);
         bgblockList.Add(bg);
+        Debug.Log(currentLevelIndex);
         bg.transform.position = new Vector3(0, 0, 0);
         bg.transform.SetSiblingIndex(0);
         Animation anim = thisgameObj.GetComponent<Animation>();
-        anim.Play("anim_bgblock_opacity");      
+        anim.Play("anim_bgblock_opacity");
+        Debug.Log("ok");
     }
 
     public static void clearBg()

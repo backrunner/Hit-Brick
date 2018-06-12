@@ -24,7 +24,7 @@ public class btn_clear_next : MonoBehaviour {
             GameObject panel_in_scene = Instantiate(panel_loading, canvas.transform);
             //读取下一关卡
             anim_ctrl_loading ctrl = panel_in_scene.GetComponent<anim_ctrl_loading>();
-            ctrl.levelIndex = gameController.currentLevelIndex + gameController.levelindexoffset + 1;
+            ctrl.levelIndex = gameController.currentLevelIndex + 1;
             gameController.isLoadingPanelSpawned = true;
             //stat
             statController.saveData();
