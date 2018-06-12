@@ -401,12 +401,12 @@ Prefab:
     - target: {fileID: 114993991956417870, guid: d41ddc22423929942995997cd1fb5724,
         type: 2}
       propertyPath: _levels.Array.size
-      value: 3
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 114993991956417870, guid: d41ddc22423929942995997cd1fb5724,
         type: 2}
       propertyPath: _levels_filename.Array.size
-      value: 3
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 4875869568438150, guid: d41ddc22423929942995997cd1fb5724, type: 2}
       propertyPath: m_LocalPosition.x
