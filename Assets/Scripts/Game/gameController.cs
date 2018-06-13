@@ -93,11 +93,11 @@ public class gameController : MonoBehaviour {
         bgblock_opacity = 0;
 
         //Prefs
-        isInited = PlayerPrefs.HasKey("player_name");        
+        isInited = Save.checkKey("player_name");        
         if (isInited)
         {
             //读入玩家信息
-            player_name = PlayerPrefs.GetString("player_name"); //玩家名称
+            player_name = Save.getString("player_name"); //玩家名称
         }
 
         //初始化开关
@@ -158,7 +158,7 @@ public class gameController : MonoBehaviour {
 
     public static void setPlayerName(string name)
     {
-        PlayerPrefs.SetString("player_name", name);
+        Save.setData("player_name", name);
         player_name = name;
     }
 
@@ -189,9 +189,9 @@ public class gameController : MonoBehaviour {
                 Text text = text_obj.GetComponent<Text>();
                 text.text = levels[i];
                 //设置clear图片
-                if (PlayerPrefs.HasKey("clearedLevel"))
+                if (Save.checkKey("clearedLevel"))
                 {
-                    string clearedlevel = PlayerPrefs.GetString("clearedLevel");
+                    string clearedlevel = Save.getString("clearedLevel");
                     if (clearedlevel.Contains(levels_filename[i]))
                     {
                         GameObject img_clear = btn.transform.Find("img_clear").gameObject;

@@ -6,7 +6,7 @@ public class Prop_powerful_child : MonoBehaviour {
 
     //持续时间
     public float liveTime;
-    private float originLiveTime;
+    public float originLiveTime;
     //ball
     private GameObject ball;
     private ballController ctrl;
@@ -49,9 +49,14 @@ public class Prop_powerful_child : MonoBehaviour {
 		if (liveTime > 0)
         {
             liveTime -= Time.deltaTime;
+            levelController.currentPowerfulTime = liveTime;
         } else
         {
+            //调整状态
             ctrl.isPowerful = false;
+            //调整开关
+            levelController.isPowerfulOn = false;
+            levelController.currentPowerfulTime = 0;
             //还原砖块的碰撞参数
             for (int i = 0; i < levelController.bricks.Count; i++)
             {
@@ -83,6 +88,7 @@ public class Prop_powerful_child : MonoBehaviour {
     public void resetLiveTime()
     {
         liveTime = originLiveTime;
+        levelController.currentPowerfulTime = originLiveTime;
     }
 
 }

@@ -145,7 +145,7 @@ public class PadController : MonoBehaviour
     {
         if (targetScale < maxScale)
         {
-            Debug.Log("Change");
+            //Debug.Log("Change");
             if (targetScale >= 1)
             {
                 targetScale += deltaScale * maxScaleMulti;
@@ -167,7 +167,7 @@ public class PadController : MonoBehaviour
     {
         if (targetScale > minScale)
         {
-            Debug.Log("Change");
+            //Debug.Log("Change");
             if (targetScale <= 1)
             {
                 targetScale -= deltaScale * minScaleMulti;

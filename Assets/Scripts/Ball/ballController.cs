@@ -169,6 +169,12 @@ public class ballController : MonoBehaviour
             rigid.AddRelativeForce(new Vector3(0, initMoveSpeed, 0));
             //开启ball的trail render
             StartCoroutine(delayToEnableTrailRender(0.1f));
+
+            //powerful检查
+            if (levelController.isPowerfulOn)
+            {
+                enablePowerful(levelController.currentPowerfulTime);
+            }
         }
     }
 
@@ -339,6 +345,25 @@ public class ballController : MonoBehaviour
         else
         {
             Instantiate(powerful_child, transform);
+        }
+        //修改开关
+        levelController.isPowerfulOn = true;
+    }
+    public void enablePowerful(float time)
+    {
+        //检测重复物体
+        Transform child = transform.Find("Prop_powerful_child(Clone)");
+        if (child != null)
+        {
+            //存在重复，重置时间
+            Prop_powerful_child ctrl = child.gameObject.GetComponent<Prop_powerful_child>();
+            ctrl.liveTime = time;
+        }
+        else
+        {
+            GameObject obj = Instantiate(powerful_child, transform);
+            Prop_powerful_child ctrl = obj.GetComponent<Prop_powerful_child>();
+            ctrl.liveTime = time;
         }
     }
 

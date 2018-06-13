@@ -31,6 +31,19 @@ public class Save : MonoBehaviour {
         }
     }
 
+    public static string getString(string key)
+    {
+        if (PlayerPrefs.HasKey(Encryption.SHA512(key)))
+        {
+            string data = PlayerPrefs.GetString(Encryption.SHA512(key));
+            return Encryption.decrypt_aes(data);
+        }
+        else
+        {
+            return null;
+        }
+    }
+
     public static bool getBool(string key)
     {
         if (PlayerPrefs.HasKey(Encryption.SHA512(key)))

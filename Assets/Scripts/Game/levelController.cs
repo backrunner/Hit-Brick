@@ -73,6 +73,9 @@ public class levelController : MonoBehaviour
     public static ArrayList ballList;
     //球初始y轴偏移量
     public static float ballInitOffset;
+    //全局Powerful
+    public static bool isPowerfulOn;
+    public static float currentPowerfulTime;
 
     //砖块
     public static ArrayList bricks;
@@ -389,18 +392,18 @@ public class levelController : MonoBehaviour
                 statController.saveData();
                 Debug.Log("Clear!");
                 //记录clear
-                if (PlayerPrefs.HasKey("clearedLevel"))
+                if (Save.checkKey("clearedLevel"))
                 {
-                    string clearedlevel = PlayerPrefs.GetString("clearedLevel");
+                    string clearedlevel = Save.getString("clearedLevel");
                     if (!clearedlevel.Contains(level_filename))
                     {
                         clearedlevel += "," + level_filename;
-                        PlayerPrefs.SetString("clearedLevel", clearedlevel);
+                        Save.setData("clearedLevel", clearedlevel);
                     }
                 }
                 else
                 {
-                    PlayerPrefs.SetString("clearedLevel", level_filename);
+                    Save.setData("clearedLevel", level_filename);
                 }
                 //Clear UI
                 if (panel_clear_inscene == null)
