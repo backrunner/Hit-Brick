@@ -21,6 +21,10 @@ public class btn_shop_dialog_confirm : MonoBehaviour {
     {
         panel = transform.parent.parent.gameObject;
         Animation anim = panel.GetComponent<Animation>();
+        if (anim.isPlaying)
+        {
+            return;
+        }
         anim_ctrl_shop_dialog ctrl = anim.GetComponent<anim_ctrl_shop_dialog>();    //控制器
         ctrl.index = index; //传递index
         ctrl.soldout = true;    //开关

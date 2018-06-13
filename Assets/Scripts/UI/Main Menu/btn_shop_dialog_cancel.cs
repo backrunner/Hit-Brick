@@ -18,6 +18,10 @@ public class btn_shop_dialog_cancel : MonoBehaviour {
     {
         panel = transform.parent.parent.gameObject;
         Animation anim = panel.GetComponent<Animation>();
+        if (anim.isPlaying)
+        {
+            return;
+        }
         anim.Play("anim_panel_shop_dialog_out");
     }
 }

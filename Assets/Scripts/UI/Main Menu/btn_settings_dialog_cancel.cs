@@ -18,6 +18,10 @@ public class btn_settings_dialog_cancel : MonoBehaviour {
 	public void onClick()
     {
         Animation anim = panel.GetComponent<Animation>();
+        if (anim.isPlaying)
+        {
+            return;
+        }
         anim.Play("anim_panel_settings_dialog_out");
     }
 }
