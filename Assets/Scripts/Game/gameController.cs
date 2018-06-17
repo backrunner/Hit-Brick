@@ -4,7 +4,8 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
-public class gameController : MonoBehaviour {
+public class gameController : MonoBehaviour
+{
 
     public static GameObject thisgameObj;
 
@@ -48,6 +49,8 @@ public class gameController : MonoBehaviour {
     public static string[] levels;
     public string[] _levels_filename;
     public static string[] levels_filename;
+    public string[] _levels_unlock;
+    public static string[] levels_unlock;
 
     //关卡索引
     public static int currentLevelIndex;
@@ -83,6 +86,7 @@ public class gameController : MonoBehaviour {
         //初始化关卡列表
         levels = _levels;
         levels_filename = _levels_filename;
+        levels_unlock = _levels_unlock;
 
         bgblockList = new ArrayList();
 
@@ -93,7 +97,7 @@ public class gameController : MonoBehaviour {
         bgblock_opacity = 0;
 
         //Prefs
-        isInited = Save.checkKey("player_name");        
+        isInited = Save.checkKey("player_name");
         if (isInited)
         {
             //读入玩家信息
@@ -114,10 +118,11 @@ public class gameController : MonoBehaviour {
 
         //保留的游戏物件
         DontDestroyOnLoad(gameObject);
-        DontDestroyOnLoad(eventSystem);        
+        DontDestroyOnLoad(eventSystem);
     }
 
-    void Start () {
+    void Start()
+    {
         //初始化
         if (canvas == null)
         {
@@ -132,9 +137,9 @@ public class gameController : MonoBehaviour {
             //显示背景
             displayBg();
             //显示主菜单
-            displayMainMenu();            
-        }       
-	}
+            displayMainMenu();
+        }
+    }
 
     public static void displayBg()
     {
@@ -176,32 +181,50 @@ public class gameController : MonoBehaviour {
         }
     }
 
-    public static void displaySelectLevel() {
+    public static void displaySelectLevel()
+    {
         if (!isSelectLevelSpawned && !isStuffPanelSpawned && !isSettingsPanelSpawned)
         {
             panel_selectLevel_inscene = Instantiate(panel_selectLevel, canvas.transform);
             //添加按钮
             GameObject content = panel_selectLevel_inscene.transform.Find("scroll_levels").Find("Viewport").Find("content_btns").gameObject;
+            string clearedlevel = "";
+            if (Save.checkKey("clearedLevel"))
+            {
+                clearedlevel = Save.getString("clearedLevel");
+            }
             for (int i = 0; i < levels.Length; i++)
             {
                 GameObject btn = Instantiate(btn_level, content.transform);
                 GameObject text_obj = btn.transform.Find("txt_btn_level").gameObject;
+                btn_level ctrl = btn.GetComponent<btn_level>();
                 Text text = text_obj.GetComponent<Text>();
                 text.text = levels[i];
-                //设置clear图片
-                if (Save.checkKey("clearedLevel"))
+
+                //检查unlock
+                if (levels_unlock[i] != null&&levels_unlock[i] != "")
                 {
-                    string clearedlevel = Save.getString("clearedLevel");
-                    if (clearedlevel.Contains(levels_filename[i]))
+                    if (!clearedlevel.Contains(levels_unlock[i]))
                     {
-                        GameObject img_clear = btn.transform.Find("img_clear").gameObject;
-                        Image img = img_clear.GetComponent<Image>();
+                        GameObject img_lock = btn.transform.Find("img_lock").gameObject;
+                        Image img = img_lock.GetComponent<Image>();
                         Color t = img.color;
                         t.a = 1;
                         img.color = t;
+                        ctrl.enabled = false;
                     }
                 }
-                btn_level ctrl = btn.GetComponent<btn_level>();
+
+                //设置clear图片
+                if (clearedlevel.Contains(levels_filename[i]))
+                {
+                    GameObject img_clear = btn.transform.Find("img_clear").gameObject;
+                    Image img = img_clear.GetComponent<Image>();
+                    Color t = img.color;
+                    t.a = 1;
+                    img.color = t;
+                }
+                
                 ctrl.filename = levels_filename[i];
                 ctrl.index = i; //设置序号
                 //coin
@@ -214,7 +237,8 @@ public class gameController : MonoBehaviour {
             if (levels.Length > 5)
             {
                 rect.sizeDelta = new Vector2(rect.sizeDelta.x, levels.Length * 148 - 48);
-            } else
+            }
+            else
             {
                 rect.sizeDelta = new Vector2(rect.sizeDelta.x, levels.Length * 148);
             }
