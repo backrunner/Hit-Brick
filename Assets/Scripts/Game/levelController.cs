@@ -408,6 +408,18 @@ public class levelController : MonoBehaviour
                 //Clear UI
                 if (panel_clear_inscene == null)
                 {
+                    //设置currentball
+                    if (currentBall == null && ballList.Count>0)
+                    {
+                        foreach(GameObject ball in ballList)
+                        {
+                            if (ball != null)
+                            {
+                                currentBall = ball;
+                                break;
+                            }
+                        }
+                    }
                     panel_clear_inscene = Instantiate(panel_clear, canvas.transform);
                     Animation anim = panel_clear_inscene.GetComponent<Animation>();
                     anim_ctrl_clear ctrl = panel_clear_inscene.GetComponent<anim_ctrl_clear>();   //控制                    

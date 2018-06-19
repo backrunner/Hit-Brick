@@ -80,6 +80,7 @@ public class Save : MonoBehaviour {
     {
         PlayerPrefs.DeleteAll();
         Destroy(gameController.eventSystem);
+        Destroy(gameController.canvas);
         Destroy(gameController.thisgameObj);
         SceneManager.LoadSceneAsync(0);
     }

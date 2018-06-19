@@ -18,14 +18,17 @@ public class obstacle_rotation : MonoBehaviour {
     }
 	
 	void Update () {
-        transform.rotation = Quaternion.Euler(0, 0, targetAngle);
-        if (isClockwise)
+        if (!levelController.isLevelPaused)
         {
-            targetAngle -= deltaAngle;
-        }
-        else
-        {
-            targetAngle += deltaAngle;
+            transform.rotation = Quaternion.Euler(0, 0, targetAngle);
+            if (isClockwise)
+            {
+                targetAngle -= deltaAngle;
+            }
+            else
+            {
+                targetAngle += deltaAngle;
+            }
         }
 	}
 }

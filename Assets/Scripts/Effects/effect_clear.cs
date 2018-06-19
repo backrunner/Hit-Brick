@@ -35,8 +35,14 @@ public class effect_clear : Effect {
         if (levelController.currentBall != null)
         {
             ball = levelController.currentBall;
-            Rigidbody2D rigidbody = ball.GetComponent<Rigidbody2D>();
-            rigidbody.drag = drag;
+            if (levelController.ballList.Count > 0)
+            {
+                foreach (GameObject obj in levelController.ballList)
+                {
+                    Rigidbody2D rigidbody = obj.GetComponent<Rigidbody2D>();
+                    rigidbody.drag = drag;
+                }                
+            }
         }
     }
 

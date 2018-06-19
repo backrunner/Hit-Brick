@@ -27,9 +27,17 @@ public class hardBrickController : brickController {
             Color t = randomColor();
             render.color = t;
             //粒子特效
-            GameObject launcher = Instantiate(particleLauncher, ball.transform.position, new Quaternion(0,0,0,0));
-            particle_hardBrick_rect_launcher ctrl = launcher.GetComponent<particle_hardBrick_rect_launcher>();
-            ctrl.particle_color = t;
+            if (ball != null)
+            {
+                GameObject launcher = Instantiate(particleLauncher, ball.transform.position, new Quaternion(0, 0, 0, 0));
+                particle_hardBrick_rect_launcher ctrl = launcher.GetComponent<particle_hardBrick_rect_launcher>();
+                ctrl.particle_color = t;
+            } else
+            {
+                GameObject launcher = Instantiate(particleLauncher, transform.position, new Quaternion(0, 0, 0, 0));
+                particle_hardBrick_rect_launcher ctrl = launcher.GetComponent<particle_hardBrick_rect_launcher>();
+                ctrl.particle_color = t;
+            }
         }
         else
         {
@@ -40,9 +48,17 @@ public class hardBrickController : brickController {
     public override void playDestoryParticle()
     {
         //刷新星星特效
-        GameObject launcher = Instantiate(particle_destory, ball.transform.position, new Quaternion(0, 0, 0, 0));
-        particle_hardBrick_star_launcher ctrl = launcher.GetComponent<particle_hardBrick_star_launcher>();
-        ctrl.particle_color = render.color;
+        if (ball != null)
+        {
+            GameObject launcher = Instantiate(particle_destory, ball.transform.position, new Quaternion(0, 0, 0, 0));
+            particle_hardBrick_star_launcher ctrl = launcher.GetComponent<particle_hardBrick_star_launcher>();
+            ctrl.particle_color = render.color;
+        } else
+        {
+            GameObject launcher = Instantiate(particle_destory, transform.position, new Quaternion(0, 0, 0, 0));
+            particle_hardBrick_star_launcher ctrl = launcher.GetComponent<particle_hardBrick_star_launcher>();
+            ctrl.particle_color = render.color;
+        }
     }
 
     public override void throwOutBrokenParts()
@@ -52,7 +68,13 @@ public class hardBrickController : brickController {
         broken.transform.localScale = transform.localScale;
         hardBrickBrokenController ctrl = broken.GetComponent<hardBrickBrokenController>();
         ctrl.brickColor = render.color;
-        ctrl.throwout(ball.transform.position);
+        if (ball != null)
+        {
+            ctrl.throwout(ball.transform.position);
+        } else
+        {
+            ctrl.throwout(transform.position);
+        }
     }
 
     public override void destroyBrick()

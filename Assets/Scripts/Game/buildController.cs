@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class buildController : MonoBehaviour {
 
-    public const string version = "Alpha 1_20180613";
-    public const string build = "4";
+    public const string version = "Alpha 1_20180620-Bug Rush";
+    public const string build = "6";
 
 }

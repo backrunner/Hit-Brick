@@ -54,8 +54,8 @@ public class Prop_shoot_launcher : MonoBehaviour {
             }
             else
             {
-                Instantiate(bullet, new Vector3(pad.transform.position.x + offset_x, pad.transform.position.y, pad.transform.position.z), new Quaternion(0, 0, 0, 0));
-                Instantiate(bullet, new Vector3(pad.transform.position.x - offset_x, pad.transform.position.y, pad.transform.position.z), new Quaternion(0, 0, 0, 0));
+                Instantiate(bullet, new Vector3(pad.transform.position.x + offset_x * pad.transform.localScale.x, pad.transform.position.y, pad.transform.position.z), new Quaternion(0, 0, 0, 0));
+                Instantiate(bullet, new Vector3(pad.transform.position.x - offset_x * pad.transform.localScale.x, pad.transform.position.y, pad.transform.position.z), new Quaternion(0, 0, 0, 0));
                 launchCooldown = launchRate;
             }
         }

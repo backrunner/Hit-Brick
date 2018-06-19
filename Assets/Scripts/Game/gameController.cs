@@ -201,28 +201,36 @@ public class gameController : MonoBehaviour
                 Text text = text_obj.GetComponent<Text>();
                 text.text = levels[i];
 
+                bool islocked = false;
+
                 //检查unlock
                 if (levels_unlock[i] != null&&levels_unlock[i] != "")
                 {
                     if (!clearedlevel.Contains(levels_unlock[i]))
                     {
+                        //设置lock图片
                         GameObject img_lock = btn.transform.Find("img_lock").gameObject;
                         Image img = img_lock.GetComponent<Image>();
                         Color t = img.color;
                         t.a = 1;
                         img.color = t;
                         ctrl.enabled = false;
+                        //调整flag
+                        islocked = true;
                     }
                 }
 
                 //设置clear图片
-                if (clearedlevel.Contains(levels_filename[i]))
+                if (!islocked)
                 {
-                    GameObject img_clear = btn.transform.Find("img_clear").gameObject;
-                    Image img = img_clear.GetComponent<Image>();
-                    Color t = img.color;
-                    t.a = 1;
-                    img.color = t;
+                    if (clearedlevel.Contains(levels_filename[i]))
+                    {
+                        GameObject img_clear = btn.transform.Find("img_clear").gameObject;
+                        Image img = img_clear.GetComponent<Image>();
+                        Color t = img.color;
+                        t.a = 1;
+                        img.color = t;
+                    }
                 }
                 
                 ctrl.filename = levels_filename[i];

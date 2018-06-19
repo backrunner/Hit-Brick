@@ -51,5 +51,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b14bf3c530cb42b459807487b1a42c55, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  liveTime: 0.5
+  liveTime: 0.2
   toward: 0
