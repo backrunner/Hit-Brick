@@ -9,7 +9,6 @@ public class Prop_magnet_child : MonoBehaviour {
     private float originLiveTime;
     //pad
     private GameObject pad;
-    private PadController ctrl;
 
     private void Awake()
     {

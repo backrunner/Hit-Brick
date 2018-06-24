@@ -248,6 +248,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   index: 0
   soldout: 0
+  panel_fail: {fileID: 1458175696797144, guid: f56e156fb49ff2c46ba431c7516e1219, type: 2}
 --- !u!114 &114135653010273832
 MonoBehaviour:
   m_ObjectHideFlags: 1

@@ -21,7 +21,7 @@ public class btn_shop_dialog_confirm : MonoBehaviour {
     {
         panel = transform.parent.parent.gameObject;
         Animation anim = panel.GetComponent<Animation>();
-        if (anim.isPlaying)
+        if (anim.isPlaying && levelController.panel_fail_inscene != null)
         {
             return;
         }

@@ -132,6 +132,8 @@ public class levelController : MonoBehaviour
     public GameObject magnet_child;
     public bool isMagnetUsed;
 
+    public static GameObject panel_fail_inscene;
+
     //time
     public static float currentTime;
 
