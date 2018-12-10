@@ -34,8 +34,12 @@ public class btn_multiplay : MonoBehaviour {
             Animation anim_parent = gameController.panel_selectLevel_inscene.GetComponent<Animation>();
             anim_parent.Play("anim_panel_selectLevel_out_down");
             //text
-            Text txt = panel_multiplay_inscene.transform.Find("txt_currentPlayerName").gameObject.GetComponent<Text>();
-            txt.text = gameController.player_name;
+            Text txt_playername = panel_multiplay_inscene.transform.Find("txt_currentPlayerName").gameObject.GetComponent<Text>();
+            txt_playername.text = gameController.player_name;
+
+            //multiplay controller
+            gameController.multiplayController = new MultiplayController(gameController.serverAddress, gameController.serverPort);
+            gameController.multiplayController.TryConnect();
         }
     }
 }

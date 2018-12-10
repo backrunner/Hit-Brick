@@ -7,7 +7,7 @@ public class anim_ctrl_multiplay : MonoBehaviour {
     public void animFinished()
     {
         Destroy(gameController.panel_multiplay_inscene);
-        gameController.isMultiPlaySpawned = false;
+        gameController.isMultiPlaySpawned = false;        
     }
 
 }

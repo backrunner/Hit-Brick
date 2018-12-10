@@ -38,6 +38,8 @@ public class gameController : MonoBehaviour
     public static GameObject panel_settings_inscene;
     public static GameObject panel_shop_inscene;
     public static GameObject panel_multiplay_inscene;
+    public GameObject _dialog_multiplay;
+    public static GameObject dialog_multiplay;
 
     public GameObject _img_bgblock_group;
     public static GameObject img_bgblock_group;
@@ -45,6 +47,11 @@ public class gameController : MonoBehaviour
 
     public static ArrayList bgblockList;
 
+    //多人
+    public static MultiplayController multiplayController;
+
+    public const string serverAddress = "127.0.0.1";
+    public const int serverPort = 8800;
     //关卡
     public string[] _levels;
     public static string[] levels;
@@ -77,6 +84,7 @@ public class gameController : MonoBehaviour
         panel_selectLevel = _panel_selectLevel;
         panel_stuff = _panel_stuff;
         panel_settings = _panel_settings;
+        dialog_multiplay = _dialog_multiplay;
 
         img_bgblock_group = _img_bgblock_group;
 

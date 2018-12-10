@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class anim_ctrl_panel_fail : MonoBehaviour {
 
-	public void animFinished()
+	public virtual void animFinished()
     {
         Destroy(gameObject);
     }

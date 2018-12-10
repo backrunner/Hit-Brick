@@ -15,6 +15,8 @@ public class btn_back_multiplay : MonoBehaviour {
 
     void onClick()
     {
+        gameController.multiplayController.Shutdown();
+        gameController.multiplayController = null;
         Animation anim = gameController.panel_multiplay_inscene.GetComponent<Animation>();
         Animation anim_parent = gameController.panel_selectLevel_inscene.GetComponent<Animation>();
         anim.Play("anim_panel_multiplay_out");
