@@ -13,6 +13,10 @@ namespace Hit_Brick_Server
         public string level;
         public int capacity;
 
+        //0: 等待中
+        //1: 游戏中
+        public short status;
+
         public List<string> players = new List<string>();
 
         public Room(string name)

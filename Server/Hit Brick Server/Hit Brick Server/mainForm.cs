@@ -111,6 +111,10 @@ namespace Hit_Brick_Server
                                 break;
                             default:
                                 Log("消息类别不明: " + message);
+                                server.Close();
+                                server = new UdpClient(localEndPoint);
+                                recvState = new UdpState(server);
+                                server.BeginReceive(new AsyncCallback(recvCallBack), recvState);                                
                                 break;
                         }
                     }
