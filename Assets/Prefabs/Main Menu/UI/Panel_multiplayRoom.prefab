@@ -190,7 +190,7 @@ GameObject:
   - component: {fileID: 222544538918491838}
   - component: {fileID: 114285467701754006}
   - component: {fileID: 114661639502284938}
-  - component: {fileID: 114056111156957278}
+  - component: {fileID: 114984829014093600}
   m_Layer: 5
   m_Name: btn_back
   m_TagString: Untagged
@@ -226,7 +226,7 @@ GameObject:
   - component: {fileID: 222351453434084124}
   - component: {fileID: 114711046688109104}
   - component: {fileID: 114357231644772826}
-  - component: {fileID: 111608069366184046}
+  - component: {fileID: 111222952658260108}
   m_Layer: 5
   m_Name: Panel_multiplayRoom
   m_TagString: Untagged
@@ -883,7 +883,7 @@ Transform:
   m_Father: {fileID: 224082886859193564}
   m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!111 &111608069366184046
+--- !u!111 &111222952658260108
 Animation:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
@@ -893,10 +893,10 @@ Animation:
   serializedVersion: 3
   m_Animation: {fileID: 0}
   m_Animations:
-  - {fileID: 7400000, guid: 8c0055a2100fb0f41833e9c6b36b7c3b, type: 2}
-  - {fileID: 7400000, guid: 440c9a95ce250ac438f32cf8ab94793e, type: 2}
+  - {fileID: 7400000, guid: 9409e4a11c358454da59374d093a3803, type: 2}
+  - {fileID: 7400000, guid: 5de98e9169aedbf4f9418293be37f243, type: 2}
   m_WrapMode: 0
-  m_PlayAutomatically: 0
+  m_PlayAutomatically: 1
   m_AnimatePhysics: 0
   m_CullingType: 0
 --- !u!114 &114005894961364088
@@ -1079,17 +1079,6 @@ MonoBehaviour:
   m_CaretBlinkRate: 0.85
   m_CaretWidth: 1
   m_ReadOnly: 0
---- !u!114 &114056111156957278
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1208781280584396}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8bb73f6d1c8302c47a5c32bf9b86887d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &114087291876971124
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2556,6 +2545,17 @@ MonoBehaviour:
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
+--- !u!114 &114984829014093600
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1208781280584396}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0c8887738ca8d4240899c89fcce0a369, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!222 &222160096929490860
 CanvasRenderer:
   m_ObjectHideFlags: 1

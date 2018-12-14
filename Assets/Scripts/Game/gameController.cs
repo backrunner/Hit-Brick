@@ -38,9 +38,15 @@ public class gameController : MonoBehaviour
     private static GameObject panel_settings;
     public static GameObject panel_settings_inscene;
     public static GameObject panel_shop_inscene;
+
     public static GameObject panel_multiplay_inscene;
+    public GameObject _panel_multiplay_room;
+    public static GameObject panel_multiplay_room;
+    public static GameObject panel_multiplay_room_inscene;
+
     public GameObject _dialog_multiplay;
     public static GameObject dialog_multiplay;
+
 
     public GameObject _img_bgblock_group;
     public static GameObject img_bgblock_group;
@@ -74,6 +80,7 @@ public class gameController : MonoBehaviour
     public static bool isSettingsPanelSpawned = false;
     public static bool isShopPanelSpawned = false;
     public static bool isMultiPlaySpawned = false;
+    public static bool isMultiPlayRoomSpawned = false;
 
     public static bool isShopDialogSpawned = false;
     public static bool isSettingsDialogSpawned = false;
@@ -86,6 +93,7 @@ public class gameController : MonoBehaviour
         panel_stuff = _panel_stuff;
         panel_settings = _panel_settings;
         dialog_multiplay = _dialog_multiplay;
+        panel_multiplay_room = _panel_multiplay_room;
 
         img_bgblock_group = _img_bgblock_group;
 
@@ -124,6 +132,7 @@ public class gameController : MonoBehaviour
         isSettingsPanelSpawned = false;
         isShopPanelSpawned = false;
         isMultiPlaySpawned = false;
+        isMultiPlayRoomSpawned = false;
 
         isShopDialogSpawned = false;
         isSettingsDialogSpawned = false;

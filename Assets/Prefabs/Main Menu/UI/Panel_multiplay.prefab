@@ -367,6 +367,7 @@ GameObject:
   - component: {fileID: 222045894526525288}
   - component: {fileID: 114247306934655938}
   - component: {fileID: 114499317223345654}
+  - component: {fileID: 114317012971476052}
   m_Layer: 5
   m_Name: btn_createGame
   m_TagString: Untagged
@@ -386,6 +387,8 @@ Animation:
   m_Animations:
   - {fileID: 7400000, guid: 8c0055a2100fb0f41833e9c6b36b7c3b, type: 2}
   - {fileID: 7400000, guid: 440c9a95ce250ac438f32cf8ab94793e, type: 2}
+  - {fileID: 7400000, guid: c91d71f8e5e26724fa6480d10c6d3e13, type: 2}
+  - {fileID: 7400000, guid: f252d52435a3c954f8d6901509fc490a, type: 2}
   m_WrapMode: 0
   m_PlayAutomatically: 0
   m_AnimatePhysics: 0
@@ -616,6 +619,17 @@ MonoBehaviour:
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
+--- !u!114 &114317012971476052
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1977237720244574}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9457b1afc12bdaf4e9e54bee3699ffba, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &114324932569843442
 MonoBehaviour:
   m_ObjectHideFlags: 1

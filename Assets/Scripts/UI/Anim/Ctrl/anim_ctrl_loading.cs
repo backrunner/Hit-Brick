@@ -110,6 +110,15 @@ public class anim_ctrl_loading : MonoBehaviour
         {
             //重绘背景
             gameController.displayBg();
+
+            //重设UI所在层
+            Canvas canvas_ctrl = gameController.canvas.GetComponent<Canvas>();
+            canvas_ctrl.sortingLayerName = "Default";
+        } else
+        {
+            //重设UI所在层
+            Canvas canvas_ctrl = gameController.canvas.GetComponent<Canvas>();
+            canvas_ctrl.sortingLayerName = "GUI";
         }
     }
 
