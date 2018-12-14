@@ -29,7 +29,7 @@ public class img_bgblock_group : MonoBehaviour {
     }
 
     void Start () {
-        canvas = gameController.canvas;
+        canvas = gameController.canvas_background;
         //初始化变量
         moveToward = new Vector3(0, 1, 0);
 

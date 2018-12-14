@@ -29,6 +29,7 @@ public class anim_ctrl_loading : MonoBehaviour
         progressbar = gameObject.transform.Find("progressbar").GetComponent<Image>();
         anim = gameObject.GetComponent<Animation>();
         DontDestroyOnLoad(gameController.canvas);
+        DontDestroyOnLoad(gameController.canvas_background);
     }
 
     public void animFinished()

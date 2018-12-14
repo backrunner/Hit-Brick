@@ -17,6 +17,7 @@ public class gameController : MonoBehaviour
 
     //UI
     public static GameObject canvas;
+    public static GameObject canvas_background;
     public static GameObject eventSystem;
     public GameObject _eventSystem;
     //UI预置
@@ -139,9 +140,15 @@ public class gameController : MonoBehaviour
         {
             canvas = GameObject.Find("Canvas");
         }
+        if (canvas_background == null)
+        {
+            canvas_background = GameObject.Find("Canvas_background");
+        }
         //调整camera
         Canvas canvas_ctrl = canvas.GetComponent<Canvas>();
         canvas_ctrl.worldCamera = Camera.main;
+        Canvas canvas_background_ctrl = canvas.GetComponent<Canvas>();
+        canvas_background_ctrl.worldCamera = Camera.main;
         //已初始化
         if (isInited)
         {
@@ -154,7 +161,7 @@ public class gameController : MonoBehaviour
 
     public static void displayBg()
     {
-        GameObject bg = Instantiate(img_bgblock_group, canvas.transform);
+        GameObject bg = Instantiate(img_bgblock_group, canvas_background.transform);
         bgblockList.Add(bg);
         //Debug.Log(currentLevelIndex);
         bg.transform.position = new Vector3(0, 0, 0);
