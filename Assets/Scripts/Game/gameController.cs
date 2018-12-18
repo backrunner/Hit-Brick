@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using System;
 
 public class gameController : MonoBehaviour
 {
@@ -14,6 +15,7 @@ public class gameController : MonoBehaviour
 
     //玩家
     public static string player_name = "";
+    public static string player_guid = "";
 
     //UI
     public static GameObject canvas;
@@ -121,6 +123,16 @@ public class gameController : MonoBehaviour
         {
             //读入玩家信息
             player_name = Save.getString("player_name"); //玩家名称
+        }
+        //处理玩家的guid
+        if (Save.checkKey("player_guid"))
+        {
+            player_guid = Save.getString("player_guid");
+        } else
+        {
+            player_guid = Guid.NewGuid().ToString();
+
+            Save.setData("player_guid", player_guid);
         }
 
         //初始化开关

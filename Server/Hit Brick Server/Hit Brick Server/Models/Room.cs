@@ -17,7 +17,10 @@ namespace Hit_Brick_Server
         //1: 游戏中
         public short status;
 
-        public List<string> players = new List<string>();
+        public Player[] players = new Player[4];
+        public int playerCount = 0;
+
+        public int holder = 0;  //房主对应的序号
 
         public Room(string name)
         {

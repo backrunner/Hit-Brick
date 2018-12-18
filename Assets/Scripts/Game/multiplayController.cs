@@ -56,7 +56,8 @@ public class MultiplayController
         client.Client.Blocking = false;
         if (remoteEndPoint != null)
         {
-            MpTextMessage message = new MpTextMessage("connect", gameController.player_name);
+            //连接的同时提交玩家的名称和guid
+            MpTextMessage message = new MpTextMessage("connect", gameController.player_name + "," + gameController.player_guid);
             if (gameController.panel_multiplay_inscene != null)
             {
                 txt_connect = gameController.panel_multiplay_inscene.transform.Find("txt_connect").gameObject;

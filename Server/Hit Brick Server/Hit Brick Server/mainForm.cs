@@ -26,9 +26,16 @@ namespace Hit_Brick_Server
         private IPEndPoint localEndPoint = null;
         private ArrayList remoteIPPool = new ArrayList();
 
-        //event
+        //events
         public delegate void LogHandler(string log);
         public event LogHandler LogEvent;
+
+        //lists
+        public List<Player> playerList;
+        public List<Room> roomList;
+
+        //values
+        public int currentRoomId = 0;
 
         private void mainForm_Load(object sender, EventArgs e)
         {
@@ -36,7 +43,7 @@ namespace Hit_Brick_Server
             this.FormBorderStyle = FormBorderStyle.FixedSingle;
 
             //事件绑定
-            LogEvent += addLog;
+            LogEvent += addLog;          
         }
 
         private void btn_start_Click(object sender, EventArgs e)
@@ -47,7 +54,14 @@ namespace Hit_Brick_Server
                 if (port <= 65535)
                 {
                     if (server == null)
-                    {                        
+                    {
+                        //初始化数据
+                        roomList = new List<Room>();
+                        playerList = new List<Player>();
+
+                        currentRoomId = 0;
+
+                        //启动服务器
                         localEndPoint = new IPEndPoint(IPAddress.Parse("127.0.0.1"), port);
                         server = new UdpClient(localEndPoint);                        
                         UdpState recvState = new UdpState(server);
@@ -93,9 +107,25 @@ namespace Hit_Brick_Server
                         string msgType = jObject["type"].ToString();
                         switch (msgType)
                         {
+                            //连接
                             case "connect":
-                                string playerName = jObject["content"].ToString();
-                                Log("新玩家加入大厅：" + playerName + ":" + recvState.remoteEndPoint.ToString());
+                                string[] contents = jObject["content"].ToString().Split(',');
+                                string playerName = "";
+                                string playerGuid = "";
+                                try
+                                {
+                                    playerName = contents[0].Trim();
+                                    playerGuid = contents[1].Trim();
+                                } catch(Exception ex)
+                                {
+                                    Log("解析消息出现问题: " + ex.Message);
+                                }
+                                Log("新玩家加入大厅：" + playerName + "("+ playerGuid+ "):" + recvState.remoteEndPoint.ToString());
+
+                                //加入到玩家列表                                
+                                Player player = new Player(playerName, playerGuid, recvState.remoteEndPoint);
+                                playerList.Add(player);
+
                                 MpTextMessage response = new MpTextMessage("connect", "success");
                                 byte[] sendBuffer = response.GetBytes();
                                 //发送回复
@@ -108,6 +138,94 @@ namespace Hit_Brick_Server
                                     Log("无法建立到客户端 " + playerName + ":" + recvState.remoteEndPoint.ToString() +" 的连接。");
                                 }                           
                                 server.BeginSend(sendBuffer, sendBuffer.Length,sendCallBack, new UdpSendState(server, response.ToString()));
+                                break;
+                            //断开连接
+                            case "disconnect":
+                                //传入内容为playerGuid
+                                playerGuid = jObject["content"].ToString();
+                                foreach (Player p in playerList)
+                                {
+                                    if (p.GUID == playerGuid)
+                                    {
+                                        playerList.Remove(p);
+                                        break;
+                                    }
+                                }
+                                break;
+                            //创建房间
+                            case "create_room":
+                                playerGuid = jObject["content"].ToString();
+
+                                //新建房间
+                                Room room = new Room("游戏房间", 4);    //默认设置
+                                room.level = "l_1";
+
+                                //获取玩家
+                                player = null;
+                                foreach (Player p in playerList)
+                                {
+                                    if (p.GUID == playerGuid)
+                                    {
+                                        player = p;
+                                        break;
+                                    }
+                                }
+
+                                if (player == null)
+                                {
+                                    //没有找到Guid匹配的玩家
+                                    response = new MpTextMessage("create_room", "failed");
+                                    sendBuffer = response.GetBytes();
+                                    server.BeginSend(sendBuffer, sendBuffer.Length, sendCallBack, new UdpSendState(server, response.ToString()));
+                                } else
+                                {
+                                    //使用递增的id
+                                    room.id = currentRoomId;
+                                    currentRoomId++;
+
+                                    //设置玩家
+                                    room.players[0] = player;
+                                    room.holder = 0;
+                                    room.playerCount++;
+
+                                    //加入到列表
+                                    roomList.Add(room);
+
+                                    //回传数据，格式为 success,roomId
+                                    response = new MpTextMessage("create_room", "success,"+room.id.ToString());
+                                    sendBuffer = response.GetBytes();
+                                    server.BeginSend(sendBuffer, sendBuffer.Length, sendCallBack, new UdpSendState(server, response.ToString()));
+                                }                                
+                                break;
+                            //房间容量调整
+                            case "room_changeCapacity":
+                                //传入内容为roomId,newCapacity
+                                break;
+                            
+                            //房间关卡调整
+                            case "room_changeLevel":
+                                //传入内容为roomId,newLevel
+                                break;
+
+                            //房间名称调整
+                            case "room_changeTitle":
+                                //传入内容为roomId,newTitle
+                                break;
+
+                            //加入房间
+                            case "join_room":
+                                break;
+                            //离开房间
+                            case "leave_room":
+                                break;
+                            //准备
+                            case "game_ready":
+                                break;
+                            //开始
+                            case "game_start":
+                                break;
+                            //读取完成
+                            case "load_completed":
                                 break;
                             default:
                                 Log("消息类别不明: " + message);
