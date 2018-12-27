@@ -35,7 +35,7 @@ namespace Hit_Brick_Server
         public List<Room> roomList;
 
         //values
-        public int currentRoomId = 0;
+        public long currentRoomId = 0;
 
         private void mainForm_Load(object sender, EventArgs e)
         {
@@ -103,7 +103,8 @@ namespace Hit_Brick_Server
                 try
                 {
                     if (message != null) {
-                        JObject jObject = (JObject)JsonConvert.DeserializeObject(message);
+                        Log("收到消息: " + message);
+                        JObject jObject = (JObject)JsonConvert.DeserializeObject(message);                        
                         string msgType = jObject["type"].ToString();
                         switch (msgType)
                         {
@@ -126,18 +127,7 @@ namespace Hit_Brick_Server
                                 Player player = new Player(playerName, playerGuid, recvState.remoteEndPoint);
                                 playerList.Add(player);
 
-                                MpTextMessage response = new MpTextMessage("connect", "success");
-                                byte[] sendBuffer = response.GetBytes();
-                                //发送回复
-                                try
-                                {
-                                    server.Connect(recvState.remoteEndPoint);
-                                }
-                                catch
-                                {
-                                    Log("无法建立到客户端 " + playerName + ":" + recvState.remoteEndPoint.ToString() +" 的连接。");
-                                }                           
-                                server.BeginSend(sendBuffer, sendBuffer.Length,sendCallBack, new UdpSendState(server, response.ToString()));
+                                SendResponse("connect", "success",recvState);
                                 break;
                             //断开连接
                             case "disconnect":
@@ -152,6 +142,25 @@ namespace Hit_Brick_Server
                                     }
                                 }
                                 break;
+                            //房间列表
+                            case "room_list":
+                                List<RoomInfo> avaliableRooms = new List<RoomInfo>();
+                                foreach (Room r in roomList)
+                                {
+                                    if (r.status == 0)
+                                    {
+                                        //新建roominfo
+                                        RoomInfo info = new RoomInfo();
+                                        info.id = r.id;
+                                        info.name = r.name;
+                                        info.playerCount = r.playerCount;
+                                        info.capacity = r.capacity;
+
+                                        avaliableRooms.Add(info);
+                                    }
+                                }
+                                SendResponse("room_list", JsonConvert.SerializeObject(avaliableRooms), recvState.remoteEndPoint);
+                                break;
                             //创建房间
                             case "create_room":
                                 playerGuid = jObject["content"].ToString();
@@ -161,22 +170,13 @@ namespace Hit_Brick_Server
                                 room.level = "l_1";
 
                                 //获取玩家
-                                player = null;
-                                foreach (Player p in playerList)
-                                {
-                                    if (p.GUID == playerGuid)
-                                    {
-                                        player = p;
-                                        break;
-                                    }
-                                }
+                                player = playerList.Find(p => p.GUID.Equals(playerGuid));
 
                                 if (player == null)
                                 {
                                     //没有找到Guid匹配的玩家
-                                    response = new MpTextMessage("create_room", "failed");
-                                    sendBuffer = response.GetBytes();
-                                    server.BeginSend(sendBuffer, sendBuffer.Length, sendCallBack, new UdpSendState(server, response.ToString()));
+                                    SendResponse("create_room", "failed", recvState);
+                                    Log("创建房间失败: "+playerList.ToString());
                                 } else
                                 {
                                     //使用递增的id
@@ -187,26 +187,53 @@ namespace Hit_Brick_Server
                                     room.players[0] = player;
                                     room.holder = 0;
                                     room.playerCount++;
+                                    player.isInLobby = true;
 
                                     //加入到列表
                                     roomList.Add(room);
 
                                     //回传数据，格式为 success,roomId
-                                    response = new MpTextMessage("create_room", "success,"+room.id.ToString());
-                                    sendBuffer = response.GetBytes();
-                                    server.BeginSend(sendBuffer, sendBuffer.Length, sendCallBack, new UdpSendState(server, response.ToString()));
+                                    SendResponse("create_room", "success," + room.id.ToString(), recvState);                                    
                                 }                                
                                 break;
                             //房间容量调整
                             case "room_changeCapacity":
                                 //传入内容为roomId,newCapacity
-                                break;
-                            
+                                contents = jObject["content"].ToString().Split(',');
+                                int roomId = Convert.ToInt32(contents[0]);
+                                int newCapacity = Convert.ToInt32(contents[1]);
+
+                                //判断容量是否合法
+                                if (newCapacity > 4 || newCapacity <= 1)
+                                {
+                                    SendResponse("room_changeCapacity", "failed", recvState);
+                                    return;
+                                }
+
+                                room = roomList.Find(r => r.id.Equals(roomId));
+
+                                if (room == null)
+                                {
+                                    SendResponse("room_changeCapacity", "failed", recvState);
+                                    return;
+                                }
+                                else
+                                {
+                                    room.capacity = newCapacity;
+                                    //给请求的玩家发送回复
+                                    SendResponse("room_changeCapacity", "success", recvState);
+                                    //给房间内的其他玩家发送更改消息
+                                    foreach(Player p in room.players)
+                                    {
+                                        SendResponse("room_changeCapacity", newCapacity.ToString(), p.EndPoint);
+                                    }                                    
+                                }
+                                break;                            
                             //房间关卡调整
                             case "room_changeLevel":
                                 //传入内容为roomId,newLevel
-                                break;
 
+                                break;
                             //房间名称调整
                             case "room_changeTitle":
                                 //传入内容为roomId,newTitle
@@ -250,7 +277,72 @@ namespace Hit_Brick_Server
             }
         }
 
-        private void sendCallBack(IAsyncResult res)
+        private void SendResponse(string type, string content, UdpState recvState)
+        {
+            MpTextMessage response = new MpTextMessage(type, content);
+            byte[] sendBuffer = response.GetBytes();
+            //发送回复
+            try
+            {
+                server.Connect(recvState.remoteEndPoint);
+            }
+            catch
+            {
+                Log("无法建立到客户端: " + recvState.remoteEndPoint.ToString() + " 的连接。");
+            }
+            server.BeginSend(sendBuffer, sendBuffer.Length, sendCallBack, new UdpSendState(server, response.ToString()));
+        }
+
+        private void SendResponse(string type, string content, IPEndPoint endPoint)
+        {
+            MpTextMessage response = new MpTextMessage(type, content);
+            byte[] sendBuffer = response.GetBytes();
+            //发送回复
+            try
+            {
+                server.Connect(endPoint);
+            }
+            catch
+            {
+                Log("无法建立到客户端: " + endPoint.ToString() + " 的连接。");
+            }
+            server.BeginSend(sendBuffer, sendBuffer.Length, sendCallBack, new UdpSendState(server, response.ToString()));
+        }
+
+        private void SendResponseWithoutRecv(string type, string content, UdpState recvState)
+        {
+            MpTextMessage response = new MpTextMessage(type, content);
+            byte[] sendBuffer = response.GetBytes();
+            //发送回复
+            try
+            {
+                server.Connect(recvState.remoteEndPoint);
+            }
+            catch
+            {
+                Log("无法建立到客户端: " + recvState.remoteEndPoint.ToString() + " 的连接。");
+            }
+            server.BeginSend(sendBuffer, sendBuffer.Length, sendCallBackWithoutRecv, new UdpSendState(server, response.ToString()));
+        }
+
+        private void SendResponseWithoutRecv(string type, string content, IPEndPoint endPoint)
+        {
+            MpTextMessage response = new MpTextMessage(type, content);
+            byte[] sendBuffer = response.GetBytes();
+            //发送回复
+            try
+            {
+                server.Connect(endPoint);
+            }
+            catch
+            {
+                Log("无法建立到客户端: " + endPoint.ToString() + " 的连接。");
+            }
+            server.BeginSend(sendBuffer, sendBuffer.Length, sendCallBackWithoutRecv, new UdpSendState(server, response.ToString()));
+        }
+
+        //不启动接收的回调函数
+        private void sendCallBackWithoutRecv(IAsyncResult res)
         {
             UdpSendState sendState = res.AsyncState as UdpSendState;
             UdpClient senderClient = sendState.client;
@@ -259,13 +351,27 @@ namespace Hit_Brick_Server
                 int sent = senderClient.EndSend(res);
                 if (sent <= 0)
                 {
-                    Log("消息发送失败: "+sendState.message);
-                } else
+                    Log("消息发送失败: " + sendState.message);
+                }
+                else
                 {
                     Log("消息已经发送至客户端: " + senderClient.Client.RemoteEndPoint.ToString());
                 }
             }
             senderClient.Close();
+        }
+
+        private void sendCallBack(IAsyncResult res)
+        {
+            sendCallBackWithoutRecv(res);
+
+            server = new UdpClient(localEndPoint);
+            UdpState recvState = new UdpState(server);
+            server.BeginReceive(new AsyncCallback(recvCallBack), recvState);
+        }
+
+        private void StartRecv()
+        {
             server = new UdpClient(localEndPoint);
             UdpState recvState = new UdpState(server);
             server.BeginReceive(new AsyncCallback(recvCallBack), recvState);

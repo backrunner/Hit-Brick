@@ -9,6 +9,11 @@ public class MpTextMessage
     public string type = null;
     public string content = null;
 
+    public MpTextMessage(string type)
+    {
+        this.type = type;
+        this.content = "";
+    }
 
     public MpTextMessage(string type, string content)
     {

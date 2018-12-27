@@ -13,6 +13,9 @@ namespace Hit_Brick_Server
         public string Name;
         public IPEndPoint EndPoint;
 
+        //flags
+        public bool isInLobby = false;
+
         public Player(string guid,string name)
         {
             GUID = guid;

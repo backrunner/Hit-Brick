@@ -7,6 +7,8 @@ using UnityEngine.UI;
 using System;
 using System.Text;
 using System.Threading;
+using Newtonsoft.Json.Linq;
+using Newtonsoft.Json;
 
 public class MultiplayController
 {
@@ -18,9 +20,7 @@ public class MultiplayController
     public int remotePort = 0;
 
     private IPEndPoint remoteSenderEP = null;
-
-    public IPEndPoint localEP = null;
-
+    private IPEndPoint localEP = null;
     //ui
     private GameObject txt_connect;
 
@@ -30,6 +30,9 @@ public class MultiplayController
     //flags
     private bool isConnectFailed = false;
     public bool isCreateRoomFailed = false;
+
+    //room
+    private long currentRoomId = -1;
 
     public MultiplayController(string ipAddress, int port)
     {
@@ -49,11 +52,48 @@ public class MultiplayController
         client.Close();
     }
 
+    private void GeneralRecvCallback(IAsyncResult iar)
+    {
+        if (iar.IsCompleted)
+        {
+            string message = null;
+            try
+            {
+                byte[] recvBytes = client.EndReceive(iar, ref remoteSenderEP);
+                message = Encoding.UTF8.GetString(recvBytes);
+            }
+            catch
+            {
+                //do nothing
+            }
+
+            if (message != null)
+            {
+                JObject jObject = (JObject)JsonConvert.DeserializeObject(message);
+                string msgType = jObject["type"].ToString();
+
+                switch (msgType)
+                {
+                    case "room_list":
+                        Debug.Log(jObject["content"].ToString());
+                        break;
+                    default:
+                        client.Close();
+                        //client = new UdpClient();
+                        client.BeginReceive(new AsyncCallback(GeneralRecvCallback), null);
+                        break;
+                }
+            }
+            //持续接收General消息
+            client.BeginReceive(new AsyncCallback(GeneralRecvCallback), null);
+        }
+    }
+
+    #region == 连接 ==
+
     public void TryConnect()
     {
-        client = new UdpClient();
-        localEP = (IPEndPoint)client.Client.LocalEndPoint;
-        client.Client.Blocking = false;
+        client = new UdpClient();             
         if (remoteEndPoint != null)
         {
             //连接的同时提交玩家的名称和guid
@@ -70,6 +110,7 @@ public class MultiplayController
             try
             {
                 client.Connect(remoteEndPoint);
+                localEP = (IPEndPoint)client.Client.LocalEndPoint;
             }
             catch
             {
@@ -99,8 +140,7 @@ public class MultiplayController
             else
             {
                 //接受服务器回复
-                client.BeginReceive(new AsyncCallback(ConnectRecvCallback), null);
-                Debug.Log(client.Client.RemoteEndPoint.ToString() + " " + client.Client.LocalEndPoint.ToString());
+                client.BeginReceive(new AsyncCallback(ConnectRecvCallback), null);                
             }
         }
     }
@@ -151,6 +191,10 @@ public class MultiplayController
             }
             connectTimer.Stop();
 
+            //自动获取房间列表
+            client.Close();
+            client = new UdpClient(localEP);
+            GetRoomList();
         });
     }
 
@@ -178,11 +222,124 @@ public class MultiplayController
             });
         }
     }
+    #endregion
 
+    #region == 获取房间列表 ==
+    public void GetRoomList()
+    {
+        client.Close();
+        client = new UdpClient(localEP);
+        if (remoteEndPoint != null)
+        {
+            MpTextMessage message = new MpTextMessage("room_list");
+
+            try
+            {
+                client.Connect(remoteEndPoint);
+            }
+            catch
+            {
+                GetRoomListFailed();
+                return;
+            }
+            byte[] sendBuffer = message.GetBytes();
+            client.BeginSend(sendBuffer, sendBuffer.Length, new AsyncCallback(GetRoomListSendCallabck), null);
+            //add a timer
+            connectTimer = gameController.thisgameObj.AddComponent<Timer>();
+            connectTimer.liveTime = 5;
+            connectTimer.Timeout += GetRoomListFailed;
+            connectTimer.Start();
+        }
+    }
+
+    private void GetRoomListSendCallabck(IAsyncResult ar)
+    {
+        if (ar.IsCompleted)
+        {
+            int sent = client.EndSend(ar);
+            if (sent == 0)
+            {
+                GetRoomListFailed();
+                return;
+            }
+            else
+            {
+                //接受服务器回复
+                client.BeginReceive(new AsyncCallback(GetRoomListRecvCallback), null);
+            }
+        }
+    }
+
+    private void GetRoomListRecvCallback(IAsyncResult iar)
+    {
+        if (iar.IsCompleted)
+        {
+            byte[] receiveBytes = new byte[0];
+            try
+            {
+                receiveBytes = client.EndReceive(iar, ref remoteSenderEP);
+            }
+            catch
+            {
+                GetRoomListFailed();
+                return;
+            }
+            if (receiveBytes.Length > 0)
+            {
+                string s = Encoding.UTF8.GetString(receiveBytes);
+                
+                MpTextMessage message = JsonUtility.FromJson<MpTextMessage>(s);
+                if (!message.content.Contains("error"))
+                {
+                    GetRoomListSuccess(message.content);
+                }
+                else
+                {
+                    GetRoomListFailed();
+                    return;
+                }
+            }
+            else
+            {
+                GetRoomListFailed();
+                return;
+            }
+        }
+    }
+
+    private void GetRoomListSuccess(string message)
+    {
+        DoOnMainThread.ExecuteOnMainThread.Enqueue(() =>
+        {
+            Debug.Log(message);
+            client.BeginReceive(new AsyncCallback(GeneralRecvCallback), null);
+        });
+    }
+
+    private void GetRoomListFailed()
+    {
+
+        DoOnMainThread.ExecuteOnMainThread.Enqueue(() =>
+        {
+            if (connectTimer != null)
+            {
+                connectTimer.Stop();
+            }
+            this.Shutdown();
+            //启动通用接收
+            client.Close();
+            client = new UdpClient(localEP);
+            client.BeginReceive(new AsyncCallback(GeneralRecvCallback), null);
+        });
+    }
+    #endregion
+
+    #region == 创建房间 ==
     public void CreateRoom()
     {
-        client = new UdpClient();
-        client.Client.Blocking = false;
+        client.Close();
+        client = new UdpClient(localEP);
+        isCreateRoomFailed = false;
         if (remoteEndPoint != null)
         {
             MpTextMessage message = new MpTextMessage("create_room", gameController.player_name);
@@ -246,10 +403,11 @@ public class MultiplayController
             if (receiveBytes.Length > 0)
             {
                 string s = Encoding.UTF8.GetString(receiveBytes);
+                Debug.Log(s);
                 MpTextMessage message = JsonUtility.FromJson<MpTextMessage>(s);
-                if (message.content == "success")
+                if (message.content.Contains("success"))
                 {
-                    CreateRoomSuccess();
+                    CreateRoomSuccess(message.content);
                 }
                 else
                 {
@@ -265,13 +423,22 @@ public class MultiplayController
         }
     }
 
-    private void CreateRoomSuccess()
+    private void CreateRoomSuccess(string s)
     {
         DoOnMainThread.ExecuteOnMainThread.Enqueue(() =>
         {
+            string[] temp = s.Split(',');
+
+            currentRoomId = int.Parse(temp[1]);
+
             if (txt_connect != null)
             {
                 txt_connect.GetComponent<Text>().text = "";
+            }
+
+            if (connectTimer != null)
+            {
+                connectTimer.Stop();
             }
 
             gameController.panel_multiplay_room_inscene = UnityEngine.MonoBehaviour.Instantiate(gameController.panel_multiplay_room, gameController.canvas.transform);
@@ -281,6 +448,14 @@ public class MultiplayController
             anim.Play("anim_panel_multiplay_room");
             Animation anim_parent = gameController.panel_multiplay_inscene.GetComponent<Animation>();
             anim_parent.Play("anim_panel_multiplay_out_left");
+
+            //面板都设置成默认的样式
+
+
+            //启动通用接收
+            client.Close();
+            client = new UdpClient(localEP);
+            client.BeginReceive(new AsyncCallback(GeneralRecvCallback), null);
         });
     }
 
@@ -309,7 +484,13 @@ public class MultiplayController
                     connectTimer.Stop();
                 }
                 this.Shutdown();
+
+                //启动通用接收
+                client.Close();
+                client = new UdpClient(localEP);
+                client.BeginReceive(new AsyncCallback(GeneralRecvCallback), null);
             });
         }
     }
+    #endregion
 }
