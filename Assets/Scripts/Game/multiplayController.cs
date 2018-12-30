@@ -70,21 +70,36 @@ public class MultiplayController
             if (message != null)
             {
                 JObject jObject = (JObject)JsonConvert.DeserializeObject(message);
+
                 string msgType = jObject["type"].ToString();
+                string content = jObject["content"].ToString();
 
                 switch (msgType)
                 {
-                    case "room_list":
-                        Debug.Log(jObject["content"].ToString());
+                    case "room_list":                      
+                        if (!content.Contains("error"))
+                        {
+                            GetRoomListSuccess(content);
+                        }
+                        else
+                        {
+                            GetRoomListFailed();
+                            return;
+                        }
                         break;
-                    default:
-                        client.Close();
-                        //client = new UdpClient();
-                        client.BeginReceive(new AsyncCallback(GeneralRecvCallback), null);
+                    case "create_room":
+                        if (content.Contains("success"))
+                        {
+                            CreateRoomSuccess(content);
+                        }
+                        else
+                        {
+                            CreateRoomFailed();
+                            return;
+                        }
                         break;
                 }
             }
-            //持续接收General消息
             client.BeginReceive(new AsyncCallback(GeneralRecvCallback), null);
         }
     }
@@ -93,7 +108,7 @@ public class MultiplayController
 
     public void TryConnect()
     {
-        client = new UdpClient();             
+        client = new UdpClient();
         if (remoteEndPoint != null)
         {
             //连接的同时提交玩家的名称和guid
@@ -140,7 +155,7 @@ public class MultiplayController
             else
             {
                 //接受服务器回复
-                client.BeginReceive(new AsyncCallback(ConnectRecvCallback), null);                
+                client.BeginReceive(new AsyncCallback(ConnectRecvCallback), null);
             }
         }
     }
@@ -265,44 +280,7 @@ public class MultiplayController
             else
             {
                 //接受服务器回复
-                client.BeginReceive(new AsyncCallback(GetRoomListRecvCallback), null);
-            }
-        }
-    }
-
-    private void GetRoomListRecvCallback(IAsyncResult iar)
-    {
-        if (iar.IsCompleted)
-        {
-            byte[] receiveBytes = new byte[0];
-            try
-            {
-                receiveBytes = client.EndReceive(iar, ref remoteSenderEP);
-            }
-            catch
-            {
-                GetRoomListFailed();
-                return;
-            }
-            if (receiveBytes.Length > 0)
-            {
-                string s = Encoding.UTF8.GetString(receiveBytes);
-                
-                MpTextMessage message = JsonUtility.FromJson<MpTextMessage>(s);
-                if (!message.content.Contains("error"))
-                {
-                    GetRoomListSuccess(message.content);
-                }
-                else
-                {
-                    GetRoomListFailed();
-                    return;
-                }
-            }
-            else
-            {
-                GetRoomListFailed();
-                return;
+                client.BeginReceive(new AsyncCallback(GeneralRecvCallback), null);
             }
         }
     }
@@ -312,7 +290,6 @@ public class MultiplayController
         DoOnMainThread.ExecuteOnMainThread.Enqueue(() =>
         {
             Debug.Log(message);
-            client.BeginReceive(new AsyncCallback(GeneralRecvCallback), null);
         });
     }
 
@@ -326,10 +303,6 @@ public class MultiplayController
                 connectTimer.Stop();
             }
             this.Shutdown();
-            //启动通用接收
-            client.Close();
-            client = new UdpClient(localEP);
-            client.BeginReceive(new AsyncCallback(GeneralRecvCallback), null);
         });
     }
     #endregion
@@ -381,44 +354,7 @@ public class MultiplayController
             else
             {
                 //接受服务器回复
-                client.BeginReceive(new AsyncCallback(CreateRoomRecvCallback), null);
-            }
-        }
-    }
-
-    private void CreateRoomRecvCallback(IAsyncResult iar)
-    {
-        if (iar.IsCompleted)
-        {
-            byte[] receiveBytes = new byte[0];
-            try
-            {
-                receiveBytes = client.EndReceive(iar, ref remoteSenderEP);
-            }
-            catch
-            {
-                CreateRoomFailed();
-                return;
-            }
-            if (receiveBytes.Length > 0)
-            {
-                string s = Encoding.UTF8.GetString(receiveBytes);
-                Debug.Log(s);
-                MpTextMessage message = JsonUtility.FromJson<MpTextMessage>(s);
-                if (message.content.Contains("success"))
-                {
-                    CreateRoomSuccess(message.content);
-                }
-                else
-                {
-                    CreateRoomFailed();
-                    return;
-                }
-            }
-            else
-            {
-                CreateRoomFailed();
-                return;
+                client.BeginReceive(new AsyncCallback(GeneralRecvCallback), null);
             }
         }
     }
@@ -451,11 +387,6 @@ public class MultiplayController
 
             //面板都设置成默认的样式
 
-
-            //启动通用接收
-            client.Close();
-            client = new UdpClient(localEP);
-            client.BeginReceive(new AsyncCallback(GeneralRecvCallback), null);
         });
     }
 
@@ -484,11 +415,6 @@ public class MultiplayController
                     connectTimer.Stop();
                 }
                 this.Shutdown();
-
-                //启动通用接收
-                client.Close();
-                client = new UdpClient(localEP);
-                client.BeginReceive(new AsyncCallback(GeneralRecvCallback), null);
             });
         }
     }
