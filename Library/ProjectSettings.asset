@@ -710,7 +710,7 @@ PlayerSettings:
       daydreamIconBackground: {fileID: 0}
   cloudServicesEnabled: {}
   facebookSdkVersion: 7.9.4
-  apiCompatibilityLevel: 2
+  apiCompatibilityLevel: 3
   cloudProjectId: 9776137c-d26f-4f45-8a17-aa45d3922bb6
   projectName: Hit Brick
   organizationId: backrunner
