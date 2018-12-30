@@ -49,6 +49,9 @@ public class gameController : MonoBehaviour
     public GameObject _dialog_multiplay;
     public static GameObject dialog_multiplay;
 
+    public GameObject _btn_room;
+    public static GameObject btn_room;
+
 
     public GameObject _img_bgblock_group;
     public static GameObject img_bgblock_group;
@@ -103,6 +106,8 @@ public class gameController : MonoBehaviour
         btn_level = _btn_level;
         eventSystem = _eventSystem;
         thisgameObj = gameObject;
+
+        btn_room = _btn_room;
 
         //初始化关卡列表
         levels = _levels;

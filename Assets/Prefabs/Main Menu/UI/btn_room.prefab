@@ -22,7 +22,7 @@ GameObject:
   - component: {fileID: 222353521183102946}
   - component: {fileID: 114161072200689938}
   m_Layer: 5
-  m_Name: Text
+  m_Name: txt_capacity
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -39,7 +39,6 @@ GameObject:
   - component: {fileID: 222288890818354512}
   - component: {fileID: 114893390791989040}
   - component: {fileID: 114881446791238366}
-  - component: {fileID: 114240032153227982}
   - component: {fileID: 114945340621121022}
   m_Layer: 5
   m_Name: btn_room
@@ -59,7 +58,7 @@ GameObject:
   - component: {fileID: 222254437739323556}
   - component: {fileID: 114056860756589232}
   m_Layer: 5
-  m_Name: txt_btn_roomName
+  m_Name: txt_roomName
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -131,21 +130,6 @@ MonoBehaviour:
     m_VerticalOverflow: 0
     m_LineSpacing: 1
   m_Text: 1 / 4
---- !u!114 &114240032153227982
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1636692813985446}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7d5bb980449b15b40b6b36bb35e4eeea, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  panel_loading: {fileID: 1643218106656408, guid: f42fe7cb777eb934c974fce06026ae73,
-    type: 2}
-  filename: 
-  index: 0
 --- !u!114 &114881446791238366
 MonoBehaviour:
   m_ObjectHideFlags: 1

@@ -247,7 +247,6 @@ public class MultiplayController
         if (remoteEndPoint != null)
         {
             MpTextMessage message = new MpTextMessage("room_list");
-
             try
             {
                 client.Connect(remoteEndPoint);
@@ -287,9 +286,31 @@ public class MultiplayController
 
     private void GetRoomListSuccess(string message)
     {
+        var jo = (JArray)JsonConvert.DeserializeObject(@message);
         DoOnMainThread.ExecuteOnMainThread.Enqueue(() =>
-        {
-            Debug.Log(message);
+        {            
+            //添加按钮
+            GameObject content = gameController.panel_multiplay_inscene.transform.Find("scroll_rooms").Find("Viewport").Find("content_btns").gameObject;
+            //清空列表
+            for (int i=0;i< content.transform.childCount; i++)
+            {
+                UnityEngine.Object.Destroy(content.transform.GetChild(i).gameObject);
+            }
+            foreach (var o in jo)
+            {
+                GameObject btn = UnityEngine.MonoBehaviour.Instantiate(gameController.btn_room, content.transform);
+                btn.transform.Find("txt_roomName").GetComponent<Text>().text = o["name"].ToString();
+                btn.transform.Find("txt_capacity").GetComponent<Text>().text = o["playerCount"].ToString() + " / " + o["capacity"].ToString();
+            }
+            RectTransform rect = content.GetComponent<RectTransform>();
+            if (jo.Count > 5)
+            {
+                rect.sizeDelta = new Vector2(rect.sizeDelta.x, jo.Count * 120 - 40);
+            }
+            else
+            {
+                rect.sizeDelta = new Vector2(rect.sizeDelta.x, jo.Count * 120);
+            }
         });
     }
 
@@ -316,11 +337,6 @@ public class MultiplayController
         if (remoteEndPoint != null)
         {
             MpTextMessage message = new MpTextMessage("create_room", gameController.player_name);
-
-            if (txt_connect != null)
-            {
-                txt_connect.GetComponent<Text>().text = "连接中...";
-            }
 
             try
             {
@@ -365,12 +381,8 @@ public class MultiplayController
         {
             string[] temp = s.Split(',');
 
-            currentRoomId = int.Parse(temp[1]);
-
-            if (txt_connect != null)
-            {
-                txt_connect.GetComponent<Text>().text = "";
-            }
+            //更改当前的房间号
+            currentRoomId = long.Parse(temp[1]);
 
             if (connectTimer != null)
             {
@@ -386,7 +398,15 @@ public class MultiplayController
             anim_parent.Play("anim_panel_multiplay_out_left");
 
             //面板都设置成默认的样式
+            Text text_playername_1 = gameController.panel_multiplay_room_inscene.transform.Find("Player_1").Find("txt_playername").gameObject.GetComponent<Text>();
+            Text text_playername_2 = gameController.panel_multiplay_room_inscene.transform.Find("Player_2").Find("txt_playername").gameObject.GetComponent<Text>();
+            Text text_playername_3 = gameController.panel_multiplay_room_inscene.transform.Find("Player_3").Find("txt_playername").gameObject.GetComponent<Text>();
+            Text text_playername_4 = gameController.panel_multiplay_room_inscene.transform.Find("Player_4").Find("txt_playername").gameObject.GetComponent<Text>();
 
+            text_playername_1.text = gameController.player_name;
+            text_playername_2.text = "";
+            text_playername_3.text = "";
+            text_playername_4.text = "";
         });
     }
 
@@ -397,11 +417,6 @@ public class MultiplayController
             isCreateRoomFailed = true;
             DoOnMainThread.ExecuteOnMainThread.Enqueue(() =>
             {
-                if (txt_connect != null)
-                {
-                    txt_connect.GetComponent<Text>().text = "";
-                }
-
                 GameObject failedDialog = UnityEngine.MonoBehaviour.Instantiate(gameController.dialog_multiplay, gameController.canvas.transform);
                 Text txt_msg = failedDialog.transform.Find("dialog").Find("txt_msg").GetComponent<Text>();
                 txt_msg.text = "遇到错误，无法创建房间";

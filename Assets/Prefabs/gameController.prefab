@@ -141,6 +141,7 @@ MonoBehaviour:
     type: 2}
   _dialog_multiplay: {fileID: 1739245603312134, guid: 49049053b97336a468999250687b7b30,
     type: 2}
+  _btn_room: {fileID: 1636692813985446, guid: 914c7db3d3b71fc4788d4a1820a12ba0, type: 2}
   _img_bgblock_group: {fileID: 1984270530135808, guid: a065ba62157a3484294c2b8d6ef5674a,
     type: 2}
   bgblock_opacity: 0

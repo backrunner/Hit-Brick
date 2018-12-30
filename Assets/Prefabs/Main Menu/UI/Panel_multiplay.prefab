@@ -127,7 +127,7 @@ GameObject:
   - component: {fileID: 222661486918831212}
   - component: {fileID: 114704635440410518}
   m_Layer: 5
-  m_Name: scroll_levels
+  m_Name: scroll_rooms
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -499,7 +499,7 @@ MonoBehaviour:
   m_StartCorner: 0
   m_StartAxis: 0
   m_CellSize: {x: 960, y: 80}
-  m_Spacing: {x: 0, y: 48}
+  m_Spacing: {x: 0, y: 40}
   m_Constraint: 0
   m_ConstraintCount: 2
 --- !u!114 &114184738869252294
@@ -1487,8 +1487,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0.00012207031, y: -0.000030517578}
-  m_SizeDelta: {x: -61.2, y: 277.2}
+  m_AnchoredPosition: {x: 58.6, y: -0.0000047704}
+  m_SizeDelta: {x: -117.19969, y: 277.2}
   m_Pivot: {x: 0, y: 1}
 --- !u!224 &224244953225448832
 RectTransform:
@@ -1600,8 +1600,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: -50}
-  m_SizeDelta: {x: 0, y: -100}
+  m_AnchoredPosition: {x: 27, y: -50}
+  m_SizeDelta: {x: -89, y: -100}
   m_Pivot: {x: 0, y: 1}
 --- !u!224 &224418374015311920
 RectTransform:
@@ -1674,7 +1674,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 19, y: 0}
   m_SizeDelta: {x: 20, y: 20}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &224619985610353954
