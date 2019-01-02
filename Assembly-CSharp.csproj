@@ -152,6 +152,7 @@
     <Compile Include="Assets\Scripts\UI\Anim\Ctrl\anim_ctrl_loading.cs" />
     <Compile Include="Assets\Scripts\UI\Anim\Ctrl\anim_ctrl_logo.cs" />
     <Compile Include="Assets\Scripts\UI\Anim\Ctrl\anim_ctrl_menuBtns.cs" />
+    <Compile Include="Assets\Scripts\UI\Anim\Ctrl\anim_ctrl_mp_room.cs" />
     <Compile Include="Assets\Scripts\UI\Anim\Ctrl\anim_ctrl_multiplay.cs" />
     <Compile Include="Assets\Scripts\UI\Anim\Ctrl\anim_ctrl_multiplay_fail.cs" />
     <Compile Include="Assets\Scripts\UI\Anim\Ctrl\anim_ctrl_panel_fail.cs" />
@@ -199,6 +200,7 @@
     <Compile Include="Assets\Scripts\UI\Main Menu\img_bgblock.cs" />
     <Compile Include="Assets\Scripts\UI\Main Menu\img_bgblock_group.cs" />
     <Compile Include="Assets\Scripts\UI\Main Menu\input_initname.cs" />
+    <Compile Include="Assets\Scripts\UI\Main Menu\input_mp_room_title.cs" />
     <Compile Include="Assets\Scripts\UI\Main Menu\txt_anykey.cs" />
     <Compile Include="Assets\Scripts\UI\Main Menu\UI_mainmenu_initname.cs" />
     <Compile Include="Assets\Scripts\UI\Main Menu\versionTextController.cs" />
@@ -412,14 +414,14 @@
     <Reference Include="UnityEngine.SpatialTracking">
       <HintPath>F:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/UnitySpatialTracking/RuntimeEditor/UnityEngine.SpatialTracking.dll</HintPath>
     </Reference>
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>F:/Projects/Unity Project/Hit Brick/Assets/Scripts/Functions/Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="UnityEngine.Analytics">
       <HintPath>C:/Users/liaoy/AppData/Local/Unity/cache/packages/packages.unity.com/com.unity.analytics@2.0.16/UnityEngine.Analytics.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.StandardEvents">
       <HintPath>C:/Users/liaoy/AppData/Local/Unity/cache/packages/packages.unity.com/com.unity.standardevents@1.0.13/UnityEngine.StandardEvents.dll</HintPath>
-    </Reference>
-    <Reference Include="Newtonsoft.Json">
-      <HintPath>F:/Projects/Unity Project/Hit Brick/Assets/Scripts/Functions/Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="mscorlib">
       <HintPath>F:/Program Files/Unity/Editor/Data/MonoBleedingEdge/lib/mono/4.7.1-api/mscorlib.dll</HintPath>

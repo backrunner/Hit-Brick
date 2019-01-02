@@ -98,6 +98,13 @@ public class MultiplayController
                             return;
                         }
                         break;
+                    case "room_changeName":
+                        //确认当前房间状态有效
+                        if (currentRoomId == long.Parse(content.Split(',')[0]) && gameController.isMultiPlayRoomSpawned)
+                        {
+                            gameController.panel_multiplay_room_inscene.transform.Find("input_roomName").GetComponent<Text>().text = content.Split(',')[1];
+                        }
+                        break;
                 }
             }
             client.BeginReceive(new AsyncCallback(GeneralRecvCallback), null);
@@ -336,7 +343,7 @@ public class MultiplayController
         isCreateRoomFailed = false;
         if (remoteEndPoint != null)
         {
-            MpTextMessage message = new MpTextMessage("create_room", gameController.player_name);
+            MpTextMessage message = new MpTextMessage("create_room", gameController.player_guid);
 
             try
             {
@@ -389,24 +396,27 @@ public class MultiplayController
                 connectTimer.Stop();
             }
 
-            gameController.panel_multiplay_room_inscene = UnityEngine.MonoBehaviour.Instantiate(gameController.panel_multiplay_room, gameController.canvas.transform);
-            gameController.isMultiPlaySpawned = true;
-            //anim
-            Animation anim = gameController.panel_multiplay_room_inscene.GetComponent<Animation>();
-            anim.Play("anim_panel_multiplay_room");
-            Animation anim_parent = gameController.panel_multiplay_inscene.GetComponent<Animation>();
-            anim_parent.Play("anim_panel_multiplay_out_left");
+            if (!gameController.isMultiPlayRoomSpawned)
+            {
+                gameController.panel_multiplay_room_inscene = UnityEngine.MonoBehaviour.Instantiate(gameController.panel_multiplay_room, gameController.canvas.transform);
+                gameController.isMultiPlayRoomSpawned = true;
+                //anim
+                Animation anim = gameController.panel_multiplay_room_inscene.GetComponent<Animation>();
+                anim.Play("anim_panel_multiplay_room");
+                Animation anim_parent = gameController.panel_multiplay_inscene.GetComponent<Animation>();
+                anim_parent.Play("anim_panel_multiplay_out_left");
 
-            //面板都设置成默认的样式
-            Text text_playername_1 = gameController.panel_multiplay_room_inscene.transform.Find("Player_1").Find("txt_playername").gameObject.GetComponent<Text>();
-            Text text_playername_2 = gameController.panel_multiplay_room_inscene.transform.Find("Player_2").Find("txt_playername").gameObject.GetComponent<Text>();
-            Text text_playername_3 = gameController.panel_multiplay_room_inscene.transform.Find("Player_3").Find("txt_playername").gameObject.GetComponent<Text>();
-            Text text_playername_4 = gameController.panel_multiplay_room_inscene.transform.Find("Player_4").Find("txt_playername").gameObject.GetComponent<Text>();
+                //面板都设置成默认的样式
+                Text text_playername_1 = gameController.panel_multiplay_room_inscene.transform.Find("Player_1").Find("txt_playername").gameObject.GetComponent<Text>();
+                Text text_playername_2 = gameController.panel_multiplay_room_inscene.transform.Find("Player_2").Find("txt_playername").gameObject.GetComponent<Text>();
+                Text text_playername_3 = gameController.panel_multiplay_room_inscene.transform.Find("Player_3").Find("txt_playername").gameObject.GetComponent<Text>();
+                Text text_playername_4 = gameController.panel_multiplay_room_inscene.transform.Find("Player_4").Find("txt_playername").gameObject.GetComponent<Text>();
 
-            text_playername_1.text = gameController.player_name;
-            text_playername_2.text = "";
-            text_playername_3.text = "";
-            text_playername_4.text = "";
+                text_playername_1.text = gameController.player_name;
+                text_playername_2.text = "";
+                text_playername_3.text = "";
+                text_playername_4.text = "";
+            }
         });
     }
 
@@ -431,6 +441,83 @@ public class MultiplayController
                 }
                 this.Shutdown();
             });
+        }
+    }
+    #endregion
+
+    #region == 离开房间 ==
+    public void LeaveRoom()
+    {
+        client.Close();
+        client = new UdpClient(localEP);
+        isCreateRoomFailed = false;
+        if (remoteEndPoint != null)
+        {
+            MpTextMessage message = new MpTextMessage("leave_room", currentRoomId.ToString()+","+gameController.player_guid);
+
+            try
+            {
+                client.Connect(remoteEndPoint);
+            }
+            catch
+            {
+                return;
+            }
+            byte[] sendBuffer = message.GetBytes();
+            client.BeginSend(sendBuffer, sendBuffer.Length, new AsyncCallback(LeaveRoomSendCallback), null);
+            //add a timer
+            connectTimer = gameController.thisgameObj.AddComponent<Timer>();
+            connectTimer.liveTime = 5;
+            connectTimer.Timeout += CreateRoomFailed;
+            connectTimer.Start();
+        }
+    }
+
+    private void LeaveRoomSendCallback(IAsyncResult iar)
+    {
+        if (iar.IsCompleted)
+        {
+            client.EndSend(iar);
+            //接受服务器回复
+            client.BeginReceive(new AsyncCallback(GeneralRecvCallback), null);
+        }
+    }
+    #endregion
+
+    #region == 房间更名 ==
+    public void RoomNameChanged(string value)
+    {
+        client.Close();
+        client = new UdpClient(localEP);
+        if (remoteEndPoint != null)
+        {
+            MpTextMessage message = new MpTextMessage("room_changeName", gameController.multiplayController.currentRoomId + ","+value);
+
+            try
+            {
+                client.Connect(remoteEndPoint);
+            }
+            catch
+            {
+                return;
+            }
+            byte[] sendBuffer = message.GetBytes();
+            client.BeginSend(sendBuffer, sendBuffer.Length, new AsyncCallback(RoomNameChangedCallback), null);
+            //add a timer
+            connectTimer = gameController.thisgameObj.AddComponent<Timer>();
+            connectTimer.liveTime = 5;
+            connectTimer.Timeout += CreateRoomFailed;
+            connectTimer.Start();
+        }
+    }
+
+    private void RoomNameChangedCallback(IAsyncResult iar)
+    {
+        if (iar.IsCompleted)
+        {
+            client.EndSend(iar);
+            //接受服务器回复
+            client.BeginReceive(new AsyncCallback(GeneralRecvCallback), null);
         }
     }
     #endregion

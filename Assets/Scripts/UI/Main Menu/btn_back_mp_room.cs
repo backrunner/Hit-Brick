@@ -19,6 +19,8 @@ public class btn_back_mp_room : MonoBehaviour {
         Animation anim_parent = gameController.panel_multiplay_inscene.GetComponent<Animation>();
         anim.Play("anim_panel_multiplay_room_out");
         anim_parent.Play("anim_panel_multiplay_in_right");
+        //触发离开房间的事件
+        gameController.multiplayController.LeaveRoom();
     }
 
 }
