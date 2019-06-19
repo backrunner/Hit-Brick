@@ -124,7 +124,7 @@ namespace Hit_Brick_Server
                                 Log("新玩家加入大厅：" + playerName + "("+ playerGuid+ "):" + recvState.remoteEndPoint.ToString());
 
                                 //加入到玩家列表                                
-                                Player player = new Player(playerName, playerGuid, recvState.remoteEndPoint);
+                                Player player = new Player(playerGuid, playerName, recvState.remoteEndPoint);
                                 playerList.Add(player);
 
                                 SendResponse("connect", "success",recvState);
@@ -200,14 +200,14 @@ namespace Hit_Brick_Server
                             case "room_changeCapacity":
                                 //传入内容为roomId,newCapacity
                                 contents = jObject["content"].ToString().Split(',');
-                                int roomId = Convert.ToInt32(contents[0]);
+                                long roomId = long.Parse(contents[0]);
                                 int newCapacity = Convert.ToInt32(contents[1]);
 
                                 //判断容量是否合法
                                 if (newCapacity > 4 || newCapacity <= 1)
                                 {
                                     SendResponse("room_changeCapacity", "failed", recvState);
-                                    return;
+                                    break;
                                 }
 
                                 room = roomList.Find(r => r.id.Equals(roomId));
@@ -215,7 +215,7 @@ namespace Hit_Brick_Server
                                 if (room == null)
                                 {
                                     SendResponse("room_changeCapacity", "failed", recvState);
-                                    return;
+                                    break;
                                 }
                                 else
                                 {
@@ -225,25 +225,88 @@ namespace Hit_Brick_Server
                                     //给房间内的其他玩家发送更改消息
                                     foreach(Player p in room.players)
                                     {
-                                        SendResponse("room_changeCapacity", newCapacity.ToString(), p.EndPoint);
+                                        SendResponseWithoutRecv("room_changeCapacity", newCapacity.ToString(), p.EndPoint);
                                     }                                    
                                 }
                                 break;                            
                             //房间关卡调整
-                            case "room_changeLevel":
-                                //传入内容为roomId,newLevel
-
+                            case "room_changeLevel":                                    
+                                
                                 break;
                             //房间名称调整
-                            case "room_changeTitle":
+                            case "room_changeName":
                                 //传入内容为roomId,newTitle
-                                break;
+                                contents = jObject["content"].ToString().Split(',');
+                                roomId = long.Parse(contents[0]);
+                                string newTitle = contents[1];
 
+                                room = roomList.Find(r => r.id.Equals(roomId));
+
+                                if (room == null)
+                                {                                    
+                                    break;
+                                }
+                                else
+                                {
+                                    room.name = newTitle;
+                                    //给房间内的其他玩家发送更改消息
+                                    for(int i=0;i<room.players.Length;i++)
+                                    {
+                                        if (room.players[i] != null && i != room.holder) {
+                                            SendResponseWithoutRecv("room_changeName", roomId.ToString()+","+newTitle, room.players[i].EndPoint);
+                                        }
+                                    }
+                                }
+                                StartRecv();
+                                break;
                             //加入房间
                             case "join_room":
+                                
                                 break;
                             //离开房间
                             case "leave_room":
+                                //传入内容为roomId,newLevel
+                                contents = jObject["content"].ToString().Split(',');
+                                roomId = long.Parse(contents[0]);
+                                playerGuid = contents[1];
+
+                                Log("玩家[" + playerGuid + "]离开了房间[" + roomId.ToString() +  "]");
+
+                                //获取玩家
+                                player = playerList.Find(p => p.GUID.Equals(playerGuid));
+                                room = roomList.Find(r => r.id.Equals(roomId));
+
+                                if (player != null && room != null)
+                                {
+                                    room.playerCount--;
+                                    if (room.playerCount > 0)
+                                    {
+                                        for (int i = 0; i < room.players.Length; i++)
+                                        {
+                                            if (room.players[i].GUID.Equals(playerGuid))
+                                            {
+                                                //判断玩家是否为房主，若是，则寻找新的房主
+                                                if (room.holder == i)
+                                                {
+                                                    //设置新房主
+                                                    for (int j=0;j<room.players.Length; j++)
+                                                    {
+                                                        if (room.players[j] != null && j!=i)
+                                                        {
+                                                            room.holder = j;
+                                                        }
+                                                    }
+                                                }
+                                                room.players[i] = null;
+                                            }
+                                        }
+                                    }
+                                    else
+                                    {
+                                        roomList.Remove(room);
+                                    }
+                                }
+                                StartRecv();
                                 break;
                             //准备
                             case "game_ready":
@@ -256,10 +319,7 @@ namespace Hit_Brick_Server
                                 break;
                             default:
                                 Log("消息类别不明: " + message);
-                                server.Close();
-                                server = new UdpClient(localEndPoint);
-                                recvState = new UdpState(server);
-                                server.BeginReceive(new AsyncCallback(recvCallBack), recvState);                                
+                                StartRecv();
                                 break;
                         }
                     }
@@ -275,6 +335,14 @@ namespace Hit_Brick_Server
                     }
                 }
             }
+        }
+
+        private void StartRecv()
+        {
+            server.Close();
+            server = new UdpClient(localEndPoint);
+            UdpState recvState = new UdpState(server);
+            server.BeginReceive(new AsyncCallback(recvCallBack), recvState);
         }
 
         private void SendResponse(string type, string content, UdpState recvState)
@@ -365,13 +433,6 @@ namespace Hit_Brick_Server
         {
             sendCallBackWithoutRecv(res);
 
-            server = new UdpClient(localEndPoint);
-            UdpState recvState = new UdpState(server);
-            server.BeginReceive(new AsyncCallback(recvCallBack), recvState);
-        }
-
-        private void StartRecv()
-        {
             server = new UdpClient(localEndPoint);
             UdpState recvState = new UdpState(server);
             server.BeginReceive(new AsyncCallback(recvCallBack), recvState);
